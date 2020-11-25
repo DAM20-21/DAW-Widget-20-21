@@ -1,5 +1,26 @@
 package nofuentes_mendez_elena;
 
-public class Principal {
+import java.awt.EventQueue;
 
+/**
+ * Clase principal del reproductor de vídeo.
+ * 
+ * @author Elena Nofuentes
+ * @since 25-11-2020
+ * @version 1.0
+ *
+ */
+public class Principal {
+    public static void main(String[] args) throws Exception {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
+                    ventanaPrincipal.inicializar();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 }
