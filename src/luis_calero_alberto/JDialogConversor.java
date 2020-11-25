@@ -1,4 +1,4 @@
-package calero_luis_alberto;
+package luis_calero_alberto;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
