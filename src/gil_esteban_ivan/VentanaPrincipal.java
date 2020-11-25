@@ -50,12 +50,12 @@ public class VentanaPrincipal {
 	 */
 	public void inicializarListeners(){
 		bDialogo.addActionListener(e->{
-			DialogSelectorColor dialog = new DialogSelectorColor(bDialogo, panelColor.getBackground());
+			WidgetIvan dialog = new WidgetIvan(bDialogo, panelColor.getBackground());
 			dialog.setVisible(true);
 			dialog.addWindowListener(new WindowAdapter() {
 				@Override
 				public void windowClosed(WindowEvent arg0) {
-					panelColor.setBackground(dialog.getColor());
+					
 				}
 			});	
 		});
