@@ -1,7 +1,9 @@
 package fuentes_santiago_javier;
 
 import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.Frame;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.util.ArrayList;
 
@@ -21,6 +23,7 @@ public class VentanaPrincipal {
 
 	JFrame ventana;
 	JPanel galeria;
+	JPanel visualizar;
 	ArrayList<Object[]> imagenes;
 	Object[] datos;
 	DimensionUIResource dimensionesLabel;
@@ -31,8 +34,9 @@ public class VentanaPrincipal {
 	 */
 	public VentanaPrincipal() {
 		ventana = new JFrame("Galería");
-		ventana.setBounds(0, 0, 1000, 500);
-		ventana.setLocationRelativeTo(null);
+		ventana.setBounds(0, 0, 1500, 750);
+		ventana.setExtendedState(Frame.MAXIMIZED_BOTH);
+		//ventana.setLocationRelativeTo(null);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
@@ -40,31 +44,51 @@ public class VentanaPrincipal {
 	 * Inicializa todos los componentes del frame
 	 */
 	public void inicializarComponentes() {
-		ventana.setLayout(new GridLayout());
-		galeria = new JPanel(new GridLayout(2, 4));
-		galeria.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		ventana.setLayout(new GridBagLayout());
+		GridBagConstraints opc = new GridBagConstraints();
+		galeria = new JPanel(new GridBagLayout());
+		galeria.setBorder(BorderFactory.createTitledBorder("Galeria"));
 
 		imagenes = new ArrayList<>();
 
-		dimensionesLabel = new DimensionUIResource(ventana.getContentPane().getWidth() / 4,
-				ventana.getContentPane().getHeight() / 2);
+		dimensionesLabel = new DimensionUIResource(100,100);
 
-		addImagen("ardilla.jpg");
 		addImagen("buho.jpg");
 		addImagen("cebra.jpg");
 		addImagen("foca.jpg");
-		addImagen("gato.jpg");
 		addImagen("gorila.jpg");
 		addImagen("monos.jpg");
-		addImagen("perro.jpg");
 
 		for (int i = 0; i < imagenes.size(); i++) {
-
 			Object[] datos = imagenes.get(i);
-			galeria.add((JLabel) datos[1]);
+			opc = new GridBagConstraints();
+
+			opc.gridx = 0;
+			opc.gridy = i;
+			opc.weighty = 1;
+			opc.weightx = 1;
+			opc.fill = GridBagConstraints.BOTH;
+
+			galeria.add((JLabel) datos[1],opc);
 		}
 
-		ventana.add(galeria);
+		opc.gridx = 0;
+		opc.gridy = 0;
+		opc.weighty = 1;
+		opc.gridheight = 1;
+		opc.fill = GridBagConstraints.BOTH;
+		ventana.add(galeria, opc);
+
+
+		visualizar = new JPanel();
+		visualizar.setBorder(BorderFactory.createTitledBorder("Visualización"));
+		opc = new GridBagConstraints();
+		opc.gridx = 1;
+		opc.gridy = 0;
+		opc.weighty = 1;
+		opc.weightx = 5;
+		opc.fill = GridBagConstraints.BOTH;
+		ventana.add(visualizar, opc);
 
 	}
 
@@ -82,8 +106,7 @@ public class VentanaPrincipal {
 
 		marco = new JLabel();
 		marco.setSize(dimensionesLabel);
-		imagen = new ImageIcon(
-				imagen.getImage().getScaledInstance(marco.getWidth(), marco.getHeight(), Image.SCALE_DEFAULT));
+		imagen = new ImageIcon(imagen.getImage().getScaledInstance(marco.getWidth(), marco.getHeight(), Image.SCALE_DEFAULT));
 		marco.setIcon(imagen);
 		datos[1] = marco;
 
@@ -101,8 +124,16 @@ public class VentanaPrincipal {
 			ImageIcon imagenReal = (ImageIcon) datos[0];
 			JLabel imagen = (JLabel) datos[1];
 
-			imagen.addMouseListener(new VisorImagen(ventana, imagenReal));
+			imagen.addMouseListener(new VisorImagen(this, imagenReal));
 		}
+	}
+
+	/**
+	 * Método para refrescar la pantalla
+	 */
+	public void refrescarPantalla() {
+		ventana.revalidate();
+		ventana.repaint();
 	}
 
 	/**

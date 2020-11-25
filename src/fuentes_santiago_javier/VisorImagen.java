@@ -1,43 +1,43 @@
 package fuentes_santiago_javier;
 
-import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-public class VisorImagen extends JDialog implements MouseListener {
+public class VisorImagen extends JPanel implements MouseListener {
 
     private static final long serialVersionUID = 4999851937545225852L;
+    VentanaPrincipal ventana;
     JLabel fondo;
     ImageIcon imagen;
 
-    public VisorImagen(JFrame ventana, ImageIcon imagen) {
+    public VisorImagen(VentanaPrincipal ventana, ImageIcon imagen) {
         super();
-        this.setBounds(0, 0, imagen.getIconWidth(), imagen.getIconHeight());
-        this.setLocationRelativeTo(ventana);
         this.imagen = imagen;
+        this.ventana = ventana;
         inicializarComponentes();
         this.addMouseListener(this);
     }
 
     public void inicializarComponentes() {
-        this.setLayout(new GridLayout());
 
         fondo = new JLabel();
 
         fondo.setIcon(imagen);
 
-        this.add(fondo);
+        
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
-            this.setVisible(true);
+            ventana.visualizar.removeAll();
+            ventana.visualizar.add(fondo);
+            ventana.refrescarPantalla();
+
         }
     }
 
