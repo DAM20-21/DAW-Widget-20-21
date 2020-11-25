@@ -24,7 +24,7 @@ public class VentanaPrincipal {
 	ArrayList<Object[]> imagenes;
 	Object[] datos;
 	DimensionUIResource dimensionesLabel;
-	String rutaImagen = "src/img/";
+	String rutaImagen = "img/";
 
 	/**
 	 * Constructor, marca el tamaño y el cierre del frame
