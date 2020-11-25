@@ -1,4 +1,4 @@
-package redondo_garcia_jesus.gil_esteban_ivan;
+package gil_esteban_ivan;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
