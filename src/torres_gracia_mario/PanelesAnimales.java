@@ -1,9 +1,11 @@
+package torres_gracia_mario;
 
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
 
-public class Paneles extends JPanel{
+public class PanelesAnimales extends JPanel{
+    private JFrame frame;
     private JPanel panelGrandeSonidos;
     private JTextField panelTextoSonidos;
     private Font fuente;
@@ -12,13 +14,13 @@ public class Paneles extends JPanel{
     JLabel imagen;
     String[][] nombreImagen = {{"img/leon.jpg","img/lobo.jpg","img/rana.jpg"},{"img/orca.jpg","img/komodo.jpg","img/elefante.jpg"},{"img/vaca.jpg","img/rinoceronte.jpg","img/cuervo.jpg"}};
     
-    public Paneles(JFrame ventana) {
-
+    public PanelesAnimales(JFrame ventana) {
+        frame = ventana;
     }
 
     public void inicializarPaneles(){
         panelTextoSonidos = new JTextField("Sonidos de Animales");
-        settingsObjeto = new GridBagConstraints();
+        GridBagConstraints settingsObjeto = new GridBagConstraints();
         settingsObjeto.gridx = 0;
         settingsObjeto.gridy = 0;
         settingsObjeto.weighty = 1;
@@ -30,10 +32,9 @@ public class Paneles extends JPanel{
         panelTextoSonidos.setForeground(Color.BLACK);
         panelTextoSonidos.setFont(new Font("Arial", Font.BOLD, 25));
         settingsObjeto.fill = GridBagConstraints.BOTH;
-        ventana.getContentPane().add(panelTextoSonidos, settingsObjeto);
+        frame.getContentPane().add(panelTextoSonidos, settingsObjeto);
 
         panelGrandeSonidos = new JPanel(new GridLayout(3, 3, 3, 3));
-        settingsObjeto = new GridBagConstraints();
         settingsObjeto.gridx = 0;
         settingsObjeto.gridy = 1;
         settingsObjeto.gridheight = 2;
@@ -41,7 +42,7 @@ public class Paneles extends JPanel{
         settingsObjeto.weighty = 4;
         settingsObjeto.weightx = 4;
         settingsObjeto.fill = GridBagConstraints.BOTH;
-        ventana.add(panelGrandeSonidos, settingsObjeto);
+        frame.add(panelGrandeSonidos, settingsObjeto);
     }
 
     public void crearBotonesAnimales(){

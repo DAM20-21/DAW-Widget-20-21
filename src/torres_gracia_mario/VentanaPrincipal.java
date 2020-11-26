@@ -1,4 +1,4 @@
-
+package torres_gracia_mario;
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
@@ -30,7 +30,7 @@ public class VentanaPrincipal {
         ventana.setLayout(new GridBagLayout());
         GridBagConstraints settingsObjeto = new GridBagConstraints();
 
-        Paneles panel = new Paneles(ventana);
+        PanelesAnimales panel = new PanelesAnimales(ventana);
         panel.inicializarPaneles();
         panel.crearBotonesAnimales();
         
