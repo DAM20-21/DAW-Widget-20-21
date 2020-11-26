@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.*;
 
@@ -22,16 +22,16 @@ public class Descuento implements KeyListener {
 
     JTextField numeroPrecioFinal;
 
-    JDialog dialogo;
-    JButton volver;
+    JPanel panel;
+
     Double precioFinal = 0.;
     Double resta = 0.;
     Double porcentaje = 0.;
     Double precioInicial = 0.;
 
-    public Descuento(JDialog dialogo, JButton volver) {
-        this.dialogo = dialogo;
-        this.volver = volver;
+    public Descuento(JPanel panel) {
+        this.panel = panel;
+
     }
 
     public void anadirElementoDescuento() {
@@ -48,44 +48,40 @@ public class Descuento implements KeyListener {
         numeroPrecioFinal.setEditable(false);
 
         textoPrecioFinal.setBorder(null);
-        dialogo.setLayout(new GridBagLayout());
+        panel.setLayout(new GridBagLayout());
         GridBagConstraints settings = new GridBagConstraints();
-        settings.gridx = 1;
-        settings.gridy = 0;
-        settings.insets = new Insets(20, 20, 20, 20);
-        dialogo.add(volver, settings);
-        settings = new GridBagConstraints();
+
         settings.gridx = 0;
         settings.gridy = 1;
         settings.ipadx = 150;
         settings.insets = new Insets(20, 20, 20, 20);
-        dialogo.add(textoPrecioOriginal, settings);
+        panel.add(textoPrecioOriginal, settings);
         settings = new GridBagConstraints();
         settings.gridx = 2;
         settings.gridy = 1;
         settings.insets = new Insets(20, 20, 20, 20);
         settings.fill = GridBagConstraints.HORIZONTAL;
         settings.weightx = 1;
-        dialogo.add(numeroPrecioInicial, settings);
+        panel.add(numeroPrecioInicial, settings);
         settings = new GridBagConstraints();
         settings.gridx = 0;
         settings.gridy = 2;
         settings.insets = new Insets(20, 20, 20, 20);
         settings.ipadx = 150;
-        dialogo.add(textoDescuento, settings);
+        panel.add(textoDescuento, settings);
         settings = new GridBagConstraints();
         settings.gridx = 2;
         settings.gridy = 2;
         settings.insets = new Insets(20, 20, 20, 20);
         settings.fill = GridBagConstraints.HORIZONTAL;
         settings.weightx = 1;
-        dialogo.add(numeroDescuento, settings);
+        panel.add(numeroDescuento, settings);
         settings = new GridBagConstraints();
         settings.gridx = 0;
         settings.gridy = 3;
         settings.insets = new Insets(20, 20, 20, 20);
         settings.ipadx = 150;
-        dialogo.add(textoPrecioFinal, settings);
+        panel.add(textoPrecioFinal, settings);
         settings = new GridBagConstraints();
         settings.gridx = 2;
         settings.gridy = 3;
@@ -93,7 +89,7 @@ public class Descuento implements KeyListener {
         settings.weightx = 1;
         settings.ipadx = 100;
         settings.fill = GridBagConstraints.HORIZONTAL;
-        dialogo.add(numeroPrecioFinal, settings);
+        panel.add(numeroPrecioFinal, settings);
 
         numeroPrecioInicial.addKeyListener(this);
         numeroDescuento.addKeyListener(this);

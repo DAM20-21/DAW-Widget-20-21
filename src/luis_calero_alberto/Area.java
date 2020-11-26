@@ -1,39 +1,33 @@
 package luis_calero_alberto;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.DecimalFormat;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * En esta clase convertiremos una medida en otra , como referencia usaremos el
- * metro , es decir cuando introduzcan una medida la pasaremos siempre a metros
- * , y despues la pasaremos a a la unidad solicitada Por ejemplo nos piden que
- * pasemos 10 centimetros a kilometros el proceso seria 10cm son 0.1 metros y
- * 0.1 metros son 0.0001 km
- * 
- */
-public class Longitud implements KeyListener, ActionListener {
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class Area implements KeyListener, ActionListener {
 
     JPanel panel;
-
+    JButton volver;
     JComboBox<String> medidaInicial;
     JComboBox<String> medidaFinal;
 
     int seleccionInicial;
     int seleccionFinal;
-    Double[] conversionaMetros = { 1.0, 1000.0, 0.1, 0.01, 0.001, 1852.00, 0.91, 1609.34 };
-    Double[] conversiondeMetrosA = { 1.0, 0.001, 10., 100., 1000., 0.000539957, 1.09361, 0.000621 };
 
-    String[] medidas = { "Metros", "Kilometros", "Decimetros", "Centimetros", "Milimetros", "Millas nauticas", "Yardas",
-            "Millas" };
+    Double[] conversion = { 1.0, 0.000001, 0.0001, 1000000., 10000., 1852.00, 0.91, 1609.34 };
+
+    String[] medidas = { "Metros^2", "Kilometros^2", "Hectarea", "Milimetros^2", "Centimetros^2", "Yardas^2",
+            "Millas^2" };
 
     Double distanciaInicial = 0.;
     Double distanciaenMetros = 0.;// Aqui guardaremos el paso intermedio
@@ -45,12 +39,11 @@ public class Longitud implements KeyListener, ActionListener {
 
     JTextField numeroResultado;
 
-    public Longitud(JPanel panel) {
+    public Area(JPanel panel) {
         this.panel = panel;
-
     }
 
-    public void anadirElementoLongitud() {
+    public void anadirElementoArea() {
         // Inicializamos los elementos
         medidaInicial = new JComboBox<>(new DefaultComboBoxModel<>(medidas));
         medidaFinal = new JComboBox<>(new DefaultComboBoxModel<>(medidas));
@@ -62,24 +55,25 @@ public class Longitud implements KeyListener, ActionListener {
         numeroResultado = new JTextField();
         // Colocamos los elementos
         panel.setLayout(new GridBagLayout());
-        GridBagConstraints settings = new GridBagConstraints();
+        GridBagConstraints settings;
 
+        settings = new GridBagConstraints();
         settings.gridx = 0;
         settings.gridy = 1;
 
-        settings.insets = new Insets(5, 20, 20, 5);
+        settings.insets = new Insets(20, 20, 20, 00);
         panel.add(medidaInicial, settings);
         settings = new GridBagConstraints();
         settings.gridx = 2;
         settings.gridy = 1;
-        settings.insets = new Insets(5, 20, 20, 5);
+        settings.insets = new Insets(20, 20, 20, 00);
         settings.fill = GridBagConstraints.HORIZONTAL;
         settings.weightx = 1;
         panel.add(numeroInicial, settings);
         settings = new GridBagConstraints();
         settings.gridx = 0;
         settings.gridy = 2;
-        settings.insets = new Insets(5, 20, 20, 5);
+        settings.insets = new Insets(20, 20, 20, 00);
 
         panel.add(medidaFinal, settings);
         JTextField vacio = new JTextField();
@@ -87,20 +81,20 @@ public class Longitud implements KeyListener, ActionListener {
         settings = new GridBagConstraints();
         settings.gridx = 2;
         settings.gridy = 2;
-        settings.insets = new Insets(5, 20, 20, 5);
+        settings.insets = new Insets(20, 20, 20, 00);
         settings.fill = GridBagConstraints.HORIZONTAL;
         settings.weightx = 1;
         panel.add(vacio, settings);//
         settings = new GridBagConstraints();
         settings.gridx = 0;
         settings.gridy = 3;
-        settings.insets = new Insets(5, 20, 20, 5);
+        settings.insets = new Insets(20, 20, 20, 00);
         settings.ipadx = 200;
         panel.add(textoResultado, settings);
         settings = new GridBagConstraints();
         settings.gridx = 2;
         settings.gridy = 3;
-        settings.insets = new Insets(05, 20, 20, 05);
+        settings.insets = new Insets(20, 20, 20, 0);
         settings.weightx = 1;
         settings.gridwidth = 2;
         settings.ipadx = 200;
@@ -165,8 +159,9 @@ public class Longitud implements KeyListener, ActionListener {
      * @return double que mostraremos como resultado
      */
     public double calcularResultado() {
-        distanciaenMetros = distanciaInicial * conversionaMetros[seleccionInicial];
-        distanciaFinal = distanciaenMetros * conversiondeMetrosA[seleccionFinal];
+        distanciaenMetros = distanciaInicial * conversion[seleccionInicial];
+        distanciaFinal = distanciaenMetros / conversion[seleccionFinal];
         return distanciaFinal;
     }
+
 }

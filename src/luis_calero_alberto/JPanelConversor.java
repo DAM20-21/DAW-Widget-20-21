@@ -2,71 +2,77 @@ package luis_calero_alberto;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import java.awt.*;
 
-public class JDialogConversor extends JDialog {
-
+public class JPanelConversor extends JPanel {
+    JPanel opciones;
+    JPanel calculadora;
     /**
      * Numero Serial
      */
     private static final long serialVersionUID = 1L;
 
     JButton[] opcionesIniciales;
-    JButton volver;
 
-    public JDialogConversor(JFrame padre) {
+    public JPanelConversor() {
         super();
-        setModal(true);
-        setBounds(100, 100, 500, 700);
-        volver = new JButton("<---Volver");// El boton volver es el mismo para todas las interfaces por lo que lo
-                                           // creamos una vez y le damos el listener
+        setBounds(100, 100, 700, 500);
         anadirElementoPrincipal();
         anadirListener();
 
     }
 
     private void anadirElementoPrincipal() {
-        this.getContentPane().removeAll();
+        this.setLayout(new GridLayout(1, 2));
+        opciones = new JPanel();
         String[] nombres = { "Porcentaje", "Descuento", "Longitud", "Area", "Volumen", "Divisas", "Velocidad", "Tiempo",
                 "Masa" };
-        this.setLayout(new GridLayout(3, 3));
+        opciones.setLayout(new GridLayout(3, 3));
         opcionesIniciales = new JButton[9];
         for (int i = 0; i < opcionesIniciales.length; i++) {
             opcionesIniciales[i] = new JButton(nombres[i]);
-            this.add(opcionesIniciales[i]);
+            opciones.add(opcionesIniciales[i]);
         }
+
+        calculadora = new JPanel();
+        this.add(opciones);
+        this.add(calculadora);
         refrescarPantalla();
 
     }
 
     private void anadirListener() {
         opcionesIniciales[0].addActionListener(e -> {
-            Porcentaje porcentaje = new Porcentaje(this, volver);
-            this.getContentPane().removeAll();
+            Porcentaje porcentaje = new Porcentaje(calculadora);
+            calculadora.removeAll();
             porcentaje.anadirElementoPorcentaje();
             refrescarPantalla();
         });
 
         opcionesIniciales[1].addActionListener(e -> {
-            Descuento descuento = new Descuento(this, volver);
-            this.getContentPane().removeAll();
+            Descuento descuento = new Descuento(calculadora);
+            calculadora.removeAll();
             descuento.anadirElementoDescuento();
             refrescarPantalla();
         });
 
         opcionesIniciales[2].addActionListener(e -> {
-            Longitud longitud = new Longitud(this, volver);
-            this.getContentPane().removeAll();
+            Longitud longitud = new Longitud(calculadora);
+            calculadora.removeAll();
             longitud.anadirElementoLongitud();
             refrescarPantalla();
         });
 
-        volver.addActionListener(e -> {
-            anadirElementoPrincipal();
-            anadirListener();
+        opcionesIniciales[3].addActionListener(e -> {
+            Area area = new Area(calculadora);
+            calculadora.removeAll();
+            area.anadirElementoArea();
+            refrescarPantalla();
+
         });
+
     }
 
     /**
