@@ -5,22 +5,24 @@ import java.util.*;
 import javax.swing.*;
 
 public class PanelesAnimales extends JPanel{
-    private JFrame frame;
     private JPanel panelGrandeSonidos;
     private JTextField panelTextoSonidos;
     private Font fuente;
     private JButton[][] arrayBoton;
-    JPanel panel;
-    JLabel imagen;
-    String[][] nombreImagen = {{"img/leon.jpg","img/lobo.jpg","img/rana.jpg"},{"img/orca.jpg","img/komodo.jpg","img/elefante.jpg"},{"img/vaca.jpg","img/rinoceronte.jpg","img/cuervo.jpg"}};
-    
-    public PanelesAnimales(JFrame ventana) {
-        frame = ventana;
+    ImageIcon imagen;
+    String[][] nombreImagen;
+    public PanelesAnimales(String[][] imagenAnimal) {
+        super();
+        setLayout(new GridBagLayout());
+        nombreImagen = imagenAnimal;
+        setBackground(Color.RED);
+		inicializarPaneles();
+        crearBotonesAnimales();
     }
 
     public void inicializarPaneles(){
-        panelTextoSonidos = new JTextField("Sonidos de Animales");
         GridBagConstraints settingsObjeto = new GridBagConstraints();
+        panelTextoSonidos = new JTextField("Sonidos de Animales");
         settingsObjeto.gridx = 0;
         settingsObjeto.gridy = 0;
         settingsObjeto.weighty = 1;
@@ -32,17 +34,16 @@ public class PanelesAnimales extends JPanel{
         panelTextoSonidos.setForeground(Color.BLACK);
         panelTextoSonidos.setFont(new Font("Arial", Font.BOLD, 25));
         settingsObjeto.fill = GridBagConstraints.BOTH;
-        frame.getContentPane().add(panelTextoSonidos, settingsObjeto);
+        add(panelTextoSonidos, settingsObjeto);
 
+        settingsObjeto = new GridBagConstraints();
         panelGrandeSonidos = new JPanel(new GridLayout(3, 3, 3, 3));
         settingsObjeto.gridx = 0;
         settingsObjeto.gridy = 1;
-        settingsObjeto.gridheight = 2;
-        settingsObjeto.gridwidth = 2;
         settingsObjeto.weighty = 4;
-        settingsObjeto.weightx = 4;
+        settingsObjeto.weightx = 1;
         settingsObjeto.fill = GridBagConstraints.BOTH;
-        frame.add(panelGrandeSonidos, settingsObjeto);
+       add(panelGrandeSonidos, settingsObjeto);
     }
 
     public void crearBotonesAnimales(){
@@ -50,17 +51,11 @@ public class PanelesAnimales extends JPanel{
 		for (int i = 0; i < arrayBoton.length; i++) {
 			for (int j = 0; j < arrayBoton[i].length; j++) {
                 arrayBoton[i][j] = new JButton();
-                imagen = new JLabel();
+                imagen = new ImageIcon(nombreImagen[i][j]);
                 arrayBoton[i][j].setBackground(Color.WHITE);
-                GridBagConstraints settingsBotones = new GridBagConstraints();
-                settingsBotones.gridx = i;
-                settingsBotones.gridy = j;
-                settingsBotones.weighty = 1;
-                settingsBotones.weightx = 1;
-                imagen.setIcon(new ImageIcon(nombreImagen[i][j]));
-                arrayBoton[i][j].add(imagen);
-                settingsBotones.fill = GridBagConstraints.BOTH;	
-                panelGrandeSonidos.add(arrayBoton[i][j], settingsBotones);
+                arrayBoton[i][j].setIcon(imagen);
+                arrayBoton[i][j].setHorizontalAlignment(JButton.CENTER);
+                panelGrandeSonidos.add(arrayBoton[i][j]);
             }
         }
     }
