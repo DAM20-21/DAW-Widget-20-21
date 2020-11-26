@@ -15,7 +15,8 @@ public class VentanaPrincipal {
      */
 	public VentanaPrincipal() {
 		ventana = new JFrame();
-		ventana.setBounds(100, 50, 400, 200);
+		ventana.setBounds(0, 0, 400, 200);
+		ventana.setLocationRelativeTo(null);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
@@ -25,7 +26,7 @@ public class VentanaPrincipal {
 	public void inicializar(){
 		ventana.setVisible(true);
 		inicializarComponentes();	
-		//inicializarListeners();		
+		inicializarListeners();		
     }
     
     public void inicializarComponentes(){
@@ -39,9 +40,8 @@ public class VentanaPrincipal {
 	 */
 	public void inicializarListeners(){
         rellenarFormulario.addActionListener((e)->{
-            Widgets_Formulario wF = new Widgets_Formulario(rellenarFormulario);
+            Widgets_Formulario wF = new Widgets_Formulario(rellenarFormulario, ventana);
             wF.setVisible(true);
-
         });
     }
 		
