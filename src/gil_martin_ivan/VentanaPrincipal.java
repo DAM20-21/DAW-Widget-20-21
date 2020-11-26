@@ -2,6 +2,7 @@ package gil_martin_ivan;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 /**
  * Ventana Principal para probar el widget Temporizador
  * @author Iván Gil Martín
@@ -10,7 +11,7 @@ public class VentanaPrincipal {
     
 	JFrame ventana;
 	JButton botonEmpezar;
-	JTextField tiempo;
+	JLabel tiempo;
 	
 	public VentanaPrincipal() {
 		ventana = new JFrame("Trabajo temporizador Iván Gil Martín");
@@ -20,7 +21,8 @@ public class VentanaPrincipal {
     
     public void inicializarVentana(){
 		ventana.setVisible(true);
-		inicializarComponentes();			
+		inicializarComponentes();		
+		inicializarListeners();
 	}
 	
 	public void inicializarComponentes(){
@@ -29,9 +31,19 @@ public class VentanaPrincipal {
 		botonEmpezar = new JButton("Establece el tiempo: ");
 		ventana.add(botonEmpezar);
 	
-        tiempo = new JTextField("00:00");
-        tiempo.setEditable(false);
-        tiempo.setHorizontalAlignment(JTextField.CENTER);
+        tiempo = new JLabel("00:00");
+        tiempo.setHorizontalAlignment(JLabel.CENTER);
 		ventana.add(tiempo);
+	}
+
+	public void inicializarListeners(){
+		botonEmpezar.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				IvanTemporizador temporizador = new IvanTemporizador();
+				temporizador.setVisible(true);
+			}
+		});
 	}
 }

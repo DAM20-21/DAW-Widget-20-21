@@ -9,10 +9,8 @@ public class Principal {
 		EventQueue.invokeLater(new Runnable() {
 		public void run() {
 			try {
-				//VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
-				//ventanaPrincipal.inicializarVentana();
-				IvanTemporizador temp = new IvanTemporizador();
-				temp.probar();
+				VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
+				ventanaPrincipal.inicializarVentana();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
