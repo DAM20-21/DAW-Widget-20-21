@@ -3,8 +3,8 @@ package fuentes_santiago_javier;
 import java.awt.EventQueue;
 
 /**
- * Main para probar el Widget Selector de Color
- * @author Jesús Redondo García
+ * Main para probar el Widget Visor de Imágenes
+ * @author Javier Fuentes
  */
 public class Principal {
 
