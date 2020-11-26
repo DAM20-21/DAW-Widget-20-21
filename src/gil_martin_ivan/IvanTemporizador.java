@@ -83,7 +83,7 @@ public class IvanTemporizador extends JDialog implements ChangeListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				dispose();
 			}
         });
     }

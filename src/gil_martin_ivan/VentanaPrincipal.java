@@ -12,6 +12,9 @@ public class VentanaPrincipal {
 	JFrame ventana;
 	JButton botonEmpezar;
 	JLabel tiempo;
+	Timer t;
+	int minutos, segundos;
+	ActionListener accion;
 	
 	public VentanaPrincipal() {
 		ventana = new JFrame("Trabajo temporizador Iván Gil Martín");
@@ -43,7 +46,36 @@ public class VentanaPrincipal {
 			public void actionPerformed(ActionEvent e) {
 				IvanTemporizador temporizador = new IvanTemporizador();
 				temporizador.setVisible(true);
+
+				tiempo.setText(temporizador.tiempoEStablecido.getText());
+
+				establecerTiempo();
 			}
 		});
+	}
+
+	public void establecerTiempo(){
+		t = new Timer(1000, accion);
+		accion = new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				t.start();
+				segundos--;
+				if (segundos == 0){
+					segundos = 59;
+					minutos--;
+				}
+				if (minutos == 0){
+					tiempo.setText("Se acabo el tiempo");
+				}
+				actualizarLabel();
+			}
+		};
+	}
+
+	public void actualizarLabel(){
+		String tiempoAct = (minutos<=9 ? "01":"")+minutos+":"+(segundos<=9 ? "01":"")+segundos;
+		tiempo.setText(tiempoAct);
 	}
 }
