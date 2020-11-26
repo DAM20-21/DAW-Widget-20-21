@@ -73,6 +73,13 @@ public class JPanelConversor extends JPanel {
 
         });
 
+        opcionesIniciales[4].addActionListener(e -> {
+            Volumen volumen = new Volumen(calculadora);
+            calculadora.removeAll();
+            volumen.anadirElementoVolumen();
+            refrescarPantalla();
+        });
+
     }
 
     /**

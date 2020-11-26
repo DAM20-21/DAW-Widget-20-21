@@ -14,7 +14,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Area implements KeyListener, ActionListener {
+public class Volumen implements KeyListener, ActionListener {
 
     JPanel panel;
     JButton volver;
@@ -24,10 +24,10 @@ public class Area implements KeyListener, ActionListener {
     int seleccionInicial;
     int seleccionFinal;
 
-    Double[] conversionDeMetrosA = { 1.0, 0.000001, 0.0001, 1.19599, 0.00000038 };
-    Double[] conversionaMetros = { 1.0, 100000., 10000., 0.8361, 2589988. };
+    Double[] conversionDeMetrosA = { 1.0, 1000., 1000000. };
+    Double[] conversionaMetros = { 1.0, 0.001, 0.000001 };
 
-    String[] medidas = { "Metros^2", "Kilometros^2", "Hectarea", "Yardas^2", "Millas^2" };
+    String[] medidas = { "Metros^3", "litro", "Mililitro" };
 
     Double distanciaInicial = 0.;
     Double distanciaenMetros = 0.;// Aqui guardaremos el paso intermedio
@@ -39,11 +39,11 @@ public class Area implements KeyListener, ActionListener {
 
     JTextField numeroResultado;
 
-    public Area(JPanel panel) {
+    public Volumen(JPanel panel) {
         this.panel = panel;
     }
 
-    public void anadirElementoArea() {
+    public void anadirElementoVolumen() {
         // Inicializamos los elementos
         medidaInicial = new JComboBox<>(new DefaultComboBoxModel<>(medidas));
         medidaFinal = new JComboBox<>(new DefaultComboBoxModel<>(medidas));
@@ -163,5 +163,4 @@ public class Area implements KeyListener, ActionListener {
         distanciaFinal = distanciaenMetros * conversionDeMetrosA[seleccionFinal];
         return distanciaFinal;
     }
-
 }
