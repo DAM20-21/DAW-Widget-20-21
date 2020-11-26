@@ -1,24 +1,31 @@
 package gil_esteban_ivan;
 
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.Color;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 /**
- * Ventana Principal para probar el widget Selector de Color
- * @author Jesús Redondo García
+ * Ventana Principal para probar el widget de censura
+ * 
+ * @author Iván Gil Esteban
  */
 public class VentanaPrincipal {
 
 	
 	//La ventana principal, en este caso, guarda todos los componentes:
 	private JFrame ventana;
-	private JButton bDialogo;
-	private JPanel panelColor;
+	private JButton botonCensura;
+	private JPanel panelTexto;
+	private JTextArea texto;
 	
 	/**
      * Constructor, marca el tamaño y el cierre del frame
@@ -35,13 +42,32 @@ public class VentanaPrincipal {
 	public void inicializarComponentes(){
 		
 		//Definimos el layout:
-		ventana.setLayout(new GridLayout(1,2));
+		ventana.setLayout(new GridBagLayout());
+
+		texto = new JTextArea();
+		texto.setLineWrap(true);
+
 		
-		bDialogo = new JButton("Selecciona Color");
-		ventana.add(bDialogo);
+		botonCensura = new JButton("Configurar Censura");
+		GridBagConstraints settings = new GridBagConstraints();
+		settings.gridx = 0;
+		settings.gridy = 1;
+		settings.weightx = 1;
+		settings.weighty = 1;
+		settings.insets = new Insets(20, 0, 0, 0);
+		ventana.add(botonCensura,settings);
 	
-		panelColor = new JPanel();
-		ventana.add(panelColor);
+		panelTexto = new JPanel();
+		panelTexto.setLayout(new GridLayout());
+		panelTexto.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+		panelTexto.add(texto);
+		settings = new GridBagConstraints();
+		settings.gridx = 0;
+		settings.gridy = 0;
+		settings.weightx = 6;
+		settings.weighty = 6;
+		settings.fill = GridBagConstraints.BOTH;
+		ventana.add(panelTexto,settings);
 		
 	}
 	
@@ -49,8 +75,8 @@ public class VentanaPrincipal {
 	 * Método que inicializa todos los listeners del programa.
 	 */
 	public void inicializarListeners(){
-		bDialogo.addActionListener(e->{
-			WidgetIvan dialog = new WidgetIvan(bDialogo, panelColor.getBackground());
+		botonCensura.addActionListener(e->{
+			WidgetIvan dialog = new WidgetIvan(botonCensura,texto, panelTexto.getBackground());
 			dialog.setVisible(true);
 			dialog.addWindowListener(new WindowAdapter() {
 				@Override

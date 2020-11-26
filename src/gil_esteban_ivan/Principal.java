@@ -3,9 +3,9 @@ package gil_esteban_ivan;
 import java.awt.EventQueue;
 
 /**
- * Main para probar el Widget Selector de Color
+ * Main para probar el Widget de censura
  * 
- * @author Jesús Redondo García
+ * @author Iván Gil Esteban
  */
 public class Principal {
 

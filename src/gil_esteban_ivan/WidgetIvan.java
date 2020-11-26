@@ -6,7 +6,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -18,38 +17,40 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- * Clase que representa un diálogo selector de color.
- * Para utilizar esta clase crea un listener del estilo:
- * {@code  DialogSelectorColor dialog = new DialogSelectorColor(bDialogo, panelColor.getBackground());
-			dialog.addWindowListener(new WindowAdapter() {
-				@Override
-				public void windowClosed(WindowEvent arg0) {
-					System.out.println(dialog.getColor());
-				}
-			});	}
- * La clase está preparada para que pueda funcionar sobre cualquier componente.
- * @author Jesus Redondo García
+ * Clase que representa un diálogo selector del tipo de censura que queremos aplicar
+ * y la visualiza antes de que apliquemos los cambios.
+ * 
+ * @author Iván Gil Esteban
  *
  */
 public class WidgetIvan extends JDialog implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
+
+	//Objeto de la clase censura
+	Censura censura;
 	
-	//Referencia al selectorColor:	
-	
+	//Mensaje que le da al usuario
 	JLabel titulo;
 
 	//Sliders:
 	JSlider sliderNivel;
 
 	//BotonAceptar
-	JButton bAceptar;
+	JButton bAplicar;
 	
-	//MostradorColor:
-	JTextArea mostradorCensura;
+	//BotonPrevisualizar
+	JButton bPrevisualizar;
 
-	public WidgetIvan(JComponent componente, Color colorInicial ) {
+	//Previsualizador de la censura
+	JTextArea mostradorCensura, palabrasTabu;
+
+	//Sera el texto que recibimos para censurar
+	JTextArea texto;
+
+	public WidgetIvan(JComponent componente,JComponent texto, Color colorInicial ) {
 		super();
+		this.texto = (JTextArea) texto;
 		setModal(true); // PARA HACERLO MODAL
 		setBounds((int)componente.getLocationOnScreen().getX(),(int)componente.getLocationOnScreen().getY(), 300, 500); //Dónde empieza el Dialog y qué tamaño tiene
 		anadirElementos();
@@ -68,6 +69,7 @@ public class WidgetIvan extends JDialog implements ActionListener{
 		GridBagConstraints settings = new GridBagConstraints();
 		settings.gridx = 0;
 		settings.gridy = 0;
+		settings.gridwidth = 2;
 		settings.insets = new Insets(20, 0, 50, 0);
 		add(titulo,settings);
 		
@@ -79,6 +81,7 @@ public class WidgetIvan extends JDialog implements ActionListener{
 		settings = new GridBagConstraints();
 		settings.gridx = 0;
 		settings.gridy = 1;
+		settings.gridwidth = 2;
 		add(sliderNivel,settings);
 		
 		//MostradorColor:
@@ -88,18 +91,40 @@ public class WidgetIvan extends JDialog implements ActionListener{
 		mostradorCensura.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		settings = new GridBagConstraints();
 		settings.gridx = 0;
+		settings.gridy = 4;
+		settings.gridwidth = 2;
+		settings.insets = new Insets(20, 0, 20, 0);
+		settings.fill = GridBagConstraints.BOTH;
+		add(mostradorCensura,settings);
+
+		//MostradorPalabasTabu
+		mostradorCensura = new JTextArea();
+		mostradorCensura.setEditable(false);
+		mostradorCensura.setLineWrap(true);
+		mostradorCensura.setBorder(BorderFactory.createLineBorder(Color.RED));
+		settings = new GridBagConstraints();
+		settings.gridx = 0;
 		settings.gridy = 2;
+		settings.gridwidth = 2;
 		settings.insets = new Insets(20, 0, 20, 0);
 		settings.fill = GridBagConstraints.BOTH;
 		add(mostradorCensura,settings);
 		
 		//bAceptar
-		bAceptar = new JButton("Aplicar Cambios");
+		bAplicar = new JButton("Aplicar Cambios");
 		settings = new GridBagConstraints();
 		settings.gridx = 0;
 		settings.gridy = 3;
+		settings.insets = new Insets(20, 0, 20, 5);
+		add(bAplicar,settings);
+
+		//bAceptar
+		bPrevisualizar = new JButton("Previsualizar");
+		settings = new GridBagConstraints();
+		settings.gridx = 1;
+		settings.gridy = 3;
 		settings.insets = new Insets(20, 0, 20, 0);
-		add(bAceptar,settings);
+		add(bPrevisualizar,settings);
 		
 	}
 	
@@ -111,16 +136,17 @@ public class WidgetIvan extends JDialog implements ActionListener{
 			
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				mostradorCensura.setText(" ");
+				mostradorCensura.setText(" Como estarias que tal estas en la historia que tenemos un problema con android  ");
 			}
 	    };
 	    sliderNivel.addChangeListener(listenerSliders);
 	    //Botón Aceptar:
-	    bAceptar.addActionListener(this);
+	    bAplicar.addActionListener(this);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		texto.setText("Hola que tal");
 		this.dispose();
 	}
 }
