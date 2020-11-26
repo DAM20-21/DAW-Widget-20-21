@@ -93,6 +93,21 @@ public class IvanTemporizador extends JDialog implements ChangeListener {
         int minutos = barraMinutos.getValue();
         int segundos = barraSegundos.getValue();
 
-        tiempoEStablecido.setText(minutos+":"+segundos);
+        if (minutos >= 10 && segundos >= 10){
+            tiempoEStablecido.setText(minutos+":"+segundos);
+        }
+        else{
+            if (minutos <= 9 && segundos >= 10){
+                tiempoEStablecido.setText("0"+minutos+":"+segundos);
+            }
+            else{
+                if (minutos >= 10 && segundos <= 9){
+                    tiempoEStablecido.setText(minutos+":0"+segundos);
+                }
+                else{
+                    tiempoEStablecido.setText("0"+minutos+":0"+segundos);
+                }
+            }
+        }
     }
 }
