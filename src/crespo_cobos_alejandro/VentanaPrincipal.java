@@ -65,12 +65,15 @@ public class VentanaPrincipal {
         ventana.getContentPane().setLayout(gbl);
 
         //Panel info
-        panelInfo = new JPanel(new GridLayout(1,1));
-        opc.gridx = 0;
-        opc.gridy = 0;
-        /* opc.weightx = 1;
+        panelInfo = new JPanel();
+      /*   opc.gridx = 0;
+        opc.gridy = 0; */
+        
+        opc.weightx = 1;
         opc.weighty = 1;
-        opc.fill = GridBagConstraints.BOTH; */
+        /* opc.fill = GridBagConstraints.BOTH;  */
+        opc.anchor = GridBagConstraints.NORTH;
+        ventana.getContentPane().add(panelInfo, opc); 
         
 
         //text Field Ciudad (Panel info)
@@ -94,7 +97,8 @@ public class VentanaPrincipal {
         opc.gridy = 0;
         panelInfo.add(botonBuscar, opc);
         //añado todos mis cambios a la ventana
-        ventana.getContentPane().add(panelInfo, opc); 
+
+        
 
 /*         //Panel de ciudades 
         opc = new GridBagConstraints();
