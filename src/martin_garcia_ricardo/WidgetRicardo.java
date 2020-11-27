@@ -1,6 +1,7 @@
 package martin_garcia_ricardo;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -63,7 +64,7 @@ public class WidgetRicardo extends JDialog {
 
     public WidgetRicardo(int seleccion,double tempMAX,double tempMIN) {
         super();
-        setModal(true);
+        setModal(false);
         setBounds(0, 0, 400, 700);
         this.seleccion = seleccion;
         temperaturaMAX = tempMAX;
@@ -156,6 +157,7 @@ public class WidgetRicardo extends JDialog {
                 labelImagen.setIcon(imageIco);
                 tiempoQhace.setText("SOL");
                 cl = new Color(58, 131, 204);
+                panelPrincipal.setBorder(BorderFactory.createLineBorder(Color.ORANGE,10));
                 
                 break;
             }
@@ -164,6 +166,8 @@ public class WidgetRicardo extends JDialog {
                 labelImagen.setIcon(imageIco);
                 tiempoQhace.setText("NUBLADO");
                 cl = new Color(20, 77, 133);
+                panelPrincipal.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY,10));
+
                 
 
                 break;
@@ -174,6 +178,7 @@ public class WidgetRicardo extends JDialog {
                 labelImagen.setIcon(imageIco);
                 tiempoQhace.setText("LLUVIA");
                 cl = new Color(3, 58, 130);
+                panelPrincipal.setBorder(BorderFactory.createLineBorder(Color.BLACK,10));
 
                 break;
 
@@ -183,6 +188,8 @@ public class WidgetRicardo extends JDialog {
                 labelImagen.setIcon(imageIco);
                 tiempoQhace.setText("NIEVE");
                 cl = new Color(134, 177, 219);
+                panelPrincipal.setBorder(BorderFactory.createLineBorder(Color.CYAN,10));
+
 
 
                 break;
