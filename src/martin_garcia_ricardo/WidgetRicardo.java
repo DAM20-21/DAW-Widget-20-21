@@ -1,6 +1,7 @@
 package martin_garcia_ricardo;
 
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -8,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
@@ -70,6 +71,7 @@ public class WidgetRicardo extends JDialog {
         // Ponemos el panel de la imagen
         ajustes.gridy = 1;
         imagen.setLayout(new GridLayout(1,1));
+        
         imagen.add(labelImagen);
 
         add(imagen, ajustes);
@@ -102,13 +104,15 @@ public class WidgetRicardo extends JDialog {
         ImageIcon imageIco ;
         switch(seleccion){
             case 1:{
-                imageIco = new ImageIcon("sol.png");
+                imageIco = new ImageIcon("img\sol.png");
                 labelImagen.setIcon(imageIco);
 
             }
         }
 
     }
+
+   
 
 
     
