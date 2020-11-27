@@ -10,7 +10,7 @@ import javax.swing.SwingConstants;
 public class VisorImagen extends JPanel{
 
     private static final long serialVersionUID = 4999851937545225852L;
-    JLabel fondo;
+    private JLabel fondo;
 
     public VisorImagen() {
         super(new GridLayout());

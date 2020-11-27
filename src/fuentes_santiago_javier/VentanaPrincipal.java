@@ -1,10 +1,13 @@
 package fuentes_santiago_javier;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -22,24 +25,36 @@ import javax.swing.plaf.DimensionUIResource;
  * @author Javier Fuentes
  */
 public class VentanaPrincipal {
-	JScrollPane panelIzq;
-	JScrollPane panelDer;
+	/** Frame principal */
 	JFrame ventana;
+	/** Panel con scroll de la izquierda */
+	JScrollPane panelIzq;
+	/** Panel con scroll de la derecha */
+	JScrollPane panelDer;
+	/** Panel que almacenará JLabel con las imágenes */
 	JPanel galeria;
+	/** Panel de la calse {@link VisorImagen} que mostrará la imagen a tamño real */
 	VisorImagen visualizar;
-	ArrayList<Object[]> imagenes;
+	/**
+	 * Array que guardará la imagen a tamaño real y un JLabel con la imagen escalada
+	 */
 	Object[] datos;
+	/** ArrayList que guardará todos los {@link #datos} */
+	ArrayList<Object[]> imagenes;
+	/** Dimensiones que tendrán los JLabel de {@link #galeria} */
 	DimensionUIResource dimensionesLabel;
-	String rutaImagen = "img/";
+	/** Carpeta donde se encuentran las imágenes. */
+	File carpetaImagenes = new File("img/");
+	/** Dimensiones de la pantalla */
+	Dimension tamanioPantalla = Toolkit.getDefaultToolkit().getScreenSize();
 
 	/**
 	 * Constructor, marca el tamaño y el cierre del frame
 	 */
 	public VentanaPrincipal() {
-		ventana = new JFrame("Galería");
-		ventana.setBounds(0, 0, 1500, 750);
-		//ventana.setExtendedState(Frame.MAXIMIZED_BOTH);
-		ventana.setLocationRelativeTo(null);
+		ventana = new JFrame("Album de Fotos");
+		ventana.setBounds(0, 0, (int) (tamanioPantalla.getWidth() * 0.75), (int) (tamanioPantalla.getHeight() * 0.75));
+		ventana.setLocationRelativeTo(null); // Se centra el frame
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
@@ -47,58 +62,87 @@ public class VentanaPrincipal {
 	 * Inicializa todos los componentes del frame
 	 */
 	public void inicializarComponentes() {
+		/** Inicializar Frame */
 		ventana.setLayout(new GridBagLayout());
-
-		panelIzq = new JScrollPane();
-
+		/** Inicializar Panel de la Izquierda */
 		GridBagConstraints opc = new GridBagConstraints();
-
+		panelIzq = new JScrollPane();
 		opc.gridx = 0;
 		opc.gridy = 0;
 		opc.weighty = 1;
 		opc.weightx = 1;
 		opc.fill = GridBagConstraints.BOTH;
 		ventana.add(panelIzq, opc);
-		panelIzq.setBorder(BorderFactory.createTitledBorder("Galería"));
-
+		/** Inicializar Galería de Fotos */
 		galeria = new JPanel(new GridBagLayout());
-		
-		panelIzq.setViewportView(galeria);
-		
+		/** Inicializa la dimensión que tendrás las imagenes en la galería */
+		dimensionesLabel = new DimensionUIResource(125, 125);
+		/** Inicializar el ArrayList de Imágenes */
 		imagenes = new ArrayList<>();
-
-		dimensionesLabel = new DimensionUIResource(150,150);
-
-		addImagen("ardilla.jpg");
-		addImagen("buho.jpg");
-		addImagen("cebra.jpg");
-		addImagen("foca.jpg");
-		addImagen("gato.jpg");
-		addImagen("gorila.jpg");
-		addImagen("monos.jpg");
-		addImagen("perro.jpg");
-
+		/** Añade las imagenes al Array */
+		imagenes();
+		/** Añade el Array de Imágenes en la galería */
 		insertarImagenesEnPanel();
-
+		/** Inicializar Panel de la Derecha */
 		panelDer = new JScrollPane();
-
 		opc = new GridBagConstraints();
 		opc.gridx = 1;
 		opc.gridy = 0;
 		opc.weighty = 1;
-		opc.weightx = 8;
+		opc.weightx = 10;
 		opc.fill = GridBagConstraints.BOTH;
-
 		ventana.add(panelDer, opc);
-
+		/** Inicializa el Panel que mostará las imágenes en grande */
 		visualizar = new VisorImagen();
-
+		/** Añadir bordes a los paneles con scroll */
+		panelIzq.setBorder(BorderFactory.createTitledBorder("Galería"));
 		panelDer.setBorder(BorderFactory.createTitledBorder("Visualización"));
-
+		/** Añade los Paneles a sus respectivos ScrollPanels */
+		panelIzq.setViewportView(galeria);
 		panelDer.setViewportView(visualizar);
-
 	}
 
+	/**
+	 * Método que enviará a {@link #addImagen(String)} el nombre de las imágenes de
+	 * la carpeta {@link #carpetaImagenes} para crear su {@link #datos}
+	 */
+	public void imagenes() {
+		/** Array que guarda los ficheros de todas las imágenes */
+		File[] imagenes = carpetaImagenes.listFiles();
+		for (int i = 1; i < imagenes.length; i++) {// Empieza en la 1 para que no pille el .gitikeep
+			addImagen(imagenes[i].getPath());
+		}
+	}
+
+	/**
+	 * Inicializa un nuevo {@link #datos} y guarada la imagen real y el label con la
+	 * imagen escalada.
+	 * 
+	 * @param ruta de la imagen que se quiere añadir
+	 */
+	private void addImagen(String ruta) {
+		/** Label que se añadirá a {@link #galeria} */
+		JLabel marco;
+		/** Imagen que se enviará a {@link #visualizar} */
+		ImageIcon imagen;
+
+		datos = new Object[2];
+		imagen = new ImageIcon(ruta);
+		datos[0] = imagen;
+		marco = new JLabel();
+		marco.setSize(dimensionesLabel);
+		imagen = new ImageIcon(
+				imagen.getImage().getScaledInstance(marco.getWidth(), marco.getHeight(), Image.SCALE_DEFAULT));
+		marco.setIcon(imagen);
+		datos[1] = marco;
+		marco.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		imagenes.add(datos);
+	}
+
+	/**
+	 * Añade los labels de {@link #datos} al panel {@link #galeria} con sus
+	 * {@link GridBagConstraints}
+	 */
 	private void insertarImagenesEnPanel() {
 		GridBagConstraints opc;
 		for (int i = 0; i < imagenes.size(); i++) {
@@ -109,34 +153,12 @@ public class VentanaPrincipal {
 			opc.weighty = 1;
 			opc.weightx = 1;
 			opc.fill = GridBagConstraints.VERTICAL;
-			galeria.add((JLabel) datos[1],opc);
+			galeria.add((JLabel) datos[1], opc);
 		}
 	}
 
 	/**
-	 * 
-	 * @param nombre de la imagen que se quiere añadir
-	 */
-	private void addImagen(String nombre) {
-		JLabel marco;
-		ImageIcon imagen;
-
-		datos = new Object[2];
-		imagen = new ImageIcon(rutaImagen + nombre);
-		datos[0] = imagen;
-
-		marco = new JLabel();
-		marco.setSize(dimensionesLabel);
-		imagen = new ImageIcon(imagen.getImage().getScaledInstance(marco.getWidth(), marco.getHeight(), Image.SCALE_DEFAULT));
-		marco.setIcon(imagen);
-		datos[1] = marco;
-
-		marco.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		imagenes.add(datos);
-	}
-
-	/**
-	 * Inicializa todos los lísteners del frame
+	 * Inicializa los lísteners de los {@link JLabel} de {@link #galeria}
 	 */
 	public void inicializarListeners() {
 		for (int i = 0; i < imagenes.size(); i++) {
@@ -145,12 +167,10 @@ public class VentanaPrincipal {
 			ImageIcon imagenReal = (ImageIcon) datos[0];
 			JLabel imagen = (JLabel) datos[1];
 
-			imagen.addMouseListener( new MouseInputAdapter(){
+			imagen.addMouseListener(new MouseInputAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					
 					visualizar.cambiarImagen(imagenReal);
-					//refrescarPantalla();
 				}
 			});
 		}
