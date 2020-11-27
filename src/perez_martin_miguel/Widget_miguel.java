@@ -1,13 +1,13 @@
 package perez_martin_miguel;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 public class Widget_miguel extends JDialog {
 
@@ -22,6 +22,9 @@ public class Widget_miguel extends JDialog {
                                     // de diche clase.
     private int posicion; // posicion aleatoria para colocar las palabras.
     private int[] ale; // array de posiciones de palabras aleatorio.
+    private boolean contando; // para saber si puedo seguir generando palaabras, o de lo contrario el usuario
+                              // quiere ver su significado.
+    private int contador; // con este contador contaremos los segundos para generar las palabras.
 
     /**
      * constructor
@@ -32,6 +35,7 @@ public class Widget_miguel extends JDialog {
         setModal(true);
         setBounds(0, 0, 300, 300);
         anadirElemento();
+        inicializarListener();
 
         // inicializamos el atributo que nos permitira poder hacer referencia a la lista
         // creada a partir del fichero
@@ -40,6 +44,10 @@ public class Widget_miguel extends JDialog {
 
         // una posicion para colocar una palabra al azar en el boton.
         posicion = 0;
+        // contador empieza en 0.
+        contador = 0;
+        // contando empieza en false.
+        contando = false;
 
         // llamada al metodo que fabricara el array de posiciones aleatorias.
         iniciarArray();
@@ -52,10 +60,11 @@ public class Widget_miguel extends JDialog {
      * colocamos en la ventana cada objeto.
      */
     public void anadirElemento() {
-        // fondo
-        getContentPane().setBackground(Color.GREEN);
 
         setLayout(new GridBagLayout());
+
+        // fondo
+        getContentPane().setBackground(Color.GREEN);
 
         // temporizador
         crono = new Cronometro();
@@ -75,12 +84,52 @@ public class Widget_miguel extends JDialog {
     }
 
     /**
-     * 
+     * metodo nos indica que hacer cuando se pulsa el boton.
      */
     public void inicializarListener() {
         botonPalabras.addActionListener(e -> {
-
+            // paramos el temporizador.
+            crono.parar();
+            // contando es falso para que no genere mas palabras
+            contando = false;
+            // llamada a un metodo para saber el significado de la palabra
+            significado();
         });
+    }
+
+    /**
+     * metodo que rellena las cadenas de la palabra y su significado.
+     */
+    public void significado() {
+        // cadenas que mandaremos al metodo encargado de escribirlas
+        String cadenaPalabra = "";
+        String cadenaSignificado = "";
+
+        // lista auxiliar para con la posicion rellenar la palabra en la que hemos
+        // pinchado.
+        ArrayList<String> palabrasAux = palabras.getPalabras();
+        cadenaPalabra += palabrasAux.get(ale[posicion - 1]);
+
+        // lista auxiliar para que con la posicion rellenar el significado de la palabra
+        // que hemos pulsado.
+        ArrayList<String> significadoAux = palabras.getSignificado();
+        cadenaSignificado += significadoAux.get(ale[posicion - 1]);
+
+        verSignificado(cadenaPalabra, cadenaSignificado);
+    }
+
+    /**
+     * muestra una ventana con un mensaje de la palabra y su significado.
+     */
+    public void verSignificado(String palabra, String significado) {
+        String cadena = "";
+        cadena += "Palabra: " + palabra + "\n";
+        cadena += "Significado: " + significado + "\n";
+
+        JOptionPane.showMessageDialog(this, cadena, "Informacion", JOptionPane.INFORMATION_MESSAGE);
+
+        crono.comenzar();
+        contando = true;
     }
 
     /**
@@ -115,22 +164,49 @@ public class Widget_miguel extends JDialog {
      * palabra en el boton. cuando el contador llega a 0 cierra la ventana.
      */
     public void palabrasCincoSeg() {
+        // generamos la primera palabra.
+        palabrasBoton();
+
+        // ponemos contando a true para empezar.
+        contando = true;
 
         TimerTask timerTask = new TimerTask() {
             public void run() {
-                // si posicion llega al final del array de aleatorios, cierra la ventana, sino,
-                // sigue cambiando la palabra.
-                if (posicion == ale.length) {
-                    dispose();
-                } else {
-                    palabrasBoton();
+                // si contando es verdadero.
+                if (contando) {
+                    // si los segundos son 0 se cierra la ventana
+                    // sigue cambiando la palabra.
+                    if (crono.getSegundos() == 0) {
+                        dispose();
+                    } else {
+                        // si contador es 5 significa que han pasado 5 segundos entonces ponemos
+                        // contador a 0 para volver a contar hasta 5.
+                        // y generamos otra nueva palabra.
+                        if (contador == 5) {
+                            contador = 0;
+                            palabrasBoton();
+                        } else {
+                            // si contador no es 5 aumentamos el contador cada 1 segundo.
+                            try {
+                                Thread.sleep(1000);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            contador++;
+                        }
+                    }
+
                 }
+
             }
         };
+
         // Aquí se pone en marcha el timer cada segundo.
         Timer timer = new Timer();
-        // Dentro de 0 milisegundos avísame cada 5050 milisegundos
-        timer.scheduleAtFixedRate(timerTask, 0, 5050);
+
+        // Dentro de 0 milisegundos avísame cada 50 milisegundos para que el fallo de
+        // sincronizacion sea poco.
+        timer.scheduleAtFixedRate(timerTask, 0, 50);
 
     }
 

@@ -36,6 +36,11 @@ public class Cronometro extends JPanel implements Runnable {
         segundos = 60;
     }
 
+    // metodo que retorna los segundos
+    public int getSegundos() {
+        return this.segundos;
+    }
+
     /**
      * metodo que llamaremos para que se lance el hilo y empiece nuestro
      * temporizador.
@@ -45,6 +50,12 @@ public class Cronometro extends JPanel implements Runnable {
             hilo = new Thread(this);
             hilo.start();
         }
+    }
+
+    // metodo que pone contando a falso para que el temporizador deje de
+    // actualizarse.
+    public void parar() {
+        contando = false;
     }
 
     /**
