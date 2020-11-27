@@ -3,7 +3,7 @@
 import java.awt.EventQueue;
 
 /**
- * Main para probar el Widget Selector de Color
+ * Main para probar el Widget Panel de Sonidos de Animales
  * @author Mario Gracia Torres
  */
 public class Principal {
