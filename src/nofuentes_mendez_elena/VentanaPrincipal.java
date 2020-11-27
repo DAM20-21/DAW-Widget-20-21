@@ -1,7 +1,6 @@
 package nofuentes_mendez_elena;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import java.awt.*;
 
@@ -17,7 +16,6 @@ public class VentanaPrincipal {
     /** Atributos de la clase */
     private JFrame ventana;
     private Dialogo dialogo;
-    private WidgetVideoElena widgetVideoElena;
 
     /**
      * Constructor por defecto. Marca el tamaño y el cierre del frame
@@ -27,7 +25,7 @@ public class VentanaPrincipal {
         ventana.setBounds(100, 100, 600, 400);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setLayout(new GridLayout(1, 1));
-        dialogo = new Dialogo(ventana);
+        dialogo = new Dialogo(ventana, this);
     }
 
     /**
@@ -41,11 +39,10 @@ public class VentanaPrincipal {
 
     public void componentes() {
         dialogo.setVisible(true);
-        widgetVideoElena = new WidgetVideoElena();
-        JPanel panel1 = new JPanel();
-        panel1 = widgetVideoElena.getBrowserPanel();
-        ventana.add(panel1);
+    }
 
+    public JFrame getVentana() {
+        return ventana;
     }
 
 }

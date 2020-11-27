@@ -2,6 +2,9 @@ package nofuentes_mendez_elena;
 
 import java.awt.EventQueue;
 
+import chrriis.common.UIUtils;
+import chrriis.dj.nativeswing.swtimpl.NativeInterface;
+
 /**
  * Clase principal del reproductor de vídeo.
  * 
@@ -12,6 +15,8 @@ import java.awt.EventQueue;
  */
 public class Principal {
     public static void main(String[] args) throws Exception {
+        NativeInterface.open();
+        UIUtils.setPreferredLookAndFeel();
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -22,5 +27,6 @@ public class Principal {
                 }
             }
         });
+        NativeInterface.runEventPump();
     }
 }

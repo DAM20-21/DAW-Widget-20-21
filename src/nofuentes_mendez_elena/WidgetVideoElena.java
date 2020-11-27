@@ -23,15 +23,31 @@ public class WidgetVideoElena {
 
     }
 
-    public JPanel getBrowserPanel() {
-        JPanel webBrowserPanel = new JPanel();
-        JWebBrowser webBrowser = new JWebBrowser();
-        webBrowser.setBarsVisible(false);
-        webBrowser.navigate("https://www.youtube.com/watch?v=iQR0b_hV0J4");
-        webBrowserPanel.add(webBrowser);
-        webBrowserPanel.revalidate();
-        webBrowserPanel.repaint();
-        return webBrowserPanel;
+    public JPanel getBrowserPanel(String url) {
+        panel = new JPanel(new GridLayout(1, 1));
+        web = new JWebBrowser();
+        web.setBarsVisible(false);
+        web.navigate(url);
+        panel.add(web);
+        panel.revalidate();
+        panel.repaint();
+        return panel;
+    }
+
+    public JPanel getPanel() {
+        return panel;
+    }
+
+    public void setPanel(JPanel panel) {
+        this.panel = panel;
+    }
+
+    public JWebBrowser getWeb() {
+        return web;
+    }
+
+    public void setWeb(JWebBrowser web) {
+        this.web = web;
     }
 
 }
