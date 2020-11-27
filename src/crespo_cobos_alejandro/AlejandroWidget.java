@@ -33,7 +33,6 @@ public class AlejandroWidget extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
-    private ImageIcon imagenIcono;
 
     private JTextField informacion;
     private JLabel imagenes;
@@ -50,11 +49,6 @@ public class AlejandroWidget extends JPanel {
         super();
         anadirImagenes();
         anadirElementosAlex();
-
-        
-        
-        
-
     }
     
 
@@ -112,28 +106,6 @@ public class AlejandroWidget extends JPanel {
         opc.gridx= 1; 
         opc.gridy = 1;
         panelImagenes.add(imagenes, opc);
-
-
-
-        
-
-
-
-        /*
-         * //añado mi texto. opc = new GridBagConstraints(); informacion = new
-         * JTextField("..............."); informacion.setEditable(true);
-         * informacion.setSize(100, 100); opc.gridx= 0; opc.gridy = 0; opc.ipady= 400;
-         * panelCiudades.add(informacion, opc);
-         * 
-         * 
-         * //añado mi imagen al panel de clima. opc = new GridBagConstraints(); imagenes
-         * = new JLabel(new ImageIcon("img/sol.png"));
-         * 
-         * opc.gridx= 1; opc.gridy = 1;
-         * 
-         * panelImagenes.add(imagenes, opc);
-         */
-
     }
 
     public void CrearObjetosTiempo() {
@@ -149,12 +121,10 @@ public class AlejandroWidget extends JPanel {
         pueblos.add(new Tiempo("Piornal", 5, -4, "Nieve"));
         pueblos.add(new Tiempo("Valdastillas", 16, 4, "Soleado"));
         pueblos.add(new Tiempo("Barrado", 16, 4, "Soleado"));
-
-        
-
     }
 
     public void comprobarPueblos(JTextField ciudad) {
+
         String texto = ciudad.getText();
         for (Tiempo tiempo : pueblos) {
             if (tiempo.getNombre().equalsIgnoreCase(texto)) {
@@ -169,6 +139,7 @@ public class AlejandroWidget extends JPanel {
      * Añado las images a mi lista
      */
     public void anadirImagenes(){
+
         imgs.add(new ImageIcon("img/sol.png"));
         imgs.add(new ImageIcon("img/lluvia.png"));
         imgs.add(new ImageIcon("img/nieve.png"));
@@ -179,10 +150,24 @@ public class AlejandroWidget extends JPanel {
    
 
     public void comprobarImagen(){
+        
         for (Tiempo tiempo : pueblos) {
             if(tiempo.getClima().equalsIgnoreCase("Soleado")){
                 imagenes.setIcon(imgs.get(0));
-            } 
+            }
+            if(tiempo.getClima().equalsIgnoreCase("Lluvia")){
+                imagenes.setIcon(imgs.get(1));
+            }
+            if(tiempo.getClima().equalsIgnoreCase("nieve")){
+                imagenes.setIcon(imgs.get(2));
+            }
+            if(tiempo.getClima().equalsIgnoreCase("Nubes y claros")){
+                imagenes.setIcon(imgs.get(3));
+            }
+            if(tiempo.getClima().equalsIgnoreCase("Nubes")){
+                imagenes.setIcon(imgs.get(4));
+            }
+
         }  
     }
 
