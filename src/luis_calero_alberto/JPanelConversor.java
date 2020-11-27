@@ -87,6 +87,20 @@ public class JPanelConversor extends JPanel {
             refrescarPantalla();
         });
 
+        opcionesIniciales[7].addActionListener(e -> {
+            Tiempo tiempo = new Tiempo(calculadora);
+            calculadora.removeAll();
+            tiempo.anadirElementoTiempo();
+            refrescarPantalla();
+        });
+
+        opcionesIniciales[8].addActionListener(e -> {
+            Masa masa = new Masa(calculadora);
+            calculadora.removeAll();
+            masa.anadirElementoMasa();
+            refrescarPantalla();
+        });
+
     }
 
     /**
