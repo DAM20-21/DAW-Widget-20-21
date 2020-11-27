@@ -50,6 +50,7 @@ public class AlejandroWidget extends JPanel {
         super();
         anadirImagenes();
         anadirElementosAlex();
+
         
         
         
@@ -75,8 +76,8 @@ public class AlejandroWidget extends JPanel {
 
         opc.gridx = 0;
         opc.gridy = 0;
-        opc.weightx = 10;
-        opc.weighty = 10;
+        opc.weightx = 5;
+        opc.weighty = 5;
         opc.fill = GridBagConstraints.BOTH;
         this.add(panelCiudades, opc);
 
@@ -95,9 +96,10 @@ public class AlejandroWidget extends JPanel {
 
         //Añado a mi panel Ciudades el JtextField que tendra la informacion de la ciudad
         opc = new GridBagConstraints();
-        informacion = new JTextField();
+        informacion = new JTextField("             ");
         
         informacion.setEditable(true);
+        informacion.setBackground(Color.GRAY);
         informacion.setSize(100, 100);
         opc.gridx= 0;
         opc.gridy = 0;
@@ -156,13 +158,16 @@ public class AlejandroWidget extends JPanel {
         String texto = ciudad.getText();
         for (Tiempo tiempo : pueblos) {
             if (tiempo.getNombre().equalsIgnoreCase(texto)) {
-                informacion.setText(tiempo.getNombre() + "TM: " + tiempo.getTemperaturaMax() + "  Tm: "
-                        + tiempo.getTemperaturaMin() + " Y el clima esta : " + tiempo.getClima());
+                informacion.setText(tiempo.getNombre() + "\nTM: " + tiempo.getTemperaturaMax() + "  Tm: "
+                        + tiempo.getTemperaturaMin() + "\nEl clima esta : " + tiempo.getClima());
 
             }
         }
-
     }
+
+    /**
+     * Añado las images a mi lista
+     */
     public void anadirImagenes(){
         imgs.add(new ImageIcon("img/sol.png"));
         imgs.add(new ImageIcon("img/lluvia.png"));
@@ -174,16 +179,11 @@ public class AlejandroWidget extends JPanel {
    
 
     public void comprobarImagen(){
-
         for (Tiempo tiempo : pueblos) {
             if(tiempo.getClima().equalsIgnoreCase("Soleado")){
-                imagenes.setIcon(new ImageIcon("img/sol.png"));
-            }
-            
-        }
-
-        
-
+                imagenes.setIcon(imgs.get(0));
+            } 
+        }  
     }
 
 
