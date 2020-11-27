@@ -10,34 +10,33 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
-import chrriis.dj.nativeswing.swtimpl.components.JVLCPlayer;
-import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
-import chrriis.dj.nativeswing.swtimpl.components.DefaultVLCPlayerDecorator.VLCDecoratorComponentType;
+import javax.swing.SwingConstants;
 
 /**
- * Clase Diálogo que extiende de JDialog
+ * Clase Diálogo que extiende de JDialog, la cual nos mostrará las opciones para
+ * poder reproducir un vídeo.
+ * 
+ * Cuando esté abierto las demás ventanas estarán bloqueadas.
  * 
  * @author Elena Nofuentes
  * @since 26-11-2020
- * @version 1.0
+ * @version 1.1
  * 
  */
 
 public class Dialogo extends JDialog {
-
+    /** Atributos de la clase */
     private static final long serialVersionUID = 1L;
     private JLabel text1, text2;
     private JTextField jt1;
     private JButton buttonArchivo;
     private JFileChooser selector;
-    private JButton buttonYt;
+    private JButton buttonURL;
     private Dialogo dialogo;
-
     private WidgetVideoElena widgetVideoElena;
     private VentanaPrincipal ventana;
 
-    /** Constructor */
+    /** Constructor parametrizado */
     public Dialogo(JFrame frame, VentanaPrincipal ventana) {
         super(frame);
         setModal(true);
@@ -46,7 +45,7 @@ public class Dialogo extends JDialog {
         text2 = new JLabel();
         jt1 = new JTextField();
         buttonArchivo = new JButton(" Archivo ");
-        buttonYt = new JButton(" PLAY ");
+        buttonURL = new JButton(" Reproducir enlace");
         selector = new JFileChooser();
         dialogo = this;
         this.ventana = ventana;
@@ -54,50 +53,53 @@ public class Dialogo extends JDialog {
         aListenert();
     }
 
+    /**
+     * Método que crear y añade los elementos del diálogo
+     */
     public void aElementos() {
         setLayout(new GridLayout(0, 1));
         text1.setText(" Elija el medio de reproducción: ");
+        text1.setHorizontalAlignment(SwingConstants.CENTER);
         add(text1);
+        buttonArchivo.setFocusable(false);
         add(buttonArchivo);
-        text2.setText(" --- URL ");
+        text2.setText(" URL ");
+        text2.setHorizontalAlignment(SwingConstants.CENTER);
         add(text2);
         add(jt1);
-        add(buttonYt);
+        add(buttonURL);
     }
 
+    /**
+     * Método para añadir los listener a los botones del diálogo para que hagan la
+     * acción correspondiente.
+     * 
+     * buttonArchivo -> Abre el selector de archivos y trabaja con el archivo
+     * seleccionado. buttonURL -> Oculta el dialogo y en el panel de la ventana
+     * principal reproduce el vídeo.
+     */
     public void aListenert() {
         buttonArchivo.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Abrimos el dialogo
                 int opcion = selector.showOpenDialog(dialogo);
-                // Comprobamos que se ha pulsado en el botón aceptar
+                // Comprobamos que se ha seleccionado un archivo.
                 if (opcion == JFileChooser.APPROVE_OPTION) {
                     dialogo.setVisible(false);
                     File fich = selector.getSelectedFile();
-                    String ruta = fich.getAbsolutePath();
-                    JVLCPlayer player = new JVLCPlayer();
-                    player.setControlBarVisible(true);
-                    Runnable loadPlayerFileRunnable = new Runnable() {
-                        public void run() {
-                            player.load(
-                                    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
-                        }
-                    };
-                    ventana.getVentana().add(player);
+                    widgetVideoElena = new WidgetVideoElena(fich);
+                    ventana.getVentana().add(widgetVideoElena.getPanelFx());
                     ventana.getVentana().revalidate();
                     ventana.getVentana().repaint();
-                    loadPlayerFileRunnable.run();
                 }
             }
         });
 
-        buttonYt.addActionListener(new ActionListener() {
-
+        buttonURL.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dialogo.setVisible(false);
+                // dialogo.setVisible(false);
                 widgetVideoElena = new WidgetVideoElena();
                 String url = jt1.getText().toString();
                 String[] splitUrl = url.split("=");

@@ -6,5 +6,13 @@
         "../lib/DJNativeSwing-SWTDemo.jar",
         "../lib/DJNativeSwing.jar",
         "../lib/swt.jar",
+        "../lib/javafx-swt.jar",
+        "../lib/javafx.base.jar",
+        "../lib/javafx.controls.jar",
+        "../lib/javafx.fxml.jar",
+        "../lib/javafx.graphics.jar",
+        "../lib/javafx.media.jar",
+        "../lib/javafx.swing.jar",
+        "../lib/javafx.web.jar",
     ],
 }
