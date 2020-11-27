@@ -1,6 +1,5 @@
 package perez_martin_miguel;
 
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.awt.*;
@@ -26,6 +25,7 @@ public class VentanaPrincipal {
     public void anadirComponentes() {
         ventana.setLayout(new GridBagLayout());
 
+        // insertamos un boton para poder probar nuestra nueva ventana.
         GridBagConstraints ajuste = new GridBagConstraints();
         ajuste.gridx = 0;
         ajuste.gridy = 0;
@@ -33,6 +33,7 @@ public class VentanaPrincipal {
     }
 
     public void inicializarListener() {
+        // al dar clik al boton se abre nuestra nueva ventana.
         boton.addActionListener(e -> {
             Widget_miguel diccionario = new Widget_miguel();
             diccionario.setVisible(true);

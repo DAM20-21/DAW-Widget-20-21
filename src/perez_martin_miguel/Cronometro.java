@@ -11,17 +11,23 @@ public class Cronometro extends JPanel implements Runnable {
 
     private static final long serialVersionUID = 1L;
 
-    JLabel contador;
-    int segundos;
-    double tiempoTranscurrido;
-    double tiempoOriginal;
-    Thread hilo = null;
-    boolean contando = false;
+    /**
+     * atributos
+     */
+    JLabel contador; // contador que cambiara cada segundo.
+    int segundos; // numero para disminuir los segundos
+    Thread hilo = null; // hilo que funciona como lanzador para empezar a contar el tiempo.
+    boolean contando = false; // si es verdadero seguiremos actualizando el tiempo y la pantalla.
 
+    /**
+     * constructor donde inicializamos los atributos, hacemos un poco vistoso el
+     * panel y añadimos los objetos necesarios.
+     */
     public Cronometro() {
         super();
         setBackground(Color.CYAN);
         setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+
         setLayout(new GridBagLayout());
         contador = new JLabel();
         add(contador);
@@ -30,39 +36,60 @@ public class Cronometro extends JPanel implements Runnable {
         segundos = 60;
     }
 
+    /**
+     * metodo que llamaremos para que se lance el hilo y empiece nuestro
+     * temporizador.
+     */
     public void comenzar() {
-        if(hilo == null){
+        if (hilo == null) {
             hilo = new Thread(this);
             hilo.start();
         }
     }
 
+    /**
+     * metodo que se ejecuta mientras contando sea true (de 60 a 0) con un retardo
+     * de 1 segundo para actualizar el tiempo y la pantalla.
+     */
     @Override
     public void run() {
         contando = true;
         while (contando) {
+            // esperamos 1 segundo.
             try {
                 Thread.sleep(1000);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            // actualizamos los segundos.
             calcularTiempoTranscurrido();
+            // actualizamos la pantalla.
             actualizarPantalla();
         }
         hilo = null;
     }
 
+    /**
+     * metodo que actualiza los segundos.
+     */
     private void calcularTiempoTranscurrido() {
-        if(segundos <= 0){
+        /**
+         * si los segundos son 0 dejamos de contar al poner contado a falso, si no son 0
+         * restamos un segundo.
+         */
+        if (segundos <= 0) {
             contando = false;
-        }else{
+        } else {
             segundos--;
         }
-        
     }
 
+    /**
+     * actualizamos la pantalla pasando los segundo a cadena cambiando el texto del
+     * contador.
+     */
     private void actualizarPantalla() {
         contador.setText(Integer.toString(segundos));
     }
-    
+
 }

@@ -1,0 +1,26 @@
+ALUMINIO: Elemento químico, es un metal plateado, muy ligero, buen conductor y resistente a la oxidación.
+BEBER: Ingerir un líquido por la boca.
+PILOTO: Persona que dirige cualquier vehiculo con motor.
+CHOQUE: Encuentro violento de dos o más cuerpos, de los cuales al menos uno está en movimiento.
+COMPÁS: Instrumento de dibujo para trazar arcos de circunferencia y tomar distancias entre dos puntos en un dibujo o mapa.
+PULMON: Órgano de la respiración de los animales vertebrados en el que se realiza el intercambio gaseoso entre el aire y la sangre.
+BAILAR: Mover el cuerpo y las extremidades con ritmo siguiendo el compás de una pieza musical.
+MUNICIPIO: División territorial administrativa en que se organiza un estado, que está regida por un ayuntamiento.
+PÁJARO: Nombre genérico que se aplica a cualquier ave voladora, especialmente si es de pequeño tamaño, y más propiamente si pertenece al orden de los paseriformes.
+MOLDE: Recipiente o pieza hueca donde se echa una masa blanda o líquida que, al solidificarse, toma la forma del recipiente.
+RESULTADO: Efecto o cosa que resulta de cierta acción, operación, proceso o suceso.
+PROHIBIR: Imponer [quien tiene autoridad para ello] que no se haga cierta cosa.
+COCODRILO: Reptil de gran tamaño, de color marrón verdoso y piel cubierta de escamas muy duras.
+JARABE: Medicamento que se presenta en forma de líquido espeso, generalmente dulce y pegajoso, elaborado a partir de una solución saturada de agua y azúcar a la que se añaden ingredientes naturales o químicos con propiedades curativas.
+DECORAR: Poner, pintar o dibujar adornos en una cosa.
+URGENTE: Que necesita ser realizado o solucionado con rapidez o lo antes posible.
+FANTASMA: Figura irreal, imaginaria o fantástica y normalmente incorpórea, que alguien cree ver.
+FINAL: Que es último o que acaba o concluye una cosa.
+ARRIBA: En dirección a un lugar que está en una posición superior a otro que se toma como referencia.
+CAMINO: Franja de terreno utilizada o dispuesta para caminar o ir de un lugar a otro; en especial la que no está asfaltada.
+NORMAS: Principio que se impone o se adopta para dirigir la conducta o la correcta realización de una acción o el correcto desarrollo de una actividad.
+LLUVIA: Precipitación acuosa en forma de gotas.
+ASTUTO: [persona] Que muestra habilidad para comprender las cosas y obtener provecho o beneficio mediante engaño o evitándolo.
+FALSO: Que es contrario a la verdad por error o malicia.
+TARDE: Parte del día que transcurre desde el mediodía hasta el anochecer.
+PIEZA: Cada una de las partes que constituyen una cosa o de los elementos de que se compone un conjunto o una colección.
