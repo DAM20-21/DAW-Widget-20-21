@@ -10,7 +10,7 @@ public class VentanaPrincipal {
 	
 	public VentanaPrincipal() {
 		ventana = new JFrame("Mini Enciclopedia The Lost World: Jurassic Park");
-		ventana.setBounds(100, 50, 400, 200);
+		ventana.setBounds(100, 50, 600, 600);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 

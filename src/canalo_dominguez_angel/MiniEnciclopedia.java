@@ -1,6 +1,8 @@
 package canalo_dominguez_angel;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -10,6 +12,9 @@ import javax.swing.SwingConstants;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MiniEnciclopedia extends JPanel implements ActionListener {
@@ -21,7 +26,11 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
 
         JPanel panelPrincipal;
         JComboBox<String> comboBoxDinosaurios;
-        JPanel panelImagen, panelLabels, panelTextFields;
+        JPanel panelImagen;
+        BufferedImage img;
+        Image imagen;
+        ImageIcon iconoImagen;
+        JLabel labelImagen;
         ArrayList<Dinosaurio> lista = new ArrayList<Dinosaurio>();
         Dinosaurio[] iniciales = {
                         new Dinosaurio("Tyrannosaurus", "Lagarto Tirano", "Cretácico Superior", 12.5, 4.5, 6500.0,
@@ -78,6 +87,29 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 comboBoxDinosaurios.addActionListener((e) -> {
                         int pos = comboBoxDinosaurios.getSelectedIndex();
                         if (pos != 0) {
+                                labelImagen.setIcon(null);
+                                GridBagConstraints settingsObjeto = new GridBagConstraints();
+                                settingsObjeto.gridx = 0;
+                                settingsObjeto.gridy = 1;
+                                settingsObjeto.gridwidth = 3;
+                                settingsObjeto.weightx = 7;
+                                settingsObjeto.weighty = 0;
+                                settingsObjeto.insets = new Insets(10, 0, 10, 0);
+                                settingsObjeto.fill = GridBagConstraints.BOTH;
+                                panelImagen = new JPanel();
+                                Image nuevaImagen=null;
+                                String rutaImagen="./img/"+lista.get(pos).getNombre()+".jpg";
+                                try {
+                                        System.out.println(rutaImagen);
+                                        nuevaImagen = ImageIO.read(new File(rutaImagen));
+                                } catch (IOException ex) {
+                                        ex.printStackTrace();
+                                }
+                                imagen = nuevaImagen.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                                iconoImagen = new ImageIcon(imagen);
+                                labelImagen = new JLabel(iconoImagen);
+                                panelImagen.add(labelImagen);
+                                add(panelImagen, settingsObjeto);
                                 nombre.setText(lista.get(pos).getNombre());
                                 significado.setText(lista.get(pos).getSignificado());
                                 periodo.setText(lista.get(pos).getPeriodo());
@@ -87,14 +119,14 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                                 dieta.setText(lista.get(pos).getDieta());
                                 peligroso.setText(lista.get(pos).getPeligroso());
                         } else {
-                                nombre.setText(null);
-                                significado.setText(null);
-                                periodo.setText(null);
-                                longitud.setText(null);
-                                altura.setText(null);
-                                peso.setText(null);
-                                dieta.setText(null);
-                                peligroso.setText(null);
+                                nombre.setText("Nombre del animal");
+                                significado.setText("Significado del nombre del animal en latín");
+                                periodo.setText("Período geológico en el que vivió el animal");
+                                longitud.setText("Longitud en metros");
+                                altura.setText("Altura en metros");
+                                peso.setText("Peso en kilogramos");
+                                dieta.setText("Dieta");
+                                peligroso.setText("Si es peligroso, y por qué");
                         }
                 });
         }
@@ -107,7 +139,7 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 settingsObjeto.gridx = 0;
                 settingsObjeto.gridy = 0;
                 settingsObjeto.gridwidth = 3;
-                settingsObjeto.weightx = 2;
+                settingsObjeto.weightx = 7;
                 settingsObjeto.weighty = 0;
                 settingsObjeto.insets = new Insets(10, 0, 10, 0);
                 settingsObjeto.fill = GridBagConstraints.BOTH;
@@ -119,6 +151,28 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
 
                 settingsObjeto.gridx = 0;
                 settingsObjeto.gridy = 1;
+                settingsObjeto.gridwidth = 3;
+                settingsObjeto.weightx = 7;
+                settingsObjeto.weighty = 0;
+                settingsObjeto.insets = new Insets(10, 0, 10, 0);
+                settingsObjeto.fill = GridBagConstraints.BOTH;
+                panelImagen = new JPanel();
+                img = null;
+                try {
+                        img = ImageIO.read(new File("./img/Sorna.jpg"));
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+                imagen = img.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+                iconoImagen = new ImageIcon(imagen);
+                labelImagen = new JLabel(iconoImagen);
+                panelImagen.add(labelImagen);
+                add(panelImagen, settingsObjeto);
+
+                settingsObjeto = new GridBagConstraints();
+
+                settingsObjeto.gridx = 0;
+                settingsObjeto.gridy = 2;
                 settingsObjeto.gridwidth = 1;
                 settingsObjeto.weightx = 1;
                 settingsObjeto.weighty = 1;
@@ -131,9 +185,9 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 settingsObjeto = new GridBagConstraints();
 
                 settingsObjeto.gridx = 1;
-                settingsObjeto.gridy = 1;
+                settingsObjeto.gridy = 2;
                 settingsObjeto.gridwidth = 2;
-                settingsObjeto.ipadx = 200;
+                settingsObjeto.weightx = 7;
                 settingsObjeto.weighty = 1;
                 settingsObjeto.fill = GridBagConstraints.BOTH;
                 nombre = new JTextField();
@@ -143,7 +197,7 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 add(nombre, settingsObjeto);
 
                 settingsObjeto.gridx = 0;
-                settingsObjeto.gridy = 2;
+                settingsObjeto.gridy = 3;
                 settingsObjeto.gridwidth = 1;
                 settingsObjeto.weightx = 1;
                 settingsObjeto.weighty = 1;
@@ -156,9 +210,9 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 settingsObjeto = new GridBagConstraints();
 
                 settingsObjeto.gridx = 1;
-                settingsObjeto.gridy = 2;
+                settingsObjeto.gridy = 3;
                 settingsObjeto.gridwidth = 2;
-                settingsObjeto.ipadx = 200;
+                settingsObjeto.weightx = 7;
                 settingsObjeto.weighty = 1;
                 settingsObjeto.fill = GridBagConstraints.BOTH;
                 significado = new JTextField();
@@ -168,7 +222,7 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 add(significado, settingsObjeto);
 
                 settingsObjeto.gridx = 0;
-                settingsObjeto.gridy = 3;
+                settingsObjeto.gridy = 4;
                 settingsObjeto.gridwidth = 1;
                 settingsObjeto.weightx = 1;
                 settingsObjeto.weighty = 1;
@@ -181,9 +235,9 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 settingsObjeto = new GridBagConstraints();
 
                 settingsObjeto.gridx = 1;
-                settingsObjeto.gridy = 3;
+                settingsObjeto.gridy = 4;
                 settingsObjeto.gridwidth = 2;
-                settingsObjeto.ipadx = 200;
+                settingsObjeto.weightx = 7;
                 settingsObjeto.weighty = 1;
                 settingsObjeto.fill = GridBagConstraints.BOTH;
                 periodo = new JTextField();
@@ -193,7 +247,7 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 add(periodo, settingsObjeto);
 
                 settingsObjeto.gridx = 0;
-                settingsObjeto.gridy = 4;
+                settingsObjeto.gridy = 5;
                 settingsObjeto.gridwidth = 1;
                 settingsObjeto.weightx = 1;
                 settingsObjeto.weighty = 1;
@@ -206,9 +260,9 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 settingsObjeto = new GridBagConstraints();
 
                 settingsObjeto.gridx = 1;
-                settingsObjeto.gridy = 4;
+                settingsObjeto.gridy = 5;
                 settingsObjeto.gridwidth = 2;
-                settingsObjeto.ipadx = 200;
+                settingsObjeto.weightx = 7;
                 settingsObjeto.weighty = 1;
                 settingsObjeto.fill = GridBagConstraints.BOTH;
                 altura = new JTextField();
@@ -218,7 +272,7 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 add(altura, settingsObjeto);
 
                 settingsObjeto.gridx = 0;
-                settingsObjeto.gridy = 5;
+                settingsObjeto.gridy = 6;
                 settingsObjeto.gridwidth = 1;
                 settingsObjeto.weightx = 1;
                 settingsObjeto.weighty = 1;
@@ -231,9 +285,9 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 settingsObjeto = new GridBagConstraints();
 
                 settingsObjeto.gridx = 1;
-                settingsObjeto.gridy = 5;
+                settingsObjeto.gridy = 6;
                 settingsObjeto.gridwidth = 2;
-                settingsObjeto.ipadx = 200;
+                settingsObjeto.weightx = 7;
                 settingsObjeto.weighty = 1;
                 settingsObjeto.fill = GridBagConstraints.BOTH;
                 longitud = new JTextField();
@@ -243,7 +297,7 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 add(longitud, settingsObjeto);
 
                 settingsObjeto.gridx = 0;
-                settingsObjeto.gridy = 6;
+                settingsObjeto.gridy = 7;
                 settingsObjeto.gridwidth = 1;
                 settingsObjeto.weightx = 1;
                 settingsObjeto.weighty = 1;
@@ -256,9 +310,9 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 settingsObjeto = new GridBagConstraints();
 
                 settingsObjeto.gridx = 1;
-                settingsObjeto.gridy = 6;
+                settingsObjeto.gridy = 7;
                 settingsObjeto.gridwidth = 2;
-                settingsObjeto.ipadx = 200;
+                settingsObjeto.weightx = 7;
                 settingsObjeto.weighty = 1;
                 settingsObjeto.fill = GridBagConstraints.BOTH;
                 peso = new JTextField();
@@ -268,7 +322,7 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 add(peso, settingsObjeto);
 
                 settingsObjeto.gridx = 0;
-                settingsObjeto.gridy = 7;
+                settingsObjeto.gridy = 8;
                 settingsObjeto.gridwidth = 1;
                 settingsObjeto.weightx = 1;
                 settingsObjeto.weighty = 1;
@@ -281,9 +335,9 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 settingsObjeto = new GridBagConstraints();
 
                 settingsObjeto.gridx = 1;
-                settingsObjeto.gridy = 7;
+                settingsObjeto.gridy = 8;
                 settingsObjeto.gridwidth = 2;
-                settingsObjeto.ipadx = 200;
+                settingsObjeto.weightx = 7;
                 settingsObjeto.weighty = 1;
                 settingsObjeto.fill = GridBagConstraints.BOTH;
                 dieta = new JTextField();
@@ -293,7 +347,7 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 add(dieta, settingsObjeto);
 
                 settingsObjeto.gridx = 0;
-                settingsObjeto.gridy = 8;
+                settingsObjeto.gridy = 9;
                 settingsObjeto.gridwidth = 1;
                 settingsObjeto.weightx = 1;
                 settingsObjeto.weighty = 1;
@@ -306,9 +360,9 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 settingsObjeto = new GridBagConstraints();
 
                 settingsObjeto.gridx = 1;
-                settingsObjeto.gridy = 8;
+                settingsObjeto.gridy = 9;
                 settingsObjeto.gridwidth = 2;
-                settingsObjeto.ipadx = 200;
+                settingsObjeto.weightx = 7;
                 settingsObjeto.weighty = 1;
                 settingsObjeto.fill = GridBagConstraints.BOTH;
                 peligroso = new JTextField();
@@ -316,6 +370,15 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 peligroso.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 peligroso.setHorizontalAlignment(SwingConstants.CENTER);
                 add(peligroso, settingsObjeto);
+
+                nombre.setText("Nombre del animal");
+                significado.setText("Significado del nombre del animal en latín");
+                periodo.setText("Período geológico en el que vivió el animal");
+                longitud.setText("Longitud en metros");
+                altura.setText("Altura en metros");
+                peso.setText("Peso en kilogramos");
+                dieta.setText("Dieta");
+                peligroso.setText("Si es peligroso, y por qué");
         }
 
         @Override
