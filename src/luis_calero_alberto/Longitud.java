@@ -1,7 +1,6 @@
 package luis_calero_alberto;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -93,9 +92,10 @@ public class Longitud implements KeyListener, ActionListener {
         panel.add(vacio, settings);//
         settings = new GridBagConstraints();
         settings.gridx = 0;
-        settings.gridy = 3;
+        settings.gridy = 4;
         settings.insets = new Insets(5, 20, 20, 5);
-        settings.ipadx = 200;
+        settings.gridwidth = 3;
+        settings.fill = GridBagConstraints.HORIZONTAL;
         panel.add(textoResultado, settings);
         settings = new GridBagConstraints();
         settings.gridx = 2;

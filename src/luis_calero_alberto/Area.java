@@ -87,9 +87,10 @@ public class Area implements KeyListener, ActionListener {
         panel.add(vacio, settings);//
         settings = new GridBagConstraints();
         settings.gridx = 0;
-        settings.gridy = 3;
-        settings.insets = new Insets(20, 20, 20, 00);
-        settings.ipadx = 200;
+        settings.gridy = 4;
+        settings.insets = new Insets(5, 20, 20, 5);
+        settings.gridwidth = 3;
+        settings.fill = GridBagConstraints.HORIZONTAL;
         panel.add(textoResultado, settings);
         settings = new GridBagConstraints();
         settings.gridx = 2;
@@ -101,6 +102,7 @@ public class Area implements KeyListener, ActionListener {
         settings.fill = GridBagConstraints.HORIZONTAL;
         panel.add(numeroResultado, settings);
 
+        // Como solo son 3 lineas los listeners los ponemos aqui directamente
         medidaInicial.addActionListener(this);
         medidaFinal.addActionListener(this);
 
@@ -120,7 +122,7 @@ public class Area implements KeyListener, ActionListener {
     }
 
     /**
-     * Cuando cambiemos el texto cambiara el resultado final
+     * Cuando cambiemos el texto cambiara el resultado final dinamicamente
      */
     @Override
     public void keyReleased(KeyEvent e) {

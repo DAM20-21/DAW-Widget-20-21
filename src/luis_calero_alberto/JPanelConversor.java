@@ -1,7 +1,7 @@
 package luis_calero_alberto;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
+
 import javax.swing.JPanel;
 
 import java.awt.*;
@@ -77,6 +77,13 @@ public class JPanelConversor extends JPanel {
             Volumen volumen = new Volumen(calculadora);
             calculadora.removeAll();
             volumen.anadirElementoVolumen();
+            refrescarPantalla();
+        });
+
+        opcionesIniciales[6].addActionListener(e -> {
+            Velocidad velocidad = new Velocidad(calculadora);
+            calculadora.removeAll();
+            velocidad.anadirElementoVelocidad();
             refrescarPantalla();
         });
 
