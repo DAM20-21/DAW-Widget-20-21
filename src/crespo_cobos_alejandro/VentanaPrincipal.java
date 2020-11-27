@@ -76,7 +76,7 @@ public class VentanaPrincipal {
                 // text Field Ciudad (Panel info)
                 opc = new GridBagConstraints();
                 ciudad = new JTextField();
-                ciudad.setText("Busca la ciudad");
+                ciudad.setText("Busca un pueblo del Valle del Jerte");
                 ciudad.setOpaque(true);
                 ciudad.setEditable(true);
                 ciudad.setEditable(true);
