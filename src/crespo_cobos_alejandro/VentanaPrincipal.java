@@ -14,6 +14,7 @@ import javax.swing.border.Border;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -42,6 +43,8 @@ public class VentanaPrincipal {
         private JPanel panelInfo;
         private JPanel panelImagenes;
         private JPanel panelCiudades;
+
+        
 
         /**
          * Constructor, marca el tamaño y el cierre del frame
@@ -72,7 +75,8 @@ public class VentanaPrincipal {
 
                 // text Field Ciudad (Panel info)
                 opc = new GridBagConstraints();
-                ciudad = new JTextField("BUSCA LA CIUDAD");
+                ciudad = new JTextField();
+                ciudad.setText("Busca la ciudad");
                 ciudad.setOpaque(true);
                 ciudad.setEditable(true);
                 ciudad.setEditable(true);
@@ -83,7 +87,7 @@ public class VentanaPrincipal {
 
                 // BOTON BUscar ( Panel info)
                 opc = new GridBagConstraints();
-                botonBuscar = new JButton("BUSCAR");
+                botonBuscar = new JButton(new ImageIcon("img/lupa.png"));
                 opc.gridx = 1;
                 opc.gridy = 0;
                 panelInfo.add(botonBuscar, opc);
@@ -98,55 +102,7 @@ public class VentanaPrincipal {
                 alex.setBorder(BorderFactory.createTitledBorder("Alex"));
                 ventana.getContentPane().add(alex, opc);
 
-                // Panel de ciudades
-                opc = new GridBagConstraints();
-                panelCiudades = new JPanel();
-                panelCiudades.setBorder(BorderFactory.createTitledBorder("Ciudad"));
-                panelCiudades.setBackground(Color.BLUE);
-
                 
-                opc.gridx = 0;
-                opc.gridy = 0;
-                opc.weightx = 10;
-                opc.weighty = 10; 
-                opc.fill = GridBagConstraints.BOTH;
-                alex.add(panelCiudades, opc);
-
-                // Panel CLima
-                opc = new GridBagConstraints();
-                panelImagenes = new JPanel();
-                panelImagenes.setBorder(BorderFactory.createTitledBorder("Clima"));
-                panelImagenes.setBackground(Color.GREEN);
-                opc.gridx = 1;
-                opc.gridy = 0;
-               /*  opc.ipadx= 400;
-                opc.ipady = 400; */
-                
-                opc.weightx = 5;
-                opc.weighty = 5;
-                opc.fill = GridBagConstraints.BOTH;
-                alex.add(panelImagenes, opc);
-
-
-                //añado mi texto.
-                opc = new GridBagConstraints();
-                informacion = new JTextField("                                              ");
-                informacion.setEditable(false);
-                informacion.setSize(100, 100);
-                opc.gridx= 0;
-                opc.gridy = 0;
-                opc.ipady= 400;
-                panelCiudades.add(informacion, opc);
-
-
-                //añado mi imagen al panel de clima.
-                opc = new GridBagConstraints(); 
-                imagenes = new JLabel(new ImageIcon("img/sol.png")); 
-
-                opc.gridx= 1; 
-                opc.gridy = 1;
-                
-                panelImagenes.add(imagenes, opc); 
                 
 
 
@@ -184,13 +140,18 @@ public class VentanaPrincipal {
                  */
 
         }
+        
+
+        
+    
 
         /**
          * Método que inicializa todos los listeners del programa.
          */
         public void inicializarListeners() {
                 botonBuscar.addActionListener(e -> {
-                        alex.actionPerformed(e);
+                        alex.comprobarPueblos(ciudad);
+                        alex.comprobarImagen();
 
                 });
 
@@ -204,5 +165,7 @@ public class VentanaPrincipal {
                 ventana.setVisible(true);
                 inicializarComponentes();
                 inicializarListeners();
+                
+               
         }
 }
