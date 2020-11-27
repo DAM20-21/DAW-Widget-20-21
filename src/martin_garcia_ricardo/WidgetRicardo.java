@@ -206,7 +206,7 @@ public class WidgetRicardo extends JDialog {
             
 
         }
-        temperaturas.setText("Max: "+ temperaturaMAX+"°C MIN: " +temperaturaMIN+"°C Media: "+ media+"");
+        temperaturas.setText("Max: "+ temperaturaMAX+"°C Min: " +temperaturaMIN+"°C Media: "+ media+"");
 
         
         
