@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,7 +29,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class AlejandroWidget extends JPanel implements ActionListener {
+public class AlejandroWidget extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
@@ -39,14 +40,22 @@ public class AlejandroWidget extends JPanel implements ActionListener {
 
     private JPanel panelImagenes;
     private JPanel panelCiudades;
+    ArrayList<Tiempo> pueblos = new ArrayList<>();
+    ArrayList <ImageIcon> imgs= new ArrayList<>();
+    String [] climas = {"Soleado", "Lluvia", "Niebla", "Nieve", "Nubes y claros"};
 
     // Referencia al selectorColor:
 
     public AlejandroWidget() {
         super();
+        anadirImagenes();
+        anadirElementosAlex();
+        
+        
         
 
     }
+    
 
     public void anadirElementosAlex() {
 
@@ -58,57 +67,125 @@ public class AlejandroWidget extends JPanel implements ActionListener {
         // PANEL PRINCIPAL
         // Titulo
         // Panel de ciudades
+        // Panel de ciudades
         opc = new GridBagConstraints();
-        panelCiudades = new JPanel(new GridLayout(1, 1));
-        panelCiudades.setBorder(BorderFactory.createTitledBorder("Ciudades"));
+        panelCiudades = new JPanel();
+        panelCiudades.setBorder(BorderFactory.createTitledBorder("Ciudad"));
+        panelCiudades.setBackground(Color.BLUE);
+
         opc.gridx = 0;
-        opc.gridy = 1;
-        opc.weightx = 2;
-        opc.weighty = 2;
+        opc.gridy = 0;
+        opc.weightx = 10;
+        opc.weighty = 10;
         opc.fill = GridBagConstraints.BOTH;
+        this.add(panelCiudades, opc);
 
-        // TExto de cuidades y caracteristas del dia
+        // Panel CLima
         opc = new GridBagConstraints();
-        informacion = new JTextField("BUSCA LA CIUDAD");
-        informacion.setOpaque(true);
-        informacion.setEnabled(true);
-        informacion.setEditable(false);
+        panelImagenes = new JPanel();
+        panelImagenes.setBorder(BorderFactory.createTitledBorder("Clima"));
+        panelImagenes.setBackground(Color.GREEN);
+        opc.gridx = 1;
+        opc.gridy = 0;
 
-        opc.gridx = 0;
-        opc.gridy = 1;
-        opc.fill = GridBagConstraints.HORIZONTAL;
-        panelCiudades.setBorder(BorderFactory.createEmptyBorder(80, 30, 80, 30));
+        opc.weightx = 5;
+        opc.weighty = 5;
+        opc.fill = GridBagConstraints.BOTH;
+        this.add(panelImagenes, opc);
+
+        //Añado a mi panel Ciudades el JtextField que tendra la informacion de la ciudad
+        opc = new GridBagConstraints();
+        informacion = new JTextField();
+        
+        informacion.setEditable(true);
+        informacion.setSize(100, 100);
+        opc.gridx= 0;
+        opc.gridy = 0;
         panelCiudades.add(informacion, opc);
 
-        opc = new GridBagConstraints();
-        panelImagenes = new JPanel(new GridLayout(1, 1));
-        panelImagenes.setBorder(BorderFactory.createTitledBorder("Clima"));
-        opc.gridx = 1;
-        opc.gridy = 1;
-        opc.weightx = 2;
-        opc.weighty = 2;
-        opc.fill = GridBagConstraints.BOTH;
 
+        //Añado las imagenes a ver como se ven
         opc = new GridBagConstraints();
-        imagenes = new JLabel(new ImageIcon("src/imagenes/sol.png"));
-        opc.gridx = 1;
+        imagenes = new JLabel();
+        opc.gridx= 1; 
         opc.gridy = 1;
-
         panelImagenes.add(imagenes, opc);
 
-    }
 
-    public void anadirListeners() {
 
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
         
-        anadirElementosAlex();
+
+
+
+        /*
+         * //añado mi texto. opc = new GridBagConstraints(); informacion = new
+         * JTextField("..............."); informacion.setEditable(true);
+         * informacion.setSize(100, 100); opc.gridx= 0; opc.gridy = 0; opc.ipady= 400;
+         * panelCiudades.add(informacion, opc);
+         * 
+         * 
+         * //añado mi imagen al panel de clima. opc = new GridBagConstraints(); imagenes
+         * = new JLabel(new ImageIcon("img/sol.png"));
+         * 
+         * opc.gridx= 1; opc.gridy = 1;
+         * 
+         * panelImagenes.add(imagenes, opc);
+         */
+
     }
 
-	
-	
-	
+    public void CrearObjetosTiempo() {
+
+        pueblos.add(new Tiempo("Tornavacas", 16, 4, "Soleado"));
+        pueblos.add(new Tiempo("Jerte", 17, 10, "Soleado"));
+        pueblos.add(new Tiempo("Cabezuela del Valle", 20, 12, "Lluvia"));
+        pueblos.add(new Tiempo("Navaconcejo", 11, 8, "Soleado"));
+        pueblos.add(new Tiempo("Rebollar", 16, 4, "Soleado"));
+        pueblos.add(new Tiempo("Las Casas del Castañar", 10, 1, "Soleado"));
+        pueblos.add(new Tiempo("El Torno", 21, 4, "Soleado"));
+        pueblos.add(new Tiempo("Cabrero", 19, 2, "Niebla"));
+        pueblos.add(new Tiempo("Piornal", 5, -4, "Nieve"));
+        pueblos.add(new Tiempo("Valdastillas", 16, 4, "Soleado"));
+        pueblos.add(new Tiempo("Barrado", 16, 4, "Soleado"));
+
+        
+
+    }
+
+    public void comprobarPueblos(JTextField ciudad) {
+        String texto = ciudad.getText();
+        for (Tiempo tiempo : pueblos) {
+            if (tiempo.getNombre().equalsIgnoreCase(texto)) {
+                informacion.setText(tiempo.getNombre() + "TM: " + tiempo.getTemperaturaMax() + "  Tm: "
+                        + tiempo.getTemperaturaMin() + " Y el clima esta : " + tiempo.getClima());
+
+            }
+        }
+
+    }
+    public void anadirImagenes(){
+        imgs.add(new ImageIcon("img/sol.png"));
+        imgs.add(new ImageIcon("img/lluvia.png"));
+        imgs.add(new ImageIcon("img/nieve.png"));
+        imgs.add(new ImageIcon("img/nubesyclaros.png"));
+        imgs.add(new ImageIcon("img/nubes.png"));
+    }
+
+   
+
+    public void comprobarImagen(){
+
+        for (Tiempo tiempo : pueblos) {
+            if(tiempo.getClima().equalsIgnoreCase("Soleado")){
+                imagenes.setIcon(new ImageIcon("img/sol.png"));
+            }
+            
+        }
+
+        
+
+    }
+
+
+
 }
