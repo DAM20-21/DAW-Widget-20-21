@@ -8,7 +8,7 @@ public class Principal {
                     VentanaPrincipal vp = new VentanaPrincipal();
                     vp.incializar();
                 }catch(Exception e){
-                    e.printStackTrace();
+                    e.printStackTrace(); 
                 }
                 
             }

@@ -28,8 +28,8 @@ public class VentanaPrincipal {
         }
         f.setLayout(gl); 
         
-        for(int i=0 ; i<nFICHEROS ; i++){//Añadir los ficheros a f
-            
+        for(int i=0 ; i<nFICHEROS ; i++){//Añadir la vista de los ficheros a f
+            /* previewTexto =  */
         }
 
         
@@ -47,21 +47,26 @@ public class VentanaPrincipal {
      * Devuelve el número de ficheros que hay en la carpeta de los ficheros
      * @return nFich 
      */
-    public int importarInfo() {
-        int nFich;
-
-        File carpeta = new File("src/martin_jimenez_alberto/Ficheros"); 
-        File[] lista = carpeta.listFiles();
-        nFich = lista.length;
-
-        return nFich;
-    }
+  
 
     public void guardarFicheros(){
         listaFICHEROS = new ArrayList<>();
+        File carpeta = new File("DAW-Widget-20-21/ficheros/Ficheros"); 
+        File[] lista = carpeta.listFiles();
+        String titulo;
+        String texto;
+        String[] aux;
 
-        for(int i=0 ; i<importarInfo() ; i++){
-
+        for(int i=0 ; i<lista.length; i++){
+            titulo = lista[i].getName();
+            if(titulo.contains("/Ficheros")){
+                aux = titulo.split("/Ficheros");
+                titulo = aux[1];
+                aux = titulo.split(".");
+                titulo = aux[0];
+            }else{
+                System.out.println("MAL GUARDADO el fichero"+titulo);
+            }
         }
     }
 }
