@@ -1,8 +1,10 @@
 package perez_martin_miguel;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class Leer_Excribir {
@@ -75,7 +77,26 @@ public class Leer_Excribir {
      * metodo el cual nos permitira añadir una linea nueva a nuestro fichero con la
      * palabra y su significado.
      */
-    public void escritura() {
+    public void escritura(String nuevaPalabra, String significadoNuevaPalabra) {
+        // ruta del fichero.
+        File fich = new File("ficheros/palabras_miguel.txt");
 
+        try {
+            // flujo de lectura.
+            BufferedWriter bw = new BufferedWriter(new FileWriter(fich, true));
+            // aqui se almacenara la nueva linea.
+            String linea;
+
+            linea = nuevaPalabra + ": " + significadoNuevaPalabra;
+
+            // creamos una nueva linea de despues escribimos la linea correspondiente.
+            bw.newLine();
+            bw.write(linea);
+
+            // cerramos el flujo de lectura.
+            bw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

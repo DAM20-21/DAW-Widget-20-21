@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -144,7 +143,7 @@ public class Widget_miguel extends JDialog {
         ajusteBoton.gridy = 0;
         ajusteBoton.ipadx = 50;
         ajusteBoton.weighty = 1;
-        ajusteBoton.fill = ajusteBoton.BOTH;
+        ajusteBoton.fill = GridBagConstraints.BOTH;
         panelCentro.add(botonPalabras, ajusteBoton);
         botonPalabras.setFont(new Font("Comic Sans Ms", Font.ITALIC, 50));
 
@@ -183,6 +182,33 @@ public class Widget_miguel extends JDialog {
 
             significadoPalabra.setText("");
         });
+
+        botonMasPalabras.addActionListener(e -> {
+            // paramos el temporizador.
+            crono.parar();
+            // contando es falso para que no genere mas palabras
+            contando = false;
+            // llamada a un metodo que pregunta la palabra y su significado.
+            añadirNuevaPalabra();
+        });
+    }
+
+    /**
+     * metodo que pregunta la palabra y su significado y se la manda a una clase que
+     * escribira una nueva linea en el fichero con estos datos.
+     */
+    public void añadirNuevaPalabra() {
+        String nuevaPalabra = "";
+        String significadoNuevaPalabra = "";
+
+        nuevaPalabra = JOptionPane.showInputDialog(this, "Palabra a introducir: ");
+
+        significadoNuevaPalabra = JOptionPane.showInputDialog(this, " Significado de la palabra: ");
+
+        if (!contando) {
+            panelAbajo.setVisible(true);
+            palabras.escritura(nuevaPalabra, significadoNuevaPalabra);
+        }
     }
 
     /**
@@ -311,9 +337,9 @@ public class Widget_miguel extends JDialog {
         // Aquí se pone en marcha el timer cada segundo.
         Timer timer = new Timer();
 
-        // Dentro de 0 milisegundos avísame cada 50 milisegundos para que el fallo de
-        // sincronizacion sea poco.
-        timer.scheduleAtFixedRate(timerTask, 0, 50);
+        // Dentro de 0 milisegundos avísame cada 1 milisegundos para que el fallo de
+        // sincronizacion sea lo menos posible.
+        timer.scheduleAtFixedRate(timerTask, 0, 1);
 
     }
 
