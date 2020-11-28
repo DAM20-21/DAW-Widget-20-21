@@ -76,14 +76,8 @@ public class VentanaPrincipal {
 	 */
 	public void inicializarListeners(){
 		botonCensura.addActionListener(e->{
-			WidgetIvan dialog = new WidgetIvan(botonCensura,texto, panelTexto.getBackground());
+			WidgetIvan dialog = new WidgetIvan(botonCensura,texto);
 			dialog.setVisible(true);
-			dialog.addWindowListener(new WindowAdapter() {
-				@Override
-				public void windowClosed(WindowEvent arg0) {
-					
-				}
-			});	
 		});
 		
 	}

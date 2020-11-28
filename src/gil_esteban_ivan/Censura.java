@@ -5,71 +5,35 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import javax.swing.JTextArea;
-
 public class Censura {
 
     final static String[] NOM_FICH = { "censura1.txt", "censura2.txt", "censura3.txt" };
-    
-    private int num;
-    private JTextArea previsualizar;
-    private JTextArea palabrasCensura;
 
-    public Censura(JTextArea previsualizar, JTextArea palabrasCensura) {
-        this.previsualizar = previsualizar;
-        this.palabrasCensura = palabrasCensura;
-        num = 0;
+    public Censura() {
     }
 
-
-    public int getNum() {
-        return this.num;
-    }
-
-    public void setNum(int num) {
-        this.num = num;
-    }
-
-    public JTextArea getPrevisualizar() {
-        return this.previsualizar;
-    }
-
-    public void setPrevisualizar(JTextArea previsualizar) {
-        this.previsualizar = previsualizar;
-    }
-
-    public JTextArea getPalabrasCensura() {
-        return this.palabrasCensura;
-    }
-
-    public void setPalabrasCensura(JTextArea palabrasCensura) {
-        this.palabrasCensura = palabrasCensura;
-    }
-
-
-    public void leerMostrarTabu() {
+    public String leerMostrarTabu(int num) {
+        String linea = null;
+        String guardar = "";
         try {
-            BufferedReader br = new BufferedReader(new FileReader(new File(NOM_FICH[num])));
-            String linea;
-            while ((linea = br.readLine()) != null) // lee una línea del fichero
-                
-            
-
+            BufferedReader br = new BufferedReader(new FileReader(new File("ficheros/" + NOM_FICH[num])));
+            while ((linea = br.readLine()) != null) {
+                guardar += linea + "\n";
+            }
             br.close();
         } catch (IOException io) {
             System.out.println("Error en la E/S: " + io.getMessage());
         }
+        return guardar;
     }
 
-    public void leerPrevisualizar() {
+    public void leerPrevisualizar(int num) {
         try {
-            BufferedReader br = new BufferedReader(new FileReader(new File(NOM_FICH[num])));
+            BufferedReader br = new BufferedReader(new FileReader(new File("ficeros/" + NOM_FICH[num])));
             String linea;
             while ((linea = br.readLine()) != null) // lee una línea del fichero
-                
-            
 
-            br.close();
+                br.close();
         } catch (IOException io) {
             System.out.println("Error en la E/S: " + io.getMessage());
         }
