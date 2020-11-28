@@ -1,9 +1,10 @@
-package redondo_garcia_jesus.Rodriguez_Parron_Alexandro;
 
 import java.awt.EventQueue;
 
+
 /**
- * Principal
+ * @author Alexandro Rodríguez Parrón
+ * @version 1.0
  */
 public class Principal {
 

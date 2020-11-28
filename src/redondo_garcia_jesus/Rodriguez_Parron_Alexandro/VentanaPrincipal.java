@@ -1,4 +1,9 @@
-package redondo_garcia_jesus.Rodriguez_Parron_Alexandro;
+
+
+/**
+ * @author Alexandro Rodríguez Parrón
+ * @version 1.0
+ */
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,7 +33,10 @@ public class VentanaPrincipal {
 		inicializarComponentes();	
 		inicializarListeners();		
     }
-    
+	
+	/**
+	 * Método que crea un botón y lo añade a la ventana
+	 */
     public void inicializarComponentes(){
         rellenarFormulario = new JButton("Rellenar Formulario");
         ventana.setLayout(new GridLayout());
@@ -40,7 +48,7 @@ public class VentanaPrincipal {
 	 */
 	public void inicializarListeners(){
         rellenarFormulario.addActionListener((e)->{
-            Widgets_Formulario wF = new Widgets_Formulario(rellenarFormulario, ventana);
+            Widgets_Formulario wF = new Widgets_Formulario(ventana);
             wF.setVisible(true);
         });
     }
