@@ -80,6 +80,13 @@ public class JPanelConversor extends JPanel {
             refrescarPantalla();
         });
 
+        opcionesIniciales[5].addActionListener(e -> {
+            Divisas divisas = new Divisas(calculadora);
+            calculadora.removeAll();
+            divisas.anadirElementoDivisas();
+            refrescarPantalla();
+        });
+
         opcionesIniciales[6].addActionListener(e -> {
             Velocidad velocidad = new Velocidad(calculadora);
             calculadora.removeAll();
