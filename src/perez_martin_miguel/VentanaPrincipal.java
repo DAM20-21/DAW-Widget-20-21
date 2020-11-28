@@ -11,6 +11,7 @@ public class VentanaPrincipal {
     public VentanaPrincipal() {
         this.ventana = new JFrame("Diccionario Dinamico");
         ventana.setBounds(0, 0, 500, 500);
+        ventana.setLocationRelativeTo(null);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.boton = new JButton("Ver palabras");
@@ -30,6 +31,7 @@ public class VentanaPrincipal {
         ajuste.gridx = 0;
         ajuste.gridy = 0;
         ventana.add(boton, ajuste);
+
     }
 
     public void inicializarListener() {

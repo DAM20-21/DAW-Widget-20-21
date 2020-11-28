@@ -31,7 +31,7 @@ public class Cronometro extends JPanel implements Runnable {
         setLayout(new GridBagLayout());
         contador = new JLabel();
         add(contador);
-        contador.setFont(new Font("Arial", Font.PLAIN, 50));
+        contador.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 100));
 
         segundos = 60;
     }
