@@ -31,7 +31,7 @@ public class VentanaPrincipal {
 
         // La ventana principal, en este caso, guarda todos los componentes:
         private JFrame ventana;
-        AlejandroWidget alex = new AlejandroWidget();
+        TornaWeather tornaWidget = new TornaWeather();
 
         private JButton botonBuscar;
         private ImageIcon imagenIcono;
@@ -51,7 +51,7 @@ public class VentanaPrincipal {
          */
         public VentanaPrincipal() {
                 ventana = new JFrame();
-                ventana.setBounds(300, 150, 600, 500);
+                ventana.setBounds(300, 150, 700, 450);
                 ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
 
@@ -59,6 +59,8 @@ public class VentanaPrincipal {
          * Método que inicializa todos los componentes de la ventana
          */
         public void inicializarComponentes() {
+
+                
 
                 // Definimos el layout:
                 GridBagLayout gbl = new GridBagLayout();
@@ -70,6 +72,10 @@ public class VentanaPrincipal {
                 opc.gridx = 0;
                 opc.gridy = 0;
                 opc.anchor = GridBagConstraints.NORTH;
+                opc.weightx= 1;
+                opc.weighty= 1;
+
+                opc.fill = GridBagConstraints.BOTH;
                 panelInfo.setBorder(BorderFactory.createTitledBorder("Buscador"));
                 ventana.getContentPane().add(panelInfo, opc);
 
@@ -99,46 +105,8 @@ public class VentanaPrincipal {
                 opc.weightx = 5;
                 opc.weighty = 5;
                 opc.fill = GridBagConstraints.BOTH;
-                alex.setBorder(BorderFactory.createTitledBorder("Alex"));
-                ventana.getContentPane().add(alex, opc);
-
-                
-                
-
-
-
-
-
-
-
-
-
-
-
-                // TExto de cuidades y caracteristas del dia
-                /*
-                 * opc = new GridBagConstraints(); informacion = new
-                 * JTextField("BUSCA LA CIUDAD"); informacion.setOpaque(true);
-                 * informacion.setEnabled(true); informacion.setEditable(false);
-                 * 
-                 * opc.gridx = 0; opc.gridy = 1; opc.fill = GridBagConstraints.HORIZONTAL;
-                 * panelCiudades.setBorder(BorderFactory.createEmptyBorder(80, 30, 80, 30));
-                 * panelCiudades.add(informacion, opc);
-                 * ventana.getContentPane().add(panelCiudades, opc);
-                 * 
-                 * 
-                 * opc = new GridBagConstraints(); panelImagenes = new JPanel(new
-                 * GridLayout(1,1)); opc.gridx = 1; opc.gridy = 1; opc.weightx = 2; opc.weighty
-                 * = 2; opc.fill = GridBagConstraints.BOTH;
-                 * 
-                 * opc = new GridBagConstraints(); imagenes = new JLabel(new
-                 * ImageIcon("src/imagenes/sol.png")); opc.gridx= 1; opc.gridy = 1;
-                 * 
-                 * 
-                 * panelImagenes.add(imagenes, opc); ventana.getContentPane().add(panelImagenes,
-                 * opc);
-                 */
-
+                tornaWidget.setBorder(BorderFactory.createTitledBorder("TornaWeather"));
+                ventana.getContentPane().add(tornaWidget, opc);
         }
         
 
@@ -149,13 +117,20 @@ public class VentanaPrincipal {
          * Método que inicializa todos los listeners del programa.
          */
         public void inicializarListeners() {
-                botonBuscar.addActionListener(e -> {
-                        alex.comprobarPueblos(ciudad);
-                        alex.comprobarImagen();
-
+                botonBuscar.addActionListener((e) -> {
+                        tornaWidget.comprobarPueblos(ciudad);
+                        tornaWidget.comprobarImagen(ciudad);
+                        refrescarPantalla();
                 });
-
         }
+
+        /**
+         * Metodo reutilizado
+         */
+        public void refrescarPantalla() {
+		ventana.revalidate();
+		ventana.repaint();
+	}
 
         /**
          * Método que realiza todas las llamadas necesarias para inicializar la ventana
@@ -163,9 +138,9 @@ public class VentanaPrincipal {
          */
         public void inicializar() {
                 ventana.setVisible(true);
+                tornaWidget.CrearObjetosTiempo();
+                tornaWidget.anadirImagenes();
                 inicializarComponentes();
-                inicializarListeners();
-                
-               
+                inicializarListeners();        
         }
 }
