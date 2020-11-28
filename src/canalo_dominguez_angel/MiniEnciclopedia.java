@@ -17,6 +17,49 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * <p>
+ * panelPrincipal: JPanel en el que van todos los demás elementos
+ * </p>
+ * <p>
+ * panelImagen: JPanel en el que va la imagen del dinosaurio
+ * </p>
+ * <p>
+ * comboBoxDinosaurios: JComboBox de tipo String con los nombres de los
+ * dinosaurios
+ * </p>
+ * <p>
+ * img: BufferedImage en el que iniciar la imagen
+ * </p>
+ * <p>
+ * imagen: Objeto de la clase Image
+ * </p>
+ * <p>
+ * iconoImagen: ImageIcon en el que se coloca "imagen"
+ * </p>
+ * <p>
+ * labelImagen: JLabel para colocar el iconoImagen
+ * </p>
+ * <p>
+ * lista: ArrayList de tipo Dinosaurio en el que van todos los dinosaurios
+ * </p>
+ * <p>
+ * iniciales: Vector de tipo Dinosaurio que incluye la lista de dinosaurios
+ * incluidos por defecto
+ * </p>
+ * <p>
+ * dinosaurios: Vector de tipo String en el que se incluirán los nombres de los
+ * dinosaurios
+ * </p>
+ * <p>
+ * textFields: Vector de JTextFields en el que se incluyen los textFields que se
+ * rellenarán con la información de los dinosaurios
+ * </p>
+ * <p>
+ * labels: Vector de JLabels que incluye los labels que definen la información
+ * del dinosaurio
+ * </p>
+ */
 public class MiniEnciclopedia extends JPanel implements ActionListener {
 
         /**
@@ -24,9 +67,8 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
          */
         private static final long serialVersionUID = 1L;
 
-        JPanel panelPrincipal;
+        JPanel panelPrincipal, panelImagen;
         JComboBox<String> comboBoxDinosaurios;
-        JPanel panelImagen;
         BufferedImage img;
         Image imagen;
         ImageIcon iconoImagen;
@@ -71,6 +113,16 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
         JLabel labelNombre, labelSign, labelPeriod, labelLong, labelAlt, labelPeso, labelDieta, labelPel;
         JLabel[] labels = { labelNombre, labelSign, labelPeriod, labelLong, labelAlt, labelPeso, labelDieta, labelPel };
 
+        /**
+         * <p>
+         * Con este constructor se inicia el objeto de clase MiniEnciclopedia,
+         * añadiéndose un objeto vacío en el ArrayList para que no elija el primer
+         * dinosaurio incluido por defecto al iniciar, y se pone un texto en el que se
+         * pide al usuario elegir un dinosaurio. A continuación se recorre el vector
+         * "iniciales" y se van añadiendo los distintos objetos de clase Dinosaurio a la
+         * lista y los nombres de éstos al vector.
+         * </p>
+         */
         public MiniEnciclopedia() {
                 super();
                 lista.add(0, null);
@@ -83,33 +135,38 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 crearListeners();
         }
 
+        /**
+         * <p>
+         * Aquí se incian los Listeners del objeto:
+         * </p>
+         * <p>
+         * +Si se elige una posición distinta de cero (-Elija un dinosaurio-), se cambia
+         * la imagen del mapa de Isla Sorna por una del animal elegido y se muestra su
+         * información (Nombre, significado, período, longitud, altura, peso, dieta y si
+         * es peligroso o no, y si lo es, por qué)
+         * </p>
+         * <p>
+         * +De lo contrario, se pone la imagen que estaba por defecto (el mapa de Isla
+         * Sorna) y se rellenan los campos de texto con la explicación de las variables.
+         * </p>
+         */
         private void crearListeners() {
                 comboBoxDinosaurios.addActionListener((e) -> {
                         int pos = comboBoxDinosaurios.getSelectedIndex();
+                        labelImagen.removeAll();
+                        Image nuevaImagen = null;
                         if (pos != 0) {
-                                labelImagen.setIcon(null);
-                                GridBagConstraints settingsObjeto = new GridBagConstraints();
-                                settingsObjeto.gridx = 0;
-                                settingsObjeto.gridy = 1;
-                                settingsObjeto.gridwidth = 3;
-                                settingsObjeto.weightx = 7;
-                                settingsObjeto.weighty = 0;
-                                settingsObjeto.insets = new Insets(10, 0, 10, 0);
-                                settingsObjeto.fill = GridBagConstraints.BOTH;
-                                panelImagen = new JPanel();
-                                Image nuevaImagen=null;
-                                String rutaImagen="./img/"+lista.get(pos).getNombre()+".jpg";
                                 try {
-                                        System.out.println(rutaImagen);
+                                        String rutaImagen = "./img/" + lista.get(pos).getNombre() + ".jpg";
                                         nuevaImagen = ImageIO.read(new File(rutaImagen));
+                                        imagen = nuevaImagen.getScaledInstance(150, 100, Image.SCALE_SMOOTH);
+                                        iconoImagen = new ImageIcon(imagen);
+                                        labelImagen.setIcon(iconoImagen);
                                 } catch (IOException ex) {
                                         ex.printStackTrace();
+                                        labelImagen.setText("Aquí iría la imagen del " + lista.get(pos).getNombre()
+                                                        + ", pero hay que incluirla en el repositorio.");
                                 }
-                                imagen = nuevaImagen.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-                                iconoImagen = new ImageIcon(imagen);
-                                labelImagen = new JLabel(iconoImagen);
-                                panelImagen.add(labelImagen);
-                                add(panelImagen, settingsObjeto);
                                 nombre.setText(lista.get(pos).getNombre());
                                 significado.setText(lista.get(pos).getSignificado());
                                 periodo.setText(lista.get(pos).getPeriodo());
@@ -119,6 +176,17 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                                 dieta.setText(lista.get(pos).getDieta());
                                 peligroso.setText(lista.get(pos).getPeligroso());
                         } else {
+                                try {
+                                        String rutaImagen = "./img/Sorna.jpg";
+                                        nuevaImagen = ImageIO.read(new File(rutaImagen));
+                                        imagen = nuevaImagen.getScaledInstance(150, 100, Image.SCALE_SMOOTH);
+                                        iconoImagen = new ImageIcon(imagen);
+                                        labelImagen.setIcon(iconoImagen);
+                                } catch (IOException ex) {
+                                        ex.printStackTrace();
+                                        labelImagen.setText(
+                                                        "Aquí iría el mapa de la isla Sorna, pero hay que incluirlo en el repositorio.");
+                                }
                                 nombre.setText("Nombre del animal");
                                 significado.setText("Significado del nombre del animal en latín");
                                 periodo.setText("Período geológico en el que vivió el animal");
@@ -131,6 +199,13 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 });
         }
 
+        /**
+         * <p>
+         * Aquí se incian los elementos del objeto. Una vez iniciados y colocados, se
+         * rellenan los JTextFields con explicaciones de qué información contendrá cada
+         * campo.
+         * </p>
+         */
         private void crearElementos() {
                 setLayout(new GridBagLayout());
 
