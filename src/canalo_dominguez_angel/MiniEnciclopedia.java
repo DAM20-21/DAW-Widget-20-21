@@ -159,7 +159,7 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                                 try {
                                         String rutaImagen = "./img/" + lista.get(pos).getNombre() + ".jpg";
                                         nuevaImagen = ImageIO.read(new File(rutaImagen));
-                                        imagen = nuevaImagen.getScaledInstance(150, 100, Image.SCALE_SMOOTH);
+                                        imagen = nuevaImagen.getScaledInstance(300, 200, Image.SCALE_SMOOTH);
                                         iconoImagen = new ImageIcon(imagen);
                                         labelImagen.setIcon(iconoImagen);
                                 } catch (IOException ex) {
@@ -179,7 +179,7 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                                 try {
                                         String rutaImagen = "./img/Sorna.jpg";
                                         nuevaImagen = ImageIO.read(new File(rutaImagen));
-                                        imagen = nuevaImagen.getScaledInstance(150, 100, Image.SCALE_SMOOTH);
+                                        imagen = nuevaImagen.getScaledInstance(300, 200, Image.SCALE_SMOOTH);
                                         iconoImagen = new ImageIcon(imagen);
                                         labelImagen.setIcon(iconoImagen);
                                 } catch (IOException ex) {
@@ -238,7 +238,7 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 } catch (IOException e) {
                         e.printStackTrace();
                 }
-                imagen = img.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+                imagen = img.getScaledInstance(300, 200, Image.SCALE_SMOOTH);
                 iconoImagen = new ImageIcon(imagen);
                 labelImagen = new JLabel(iconoImagen);
                 panelImagen.add(labelImagen);
