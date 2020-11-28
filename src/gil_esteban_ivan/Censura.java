@@ -27,16 +27,23 @@ public class Censura {
         return guardar;
     }
 
-    public void leerPrevisualizar(int num) {
+    public String leerPrevisualizar(int num, String a) {
+        int cont = 0;
+        String texto = a;
         try {
-            BufferedReader br = new BufferedReader(new FileReader(new File("ficeros/" + NOM_FICH[num])));
-            String linea;
-            while ((linea = br.readLine()) != null) // lee una línea del fichero
-
-                br.close();
+            BufferedReader br = new BufferedReader(new FileReader(new File("ficheros/" + NOM_FICH[num])));
+            String censurado;
+            while ((censurado = br.readLine()) != null) {
+                if (cont > 0) {
+                    texto = texto.replace(censurado.split(":")[0], censurado.split(":")[1]);
+                }
+                cont++;
+            }
+            br.close();
         } catch (IOException io) {
             System.out.println("Error en la E/S: " + io.getMessage());
         }
+        return texto;
     }
 
 }

@@ -98,6 +98,7 @@ public class WidgetIvan extends JDialog {
 
 		// MostradorPalabasTabu
 		palabrasTabu = new JTextArea();
+		palabrasTabu.setText(censura.leerMostrarTabu(sliderNivel.getValue()));
 		palabrasTabu.setEditable(false);
 		palabrasTabu.setLineWrap(true);
 		palabrasTabu.setBorder(BorderFactory.createLineBorder(Color.RED));
@@ -131,22 +132,19 @@ public class WidgetIvan extends JDialog {
 	 * Método que añade todos los listeners al Dialog
 	 */
 	private void anadirListeners() {
-
 		sliderNivel.addChangeListener(e -> {
 			palabrasTabu.setText(censura.leerMostrarTabu(sliderNivel.getValue()));
 		});
 
-		// Botón Aceptar:
 		bAplicar.addActionListener((e) -> {
-			texto.setText("Hola que tal");
+			texto.setText(censura.leerPrevisualizar(sliderNivel.getValue(),texto.getText()));
 			this.dispose();
 		});
 
 
 		bPrevisualizar.addActionListener((e) -> {
-			mostradorCensura.setText("Hola que tal");
+			mostradorCensura.setText(censura.leerPrevisualizar(sliderNivel.getValue(),texto.getText()));
 		});
-
 	}
 
 }
