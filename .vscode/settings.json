@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/*/.jar",
+        "mysql-connector-java-5.1.36-bin",
+        ".vscode/mysql-connector-java-5.1.36-bin.jar"
+    ]
+}
