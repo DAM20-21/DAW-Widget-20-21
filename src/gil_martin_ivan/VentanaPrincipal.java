@@ -101,6 +101,7 @@ public class VentanaPrincipal extends Thread implements ActionListener{
 		}
 		else{
 			tiempo.setText("Se acabo el tiempo");
+			iniciaHilo = false;
 		}
 	}
 
