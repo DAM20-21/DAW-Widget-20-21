@@ -1,17 +1,13 @@
 package bonifacio_hernandez_javier;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.plaf.FontUIResource;
 
 /**
  * Ventana Principal para probar el widget Selector de Formato de Texto

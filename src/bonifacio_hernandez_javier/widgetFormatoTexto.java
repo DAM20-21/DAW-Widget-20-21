@@ -14,13 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * Clase que representa un diálogo selector de color. Para utilizar esta clase
- * crea un listener del estilo:
- * {@code  DialogSelectorColor dialog = new DialogSelectorColor(bDialogo, panelColor.getBackground());
-			dialog.addWindowListener(new WindowAdapter() { @Override public void
- * windowClosed(WindowEvent arg0) { System.out.println(dialog.getColor()); } });
- * } La clase está preparada para que pueda funcionar sobre cualquier
- * componente.
  * 
  * @author Javier Bonifacio Hernandez
  *
