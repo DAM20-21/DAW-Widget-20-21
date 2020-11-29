@@ -1,15 +1,11 @@
 package corrales_santos_sara;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,13 +13,11 @@ import java.util.ArrayList;
 public class VentanaPrincipal {
 
     private JFrame ventana;
-    private JPanel JPTiempo, JPNota, JPpantalla, JPtexto, JPbotones, JPtemporizador, JPtextoNota, JPanaidir;
-    private JLabel JLtiempo;
+    private JPanel JPTiempo, JPNota, JPpantalla, JPtexto, JPbotones, JPtextoNota, JPanaidir;
     private JButton[] JBotones = {new JButton("Iniciar"), new JButton("Pausa"), new JButton("Reiniciar")};
     private JButton JBaniadir;
-    private ArrayList<JCheckBox> JCheck = new ArrayList<>();
-    private JTextField JTNota;
-    private ButtonGroup grupoNotas;
+     ArrayList<JCheckBox> JCheck = new ArrayList<>();
+     JTextField JTNota;
     private WidgetSara widgetSara;
     private Pomodoro pomodoro;
     
@@ -44,7 +38,6 @@ public class VentanaPrincipal {
 
         //POMODORO
         GridBagLayout gb = new GridBagLayout();
-        /* JPTiempo.setBackground(Color.BLUE); */
         JPTiempo.setLayout(gb);
         GridBagConstraints setting = new GridBagConstraints();
         setting.gridx = 0;
@@ -62,7 +55,6 @@ public class VentanaPrincipal {
         JLtiempo.setHorizontalAlignment(SwingConstants.CENTER);
         JPtemporizador.add(JLtiempo);  */
         pomodoro = new Pomodoro();
-        //pomodoro.hilo.start();
         setting.gridx = 0;
         setting.gridy = 0;
         setting.weightx = 7;
@@ -87,9 +79,8 @@ public class VentanaPrincipal {
         JPTiempo.add(JPbotones, setting);
 
         //NOTA
-        /* JPNota.setBackground(Color.GREEN); */
         JPNota.setLayout(new GridLayout(JCheck.size(), 1));
-        JPNota.setBackground(new Color(246, 216, 83));
+        JPNota.setBackground(new Color(166, 247, 203));
         setting = new GridBagConstraints();
         setting.gridx = 0;
         setting.gridy = 1;
@@ -106,7 +97,6 @@ public class VentanaPrincipal {
         
         // TEXTO
         JPtexto.setLayout(new GridBagLayout());
-        /* JPtexto.setBackground(Color.PINK); */
         setting = new GridBagConstraints();
         setting.gridx = 0;
         setting.gridy = 2;
@@ -118,7 +108,7 @@ public class VentanaPrincipal {
         JPpantalla.add(JPtexto, setting);
 
         //NOTA TEXTO
-        JTNota = new JTextField("Hola");
+        JTNota = new JTextField();
         JPtextoNota = new JPanel(new GridLayout(1,1));
         JPtextoNota.add(JTNota); 
         setting = new GridBagConstraints();
@@ -149,12 +139,11 @@ public class VentanaPrincipal {
         JBaniadir.addActionListener((e)->{
             String nota = JTNota.getText();
             JCheckBox nuevoCheck =new JCheckBox(nota);
-            nuevoCheck.setBackground(new Color(246, 216, 83 ));
+            nuevoCheck.setBackground(new Color(166, 247, 203));
             JCheck.add(nuevoCheck);
             JPNota.add(JCheck.get(JCheck.size()-1));
 
-            JPpantalla.revalidate();
-            JPpantalla.repaint();
+            refrescarPantalla();
         });
 
 

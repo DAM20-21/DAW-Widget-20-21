@@ -20,13 +20,14 @@ public class Pomodoro extends JPanel implements Runnable{
     double tiempo;
     Thread hilo = null;
     boolean contando;
+    String minutosTexto, segundosTexto;
 
     public Pomodoro() {
         super();
         setLayout(new GridLayout(1, 1));
-        setBackground(new Color(207, 149, 250 ));
+        setBackground(new Color(110, 197, 255));
         contador = new JLabel(0+""+0+":"+0+""+0);
-        contador.setFont(new Font("Arial", Font.BOLD, 50));
+        contador.setFont(new Font("Arial", Font.BOLD, 80));
         contador.setHorizontalAlignment(SwingConstants.CENTER);
         minutos = 0;
         segundos = 0;
@@ -39,7 +40,7 @@ public class Pomodoro extends JPanel implements Runnable{
         while (contando) {
             actualizarTiempo();
             try {
-                hilo.sleep(1000);
+                hilo.sleep(100);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -71,27 +72,32 @@ public class Pomodoro extends JPanel implements Runnable{
         tiempoTranscurrido = System.nanoTime();
         tiempo = (tiempoTranscurrido - tiempoOriginal) / 1000000000;
 
+        minutos = tiempo / 60;
+        if (minutos < 10) {
+            minutosTexto = "0"+(int) minutos;
+        } else{
+            minutosTexto = ""+(int) minutos;
+        }
+
         segundos = tiempo % 60;
-        String segundosTexto;
         if (segundos < 10) {
             segundosTexto = "0"+(int) segundos;
         } else{
             segundosTexto = ""+(int) segundos;
         }
 
-        minutos = tiempo / 60;
-        String minutosTexto;
-        if (minutos < 10) {
-            minutosTexto = "0"+(int) minutos;
-        } else{
-            minutosTexto = ""+(int) minutos;
-        }
-        //TODO: mirar que pare cuando llegue al minuto 25
+        finPomodoro();
+
+        contador.setText(minutosTexto+":"+segundosTexto);
+    }
+
+    public void finPomodoro(){
         if (minutosTexto.equals("25")) {
             reiniciar();
-
+            pausar();
+            SonidoAlarma sonidoAlarma = new SonidoAlarma();
+            sonidoAlarma.start();
         }
-        contador.setText(minutosTexto+":"+segundosTexto);
     }
 
 }
