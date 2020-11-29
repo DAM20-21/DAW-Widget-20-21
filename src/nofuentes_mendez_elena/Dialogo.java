@@ -35,10 +35,12 @@ public class Dialogo extends JDialog {
     private Dialogo dialogo;
     private VentanaPrincipal ventana;
     private WidgetVideoElena w;
+    private JFrame frame;
 
     /** Constructor parametrizado */
     public Dialogo(JFrame frame, VentanaPrincipal ventana) {
         super(frame);
+        this.frame = frame;
         setModal(true);
         setBounds(100, 100, 300, 200);
         text1 = new JLabel();
@@ -93,16 +95,11 @@ public class Dialogo extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // dialogo.setVisible(false);
-                // widgetVideoElena = new WidgetVideoElena();
-                // String url = jt1.getText().toString();
-                // String[] splitUrl = url.split("=");
-                // ventana.getVentana().add(widgetVideoElena
-                // .getBrowserPanel("https://www.youtube.com/embed/" + splitUrl[1] +
-                // "?rel=0&amp;autoplay=1"));
-                // ventana.getVentana().add(widgetVideoElena.getBrowserPanel(url));
-                // ventana.getVentana().revalidate();
-                // ventana.getVentana().repaint();
-                // widgetVideoElena = null;
+
+                String url = jt1.getText().toString();
+                String[] splitUrl = url.split("=");
+                frame.add(w.getBrowserPanel("https://www.youtube.com/embed/" + splitUrl[1] + "?rel=0&amp;autoplay=1"));
+
             }
 
         });

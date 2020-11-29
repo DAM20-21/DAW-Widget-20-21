@@ -49,8 +49,8 @@ public class WidgetVideoElena {
      */
     WidgetVideoElena(JFrame frame) {
         this.frame = frame;
+        panel = new JPanel();
         selector = new JFileChooser();
-        web = new JWebBrowser();
         panelFx = new JFXPanel();
     }
 
@@ -59,7 +59,13 @@ public class WidgetVideoElena {
      * 
      */
     public JPanel getBrowserPanel(String url) {
-        panel.setLayout(new GridLayout(1, 1));
+        if (web != null) {
+            panel.remove(web);
+            web.disposeNativePeer();
+            web.reloadPage();
+        }
+        web = new JWebBrowser(JWebBrowser.destroyOnFinalization());
+        panel.setLayout(new BorderLayout());
         web.setBarsVisible(false);
         web.navigate(url);
         panel.add(web);
@@ -118,4 +124,13 @@ public class WidgetVideoElena {
     public void setPanelFx(JFXPanel panelFx) {
         this.panelFx = panelFx;
     }
+
+    public JWebBrowser getWeb() {
+        return web;
+    }
+
+    public void setWeb(JWebBrowser web) {
+        this.web = web;
+    }
+
 }
