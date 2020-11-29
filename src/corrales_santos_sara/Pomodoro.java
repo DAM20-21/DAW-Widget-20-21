@@ -115,7 +115,7 @@ public class Pomodoro extends JPanel implements Runnable{
      * Método que hace que al llegar los minutos a 25 reinicia el temporizador y hace que suene una alarma para avisar al usuario
      */
     public void finPomodoro() {
-        if (minutosTexto.equals("01")) {
+        if (minutosTexto.equals("25")) {
             reiniciar();
             SonidoAlarma sonidoAlarma = new SonidoAlarma();
             sonidoAlarma.start();
