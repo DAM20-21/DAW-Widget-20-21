@@ -10,8 +10,10 @@ import java.awt.*;
  * @author Elena Nofuentes
  * @since 25-11-2020
  * @version 1.0
+ * @link {@link Dialogo}
  * 
  */
+
 public class VentanaPrincipal {
     /** Atributos de la clase */
     private JFrame ventana;
@@ -27,7 +29,7 @@ public class VentanaPrincipal {
     }
 
     /**
-     * Método para inicializar el programa
+     * Método para inicializar el programa. Hacemos visibles los componentes.
      */
     public void inicializar() {
         ventana.setVisible(true);
@@ -42,9 +44,4 @@ public class VentanaPrincipal {
     public JFrame getVentana() {
         return ventana;
     }
-
-    public void setVentana(JFrame ventana) {
-        this.ventana = ventana;
-    }
-
 }

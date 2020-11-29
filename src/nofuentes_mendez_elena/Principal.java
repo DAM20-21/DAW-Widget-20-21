@@ -12,7 +12,7 @@ import chrriis.dj.nativeswing.swtimpl.NativeInterface;
  * 
  * @author Elena Nofuentes
  * @since 25-11-2020
- * @version 1.1
+ * @version 1.2
  *
  */
 

@@ -3,10 +3,8 @@ package nofuentes_mendez_elena;
 import java.awt.event.ActionEvent;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -30,14 +28,17 @@ public class Dialogo extends JDialog {
     private JLabel text1, text2;
     private JTextField jt1;
     private JButton buttonArchivo;
-    private JFileChooser selector;
     private JButton buttonURL;
-    private Dialogo dialogo;
     private VentanaPrincipal ventana;
     private WidgetVideoElena w;
     private JFrame frame;
 
-    /** Constructor parametrizado */
+    /**
+     * Constructor parametrizado
+     * 
+     * @param frame,   Jframe de la ventana principal.
+     * @param ventana, Objeto de la ventana principal.
+     */
     public Dialogo(JFrame frame, VentanaPrincipal ventana) {
         super(frame);
         this.frame = frame;
@@ -48,8 +49,6 @@ public class Dialogo extends JDialog {
         jt1 = new JTextField();
         buttonArchivo = new JButton(" Archivo ");
         buttonURL = new JButton(" Reproducir enlace");
-        selector = new JFileChooser();
-        dialogo = this;
         this.ventana = ventana;
         w = new WidgetVideoElena(ventana.getVentana());
         aElementos();
@@ -94,14 +93,19 @@ public class Dialogo extends JDialog {
         buttonURL.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // dialogo.setVisible(false);
-
                 String url = jt1.getText().toString();
-                String[] splitUrl = url.split("=");
-                frame.add(w.getBrowserPanel("https://www.youtube.com/embed/" + splitUrl[1] + "?rel=0&amp;autoplay=1"));
+                w.prueba(url);
+                ventana.getVentana().repaint();
+                ventana.getVentana().revalidate();
 
+                /**
+                 * // dialogo.setVisible(false); String url = jt1.getText().toString(); String[]
+                 * splitUrl = url.split("=");
+                 * 
+                 * frame.add(w.getBrowserPanel("https://www.youtube.com/embed/" + splitUrl[1] +
+                 * "?rel=0&amp;autoplay=1")); }
+                 */
             }
-
         });
     }
 }
