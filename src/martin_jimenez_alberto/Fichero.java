@@ -8,16 +8,14 @@ public class Fichero {
     private String titulo;
     private String texto;
 
-    Fichero(String t,String texto){
-        this.titulo = t;
+    Fichero(String titulo,String texto){
+        this.titulo = titulo;
         this.texto = texto;
         anadirCarpeta();
     }
 
     /**
      * Crea un fichero con los parámetros dados
-     * @param titulo2
-     * @param texto2
      */
     private void anadirCarpeta() {
         String direccion = "DAW-Widget-20-21/ficheros/Ficheros/";
@@ -28,10 +26,9 @@ public class Fichero {
             BufferedWriter bw = new BufferedWriter(new FileWriter(direccion));
             bw.write(texto);
             bw.close();
-        } catch (IOException io) {
+        }catch (IOException io) {
             System.out.println("Error en la E/S: " + io.getMessage());
         }
-
     }
 
     public String getTitulo() {

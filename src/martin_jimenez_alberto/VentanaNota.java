@@ -1,6 +1,5 @@
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -17,7 +16,8 @@ public class VentanaNota extends JDialog{
     private static final long serialVersionUID = 1L;
     ArrayList<Fichero> listaFICHEROS;// Lista que guarda Objetos Fichero
     int nFICHEROS;
-    
+    VentanaPrincipalWidget vp;
+
     JButton botonGuardar;
     JPanel pTitulo;
     JTextField tTitulo;
@@ -27,9 +27,10 @@ public class VentanaNota extends JDialog{
     JButton bGuardar;
     JButton bEliminar;
 
-    VentanaNota() {
+    VentanaNota(VentanaPrincipalWidget vp) {
         super();
         this.setBounds(1000, 100, 200, 300);
+        this.vp = vp;
     }
     public void anadirComponentes() {
         GridBagLayout gb = new GridBagLayout();
@@ -78,16 +79,17 @@ public class VentanaNota extends JDialog{
     private void inicializarListteners() {
         botonGuardar.addActionListener((e)->{
             Boolean salir = false;
-            String titulo , texto;
-            titulo = tTitulo.getText();
-            texto = tTexto.getText();
+            String tituloRecogido , textoRecogido;
+            tituloRecogido = tTitulo.getText();
+            textoRecogido = tTexto.getText();
             do{
-                if(titulo != null && texto!= null){
-                    Fichero fich  =new Fichero(titulo, texto);
-                    salir = true;
-                }else{
+                if(tituloRecogido.equals("") || textoRecogido.equals("")){
                     JOptionPane.showMessageDialog(this, "Rellena todos los campos");
                     salir = false;
+                    
+                }else{
+                    Fichero fich = new Fichero(tituloRecogido, textoRecogido);
+                    salir = true;
                 }
             }while(salir = false);
                 
