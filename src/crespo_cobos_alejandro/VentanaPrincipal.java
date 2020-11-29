@@ -21,11 +21,7 @@ public class VentanaPrincipal {
         TornaWeather tornaWidget = new TornaWeather();
 
         private JButton botonBuscar;
-       
-
         private JTextField ciudad;
-      
-
         private JPanel panelInfo;
         
 
@@ -61,7 +57,7 @@ public class VentanaPrincipal {
                 opc.weighty= 1;
 
                 opc.fill = GridBagConstraints.BOTH;
-                panelInfo.setBorder(BorderFactory.createTitledBorder("Buscador"));
+                panelInfo.setBorder(BorderFactory.createTitledBorder("Buscador"));//Le pongo imagen a mi boton para buscar
                 ventana.getContentPane().add(panelInfo, opc);
 
                 // text Field Ciudad (Panel info)
@@ -79,7 +75,7 @@ public class VentanaPrincipal {
 
                 // BOTON BUscar ( Panel info)
                 opc = new GridBagConstraints();
-                botonBuscar = new JButton(new ImageIcon("img/lupa.png"));
+                botonBuscar = new JButton(new ImageIcon("img/lupa.png"));//Le pongo imagen a mi boton para buscar
                 opc.gridx = 1;
                 opc.gridy = 0;
                 panelInfo.add(botonBuscar, opc);
@@ -91,7 +87,7 @@ public class VentanaPrincipal {
                 opc.weightx = 5;
                 opc.weighty = 5;
                 opc.fill = GridBagConstraints.BOTH;
-                tornaWidget.setBorder(BorderFactory.createTitledBorder("TornaWeather"));
+                tornaWidget.setBorder(BorderFactory.createTitledBorder("TornaWeather"));//Le pongo imagen a mi boton para buscar
                 ventana.getContentPane().add(tornaWidget, opc);
         }
         
@@ -106,7 +102,7 @@ public class VentanaPrincipal {
                 botonBuscar.addActionListener((e) -> {
                         tornaWidget.comprobarPueblos(ciudad);
                         tornaWidget.comprobarImagen(ciudad);
-                        refrescarPantalla();
+                        //refrescarPantalla();
                         
                 });
         }
