@@ -8,8 +8,9 @@ import javax.swing.*;
  * los animales,solo se encarga de implementar el frame y el widget
  * que dirige otra clase
  * 
- * {@link #inicializar()} //Este metodo se encarga de inicializar crear la ventana
- *  y la creacion del widget
+ * {@link #inicializar()} //Este metodo se encarga de crear la ventana principal 
+ * y del resto de componentes creados por el widgets
+ *  
  * 
  * {@code
     public void inicializar(){
@@ -21,8 +22,8 @@ import javax.swing.*;
  * @version 1.0
  * @since   1.0
  * @see Esta clase VentanaPrincipal esta unida a la clase
- *      PanelesAnimales,creando un atributo para que elrsto de los componentes
- *      del panel se empeizn a unir,pasandoles parametros para formar la libreria
+ *      PanelesAnimales,creando un atributo para que el resto de los componentes
+ *      del panel se unen,pasandoselos por parametros
  * 
  */
 
