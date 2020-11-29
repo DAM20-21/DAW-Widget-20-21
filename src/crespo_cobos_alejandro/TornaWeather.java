@@ -1,6 +1,8 @@
 package crespo_cobos_alejandro;
 
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
@@ -26,6 +28,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -34,7 +37,10 @@ public class TornaWeather extends JPanel {
     private static final long serialVersionUID = 1L;
 
 
-    private JTextField informacion;
+    private JTextArea municipio;
+    private JTextField tempM;
+    private JTextField tempm;
+    private JTextField cielo;
     private JLabel imagenes;
 
     private JPanel panelImagenes;
@@ -44,11 +50,13 @@ public class TornaWeather extends JPanel {
     //String [] climas = {"Soleado", "Lluvia", "Niebla", "Nieve", "Nubes y claros"};
 
     // Referencia al Widget:
+   
 
     public TornaWeather() {
         super();
-        anadirImagenes();
         anadirElementosAlex();
+        
+        
     }
     
 
@@ -66,7 +74,6 @@ public class TornaWeather extends JPanel {
         panelCiudades = new JPanel();
         panelCiudades.setBorder(BorderFactory.createTitledBorder("Ciudad"));
         panelCiudades.setBackground(Color.CYAN);
-
         opc.gridx = 0;
         opc.gridy = 0;
         opc.weightx = 5;
@@ -77,11 +84,10 @@ public class TornaWeather extends JPanel {
         // Panel CLima
         opc = new GridBagConstraints();
         panelImagenes = new JPanel();
-        panelImagenes.setBorder(BorderFactory.createTitledBorder("Clima"));
+        panelImagenes.setBorder(BorderFactory.createTitledBorder("CLima"));
         panelImagenes.setBackground(Color.MAGENTA);
         opc.gridx = 1;
         opc.gridy = 0;
-
         opc.weightx = 5;
         opc.weighty = 5;
         opc.fill = GridBagConstraints.BOTH;
@@ -89,17 +95,43 @@ public class TornaWeather extends JPanel {
 
         //Añado a mi panel Ciudades el JtextField que tendra la informacion de la ciudad
         opc = new GridBagConstraints();
-        informacion = new JTextField("");
-        
-        informacion.setEditable(true);
-        //informacion.setBackground(Color.GRAY);
-        informacion.setSize(100, 100);
+        municipio = new JTextArea("");
+        municipio.setBorder(BorderFactory.createTitledBorder("Municipio"));
+        municipio.setEditable(false);
         opc.gridx= 0;
         opc.gridy = 0;
-        panelCiudades.add(informacion, opc);
+        panelCiudades.add(municipio, opc);
+
+        /* //TEMP MAXIMA
+        opc = new GridBagConstraints();
+        tempM = new JTextField("");
+        tempM.setBorder(BorderFactory.createTitledBorder("Temperatura Maxima"));
+        tempM.setEditable(false);
+        opc.gridx= 0;
+        opc.gridy = 1;
+        panelCiudades.add(tempM, opc);
+
+        //TEMP MINIMA
+        opc = new GridBagConstraints();
+        tempm = new JTextField("");
+        tempm.setBorder(BorderFactory.createTitledBorder("Temperatura Minima"));
+        tempm.setEditable(false);
+        opc.gridx= 0;
+        opc.gridy = 2;
+        panelCiudades.add(tempm, opc);
+
+        //CIELO
+        opc = new GridBagConstraints();
+        cielo = new JTextField("");
+        cielo.setBorder(BorderFactory.createTitledBorder("Clima"));
+        cielo.setEditable(false);
+        opc.gridx= 0;
+        opc.gridy = 3;
+        panelCiudades.add(cielo, opc);  */
+    
 
 
-        //Añado las imagenes a ver como se ven
+        //Añado las imagenes
         opc = new GridBagConstraints();
         imagenes = new JLabel();
         opc.gridx= 1; 
@@ -118,7 +150,7 @@ public class TornaWeather extends JPanel {
         pueblos.add(new Tiempo("Navaconcejo", 11, 8, "Nieve"));
         pueblos.add(new Tiempo("Rebollar", 16, 4, "Soleado"));
         pueblos.add(new Tiempo("Las Casas del Castañar", 10, 1, "Nubes y claros"));
-        pueblos.add(new Tiempo("El Torno", 21, 4, "Soleado"));
+        pueblos.add(new Tiempo("El Torno", 21, 4, "Lluvia"));
         pueblos.add(new Tiempo("Cabrero", 19, 2, "Niebla"));
         pueblos.add(new Tiempo("Piornal", 5, -4, "Nieve"));
         pueblos.add(new Tiempo("Valdastillas", 16, 4, "Soleado"));
@@ -135,10 +167,12 @@ public class TornaWeather extends JPanel {
         //Tiempo tiempo : pueblos
         for (int i = 0; i < pueblos.size(); i++){
             if (pueblos.get(i).getNombre().equalsIgnoreCase(texto)) {
-                informacion.setText(pueblos.get(i).getNombre() + "\nTemperatura Maxima: " +pueblos.get(i).getTemperaturaMax() + "  Tm: "
-                        + pueblos.get(i).getTemperaturaMin() + "\nEl clima es: " + pueblos.get(i).getClima());
+                municipio.setText(pueblos.get(i).getNombre() + "\nTemperatura Máxima: "+pueblos.get(i).getTemperaturaMax()+ "º\nTemperatura Mínima: " + pueblos.get(i).getTemperaturaMin()+ "º\n"+ pueblos.get(i).getClima());
 
+            }else{
+              //JOptionPane.showMessageDialog(, "El municipio indicado no es correcto", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
+            
         }
     }
 
