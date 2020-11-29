@@ -1,5 +1,7 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class Fichero {
@@ -7,8 +9,29 @@ public class Fichero {
     private String texto;
 
     Fichero(String t,String texto){
-        titulo = t;
+        this.titulo = t;
         this.texto = texto;
+        anadirCarpeta();
+    }
+
+    /**
+     * Crea un fichero con los parámetros dados
+     * @param titulo2
+     * @param texto2
+     */
+    private void anadirCarpeta() {
+        String direccion = "DAW-Widget-20-21/ficheros/Ficheros/";
+        direccion += titulo;
+        direccion += ".txt";
+
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(direccion));
+            bw.write(texto);
+            bw.close();
+        } catch (IOException io) {
+            System.out.println("Error en la E/S: " + io.getMessage());
+        }
+
     }
 
     public String getTitulo() {
@@ -21,7 +44,6 @@ public class Fichero {
     public void setTexto(String texto) {
         this.texto = texto;
     }
-
 
     public static String  getTexto(String lec) {
     String texto = null;
@@ -39,14 +61,5 @@ public class Fichero {
         }
         return texto;
     }
-
-	public static void nuevaNota() {
-        try{
-            VentanaNota vn = new VentanaNota();
-        }catch(Exception e){
-            e.printStackTrace(); 
-        }
-                
-	}
 
 }

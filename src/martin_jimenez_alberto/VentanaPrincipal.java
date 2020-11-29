@@ -69,18 +69,27 @@ public class VentanaPrincipal {
 
     private void inicializarListteners() {
         nuevaNota.addActionListener((e)->{
-            Fichero.nuevaNota();
+            try{
+                VentanaNota vn = new VentanaNota();
+                vn.incializar();
+            }catch(Exception ex){
+                ex.printStackTrace(); 
+            }
+            actualizarPantalla();
         });
     }
-
+    /**
+	 * Método para refrescar la pantalla
+	 */
     public void incializar() {
         f.setVisible(true);
-        guardarFicheros();
-        anadirComponentes();
+        actualizarPantalla();
         inicializarListteners();
     }
-
-    
+    private void actualizarPantalla() {
+        guardarFicheros();
+        anadirComponentes();
+    }
 
     /**
      * Devuelve el número de ficheros que hay en la carpeta de los ficheros

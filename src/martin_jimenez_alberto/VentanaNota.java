@@ -1,6 +1,7 @@
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
+import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
@@ -10,13 +11,16 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class VentanaNota extends JDialog{
-    ArrayList<Fichero> listaFICHEROS ;//Lista que guarda Objetos Fichero
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    ArrayList<Fichero> listaFICHEROS;// Lista que guarda Objetos Fichero
     int nFICHEROS;
-    JFrame f;
     
+    JButton botonGuardar;
     JPanel pTitulo;
     JTextField tTitulo;
-
     JPanel pTexto;
     JTextField tTexto;
 
@@ -26,17 +30,16 @@ public class VentanaNota extends JDialog{
     VentanaNota() {
         super();
         this.setBounds(1000, 100, 200, 300);
-        incializar();
     }
     public void anadirComponentes() {
         GridBagLayout gb = new GridBagLayout();
         this.setLayout(gb); 
         
+        botonGuardar = new JButton("Guardar");
         tTitulo  = new JTextField();
-        pTitulo = new JPanel();
+        pTitulo = new JPanel(new GridBagLayout());
         tTexto  = new JTextField();
-        pTexto = new JPanel();
-        
+        pTexto = new JPanel(new GridBagLayout());
 
         GridBagConstraints sTitulo = new GridBagConstraints();
         sTitulo.gridx = 0;
@@ -56,16 +59,45 @@ public class VentanaNota extends JDialog{
         TitledBorder bTexto = new TitledBorder("Texto");
         pTexto.setBorder(bTexto);
 
+        GridBagConstraints sBoton = new GridBagConstraints();
+        sBoton.gridx = 0;
+        sBoton.gridy = 2;
+        sBoton.weighty = 1;
+        sBoton.weightx = 1;
+        sBoton.fill = GridBagConstraints.BOTH;
+        
+        pTitulo.add(tTitulo,sTitulo);
         this.add(pTitulo,sTitulo);
+
+        pTexto.add(tTexto,sTitulo);
         this.add(pTexto,sTexto);
+
+        this.add(botonGuardar,sBoton);
     }
 
+    private void inicializarListteners() {
+        botonGuardar.addActionListener((e)->{
+            Boolean salir = false;
+            String titulo , texto;
+            titulo = tTitulo.getText();
+            texto = tTexto.getText();
+            do{
+                if(titulo != null && texto!= null){
+                    Fichero fich  =new Fichero(titulo, texto);
+                    salir = true;
+                }else{
+                    JOptionPane.showMessageDialog(this, "Rellena todos los campos");
+                    salir = false;
+                }
+            }while(salir = false);
+                
+            this.setVisible(false);
+            this.dispose();
+        });
+    }
     public void incializar() {
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         anadirComponentes();
-        /* inicializarListteners(); */
+        inicializarListteners(); 
         this.setVisible(true);
-
-    }  
-
+    }
 }
