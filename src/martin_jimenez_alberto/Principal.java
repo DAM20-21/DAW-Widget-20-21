@@ -5,7 +5,7 @@ public class Principal {
         EventQueue.invokeLater(new Runnable(){
             public void run(){
                 try{
-                    VentanaNota vp = new VentanaNota();
+                    VentanaPrincipal vp = new VentanaPrincipal();
                     vp.incializar();
                 }catch(Exception e){
                     e.printStackTrace(); 

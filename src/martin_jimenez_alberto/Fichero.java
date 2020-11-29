@@ -41,12 +41,11 @@ public class Fichero {
     }
 
 	public static void nuevaNota() {
-                try{
-                    VentanaNota vn = new VentanaNota();
-                    vn.incializar();
-                }catch(Exception e){
-                    e.printStackTrace(); 
-                }
+        try{
+            VentanaNota vn = new VentanaNota();
+        }catch(Exception e){
+            e.printStackTrace(); 
+        }
                 
 	}
 

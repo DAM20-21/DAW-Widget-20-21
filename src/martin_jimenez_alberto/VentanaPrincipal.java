@@ -22,6 +22,7 @@ public class VentanaPrincipal {
     VentanaPrincipal() {
         f = new JFrame();
         f.setBounds(1000, 100, 200, 300);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     public void anadirComponentes() {
         GridBagLayout gb = new GridBagLayout();
@@ -73,9 +74,7 @@ public class VentanaPrincipal {
     }
 
     public void incializar() {
-        
         f.setVisible(true);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         guardarFicheros();
         anadirComponentes();
         inicializarListteners();
