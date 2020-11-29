@@ -1,5 +1,10 @@
 package crespo_cobos_alejandro;
 
+/**
+ * Clase tiempo.
+ * @author Alejnadro Crespo Cobos
+ */
+
 public class Tiempo {
 
     private String nombre ;
