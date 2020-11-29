@@ -15,16 +15,17 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+/**
+ * Mi clase Widget, la que se encarga de todo el proceso.
+ * @author Alejnadro Crespo Cobos
+ */
+
 public class TornaWeather extends JPanel {
 
     private static final long serialVersionUID = 1L;
-
     private JTextArea municipio;
-
     private JLabel imagenes;
-
     private Boolean aviso = false;
-
     private JPanel panelImagenes;
     private JPanel panelCiudades;
     ArrayList<Tiempo> pueblos = new ArrayList<>();
