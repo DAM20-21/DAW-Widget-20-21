@@ -8,7 +8,7 @@ import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 
-public class VentanaPrincipal {
+public class VentanaPrincipalWidget {
     ArrayList<Fichero> listaFICHEROS ;//Lista que guarda Objetos Fichero
     int nFICHEROS;
 
@@ -19,7 +19,7 @@ public class VentanaPrincipal {
 
     JButton nuevaNota;
 
-    VentanaPrincipal() {
+    VentanaPrincipalWidget() {
         f = new JFrame();
         f.setBounds(1000, 100, 200, 300);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,18 +64,16 @@ public class VentanaPrincipal {
         snuevaNota.gridx = 0;
         snuevaNota.gridy = nFICHEROS;
         f.add(nuevaNota,snuevaNota);
-        
     }
 
     private void inicializarListteners() {
         nuevaNota.addActionListener((e)->{
             try{
-                VentanaNota vn = new VentanaNota();
+                VentanaNota vn = new VentanaNota(this);
                 vn.incializar();
             }catch(Exception ex){
                 ex.printStackTrace(); 
             }
-            actualizarPantalla();
         });
     }
     /**
@@ -83,12 +81,9 @@ public class VentanaPrincipal {
 	 */
     public void incializar() {
         f.setVisible(true);
-        actualizarPantalla();
-        inicializarListteners();
-    }
-    private void actualizarPantalla() {
         guardarFicheros();
         anadirComponentes();
+        inicializarListteners();
     }
 
     /**
@@ -113,6 +108,5 @@ public class VentanaPrincipal {
             Fichero fich = new Fichero(titulo,texto);
             listaFICHEROS.add(fich);
         }
-
     }
 }
