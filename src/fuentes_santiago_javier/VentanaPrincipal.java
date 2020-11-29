@@ -52,8 +52,10 @@ public class VentanaPrincipal {
 	 * Constructor, marca el tamaño y el cierre del frame
 	 */
 	public VentanaPrincipal() {
+		int width = (int) (tamanioPantalla.getWidth() * 0.9); // 90% de la pantalla
+ 		int height = (int) (tamanioPantalla.getHeight() * 0.9); // 90% de la pantalla
 		ventana = new JFrame("Album de Fotos");
-		ventana.setBounds(0, 0, (int) (tamanioPantalla.getWidth() * 0.75), (int) (tamanioPantalla.getHeight() * 0.75));
+		ventana.setBounds(0, 0, width, height);
 		ventana.setLocationRelativeTo(null); // Se centra el frame
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -76,7 +78,7 @@ public class VentanaPrincipal {
 		/** Inicializar Galería de Fotos */
 		galeria = new JPanel(new GridBagLayout());
 		/** Inicializa la dimensión que tendrás las imagenes en la galería */
-		dimensionesLabel = new DimensionUIResource(125, 125);
+		dimensionesLabel = new DimensionUIResource(100, 100);
 		/** Inicializar el ArrayList de Imágenes */
 		imagenes = new ArrayList<>();
 		/** Añade las imagenes al Array */
@@ -162,15 +164,16 @@ public class VentanaPrincipal {
 	 */
 	public void inicializarListeners() {
 		for (int i = 0; i < imagenes.size(); i++) {
+			// Recoge los datos del ArrayList de Imágenes
 			Object[] datos = imagenes.get(i);
-
+			// Parsea los datos recibidos para trabajar con ellos
 			ImageIcon imagenReal = (ImageIcon) datos[0];
 			JLabel imagen = (JLabel) datos[1];
-
+			// MouseListener de cada JLabel
 			imagen.addMouseListener(new MouseInputAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					visualizar.cambiarImagen(imagenReal);
+					visualizar.cambiarImagen(imagenReal); // Envía la imagen a tamaño real al panel de visualización
 				}
 			});
 		}
