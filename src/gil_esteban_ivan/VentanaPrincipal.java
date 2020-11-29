@@ -2,8 +2,6 @@ package gil_esteban_ivan;
 
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Color;
@@ -18,6 +16,9 @@ import javax.swing.JTextArea;
  * Ventana Principal para probar el widget de censura
  * 
  * @author Iván Gil Esteban
+ *   
+ * @version 1.0 
+ * @since 1.0 
  */
 public class VentanaPrincipal {
 

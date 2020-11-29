@@ -6,6 +6,9 @@ import java.awt.EventQueue;
  * Main para probar el Widget de censura
  * 
  * @author Iván Gil Esteban
+ * 
+ * @version 1.0 
+ * @since 1.0 
  */
 public class Principal {
 

@@ -17,7 +17,9 @@ import javax.swing.JTextArea;
  * aplicar y la visualiza antes de que apliquemos los cambios.
  * 
  * @author Iván Gil Esteban
- *
+ * 
+ * @version 1.0 
+ * @since 1.0 
  */
 public class WidgetIvan extends JDialog {
 
@@ -26,10 +28,10 @@ public class WidgetIvan extends JDialog {
 	// Objeto de la clase censura
 	Censura censura;
 
-	// Mensaje que le da al usuario
+	// JLabel en el que mostramos mensaje al usuario
 	JLabel titulo;
 
-	// Sliders:
+	// Slider para elegir censura
 	JSlider sliderNivel;
 
 	// BotonAceptar
@@ -39,11 +41,12 @@ public class WidgetIvan extends JDialog {
 	JButton bPrevisualizar;
 
 	// Previsualizador de la censura
-	JTextArea mostradorCensura, palabrasTabu;
+	JTextArea mostradorPrevisualizar, palabrasTabu;
 
 	// Sera el texto que recibimos para censurar
 	JTextArea texto;
 
+	//Constructor de nuestro widget, recibe un componente sobre el que abrimos nuestro dialogo y un texto para censurar
 	public WidgetIvan(JComponent componente, JComponent texto) {
 		super();
 		this.texto = (JTextArea) texto;
@@ -61,7 +64,6 @@ public class WidgetIvan extends JDialog {
 	private void anadirElementos() {
 		this.setLayout(new GridBagLayout());
 
-		// PANEL PRINCIPAL
 		// Titulo
 		titulo = new JLabel("Selecciona el nivel de censura:");
 		GridBagConstraints settings = new GridBagConstraints();
@@ -82,19 +84,19 @@ public class WidgetIvan extends JDialog {
 		settings.gridwidth = 2;
 		add(sliderNivel, settings);
 
-		// MostradorColor:
-		mostradorCensura = new JTextArea();
-		mostradorCensura.setText(texto.getText());
-		mostradorCensura.setEditable(false);
-		mostradorCensura.setLineWrap(true);
-		mostradorCensura.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		// Mostrador de previsualización de la censura
+		mostradorPrevisualizar = new JTextArea();
+		mostradorPrevisualizar.setText(texto.getText());
+		mostradorPrevisualizar.setEditable(false);
+		mostradorPrevisualizar.setLineWrap(true);
+		mostradorPrevisualizar.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		settings = new GridBagConstraints();
 		settings.gridx = 0;
 		settings.gridy = 4;
 		settings.gridwidth = 2;
 		settings.insets = new Insets(20, 0, 20, 0);
 		settings.fill = GridBagConstraints.BOTH;
-		add(mostradorCensura, settings);
+		add(mostradorPrevisualizar, settings);
 
 		// MostradorPalabasTabu
 		palabrasTabu = new JTextArea();
@@ -118,7 +120,7 @@ public class WidgetIvan extends JDialog {
 		settings.insets = new Insets(20, 0, 20, 5);
 		add(bAplicar, settings);
 
-		// bAceptar
+		// bPrevisualizar
 		bPrevisualizar = new JButton("Previsualizar");
 		settings = new GridBagConstraints();
 		settings.gridx = 1;
@@ -129,7 +131,7 @@ public class WidgetIvan extends JDialog {
 	}
 
 	/**
-	 * Método que añade todos los listeners al Dialog
+	 * Método que añade todos los listeners al Dialogo
 	 */
 	private void anadirListeners() {
 		sliderNivel.addChangeListener(e -> {
@@ -143,7 +145,7 @@ public class WidgetIvan extends JDialog {
 
 
 		bPrevisualizar.addActionListener((e) -> {
-			mostradorCensura.setText(censura.leerPrevisualizar(sliderNivel.getValue(),texto.getText()));
+			mostradorPrevisualizar.setText(censura.leerPrevisualizar(sliderNivel.getValue(),texto.getText()));
 		});
 	}
 
