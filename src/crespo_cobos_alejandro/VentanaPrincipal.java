@@ -1,26 +1,13 @@
 package crespo_cobos_alejandro;
 
-import java.awt.Color;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import javax.swing.BorderFactory;
-import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-
-import java.awt.GridLayout;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
@@ -35,15 +22,13 @@ public class VentanaPrincipal {
         TornaWeather tornaWidget = new TornaWeather();
 
         private JButton botonBuscar;
-        private ImageIcon imagenIcono;
+       
 
         private JTextField ciudad;
-        private JTextField informacion;
-        private JLabel imagenes;
+      
 
         private JPanel panelInfo;
-        private JPanel panelImagenes;
-        private JPanel panelCiudades;
+        
 
         
 
