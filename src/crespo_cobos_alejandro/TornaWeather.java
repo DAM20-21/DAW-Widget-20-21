@@ -153,7 +153,6 @@ public class TornaWeather extends JPanel {
         if(!aviso){
             JOptionPane.showMessageDialog(this, "El municipio indicado no es correcto", "Error",
                         JOptionPane.INFORMATION_MESSAGE);
-
         }
 
     }
