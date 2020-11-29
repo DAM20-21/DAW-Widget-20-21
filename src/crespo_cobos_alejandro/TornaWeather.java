@@ -23,11 +23,13 @@ import javax.swing.JTextField;
 public class TornaWeather extends JPanel {
 
     private static final long serialVersionUID = 1L;
+
     private JTextArea municipio;
     private JLabel imagenes;
     private Boolean aviso = false;
     private JPanel panelImagenes;
     private JPanel panelCiudades;
+
     ArrayList<Tiempo> pueblos = new ArrayList<>();
     ArrayList<ImageIcon> imgs = new ArrayList<>();
 
@@ -38,6 +40,10 @@ public class TornaWeather extends JPanel {
         anadirElementosAlex();
 
     }
+
+    /**
+     * Añadimos todos los componentes de mi Widget a la ventana principal
+     */
 
     public void anadirElementosAlex() {
 
@@ -64,8 +70,8 @@ public class TornaWeather extends JPanel {
         // Panel CLima
         opc = new GridBagConstraints();
         panelImagenes = new JPanel();
-        panelImagenes.setBorder(BorderFactory.createTitledBorder("Clima"));
-        panelImagenes.setBackground(Color.MAGENTA);
+        panelImagenes.setBorder(BorderFactory.createTitledBorder("Clima"));//Le pongo un borde con titulo.
+        panelImagenes.setBackground(Color.MAGENTA);//Le ponemos un color al fondo
         opc.gridx = 1;
         opc.gridy = 0;
         opc.weightx = 5;
@@ -77,7 +83,7 @@ public class TornaWeather extends JPanel {
         // ciudad
         opc = new GridBagConstraints();
         municipio = new JTextArea("");
-        municipio.setBorder(BorderFactory.createTitledBorder("Municipio"));
+        municipio.setBorder(BorderFactory.createTitledBorder("Municipio"));//Le pongo un borde con titulo.
         municipio.setEditable(false);
         opc.gridx = 0;
         opc.gridy = 0;
@@ -92,7 +98,7 @@ public class TornaWeather extends JPanel {
     }
 
     /**
-     * 
+     * Aqui creamos los objetos de tiempo.
      */
 
     public void CrearObjetosTiempo() {
@@ -121,22 +127,18 @@ public class TornaWeather extends JPanel {
     public void comprobarPueblos(JTextField ciudad) {
 
         String texto = ciudad.getText();
-        // Tiempo tiempo : pueblos
         for (int i = 0; i < pueblos.size(); i++) {
             if (pueblos.get(i).getNombre().equalsIgnoreCase(texto)) {
                 municipio.setText(pueblos.get(i).getNombre() + "\nTemperatura Máxima: "
                         + pueblos.get(i).getTemperaturaMax() + "º\nTemperatura Mínima: "
                         + pueblos.get(i).getTemperaturaMin() + "º\n" + pueblos.get(i).getClima());
                 aviso = true;
-            }
-            
-                
+            }    
         }
         if(!aviso){
             JOptionPane.showMessageDialog(this, "El municipio indicado no es correcto", "Error",
                         JOptionPane.INFORMATION_MESSAGE);
         }
-
     }
 
     /**
