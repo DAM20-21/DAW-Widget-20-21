@@ -102,7 +102,7 @@ public class VentanaPrincipal {
                 botonBuscar.addActionListener((e) -> {
                         tornaWidget.comprobarPueblos(ciudad);
                         tornaWidget.comprobarImagen(ciudad);
-                        //refrescarPantalla();
+                        refrescarPantalla();
                         
                 });
         }
