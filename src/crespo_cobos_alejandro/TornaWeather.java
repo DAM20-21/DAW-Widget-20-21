@@ -65,7 +65,7 @@ public class TornaWeather extends JPanel {
         // Panel CLima
         opc = new GridBagConstraints();
         panelImagenes = new JPanel();
-        panelImagenes.setBorder(BorderFactory.createTitledBorder("CLima"));
+        panelImagenes.setBorder(BorderFactory.createTitledBorder("Clima"));
         panelImagenes.setBackground(Color.MAGENTA);
         opc.gridx = 1;
         opc.gridy = 0;
