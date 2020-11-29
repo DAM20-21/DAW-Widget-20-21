@@ -2,16 +2,9 @@ package nofuentes_mendez_elena;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.*;
 import java.io.File;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
-import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.media.Media;
@@ -30,8 +23,6 @@ import javafx.scene.web.WebView;
  */
 public class WidgetVideoElena {
     /** Atributos de la clase */
-    private JPanel panel;
-    private JWebBrowser web;
     private JFXPanel panelFx;
     private JFXPanel panelYt;
     private File ruta;
@@ -41,65 +32,33 @@ public class WidgetVideoElena {
     private MediaPlayer mp;
 
     /**
-     * Constructor parametrizado Usado para reproducir videos desde archivos.
+     * Constructor parametrizado.
      * 
-     * 
+     * @param frame, JFrame de la ventana.
      */
     WidgetVideoElena(JFrame frame) {
         this.frame = frame;
-        panel = new JPanel();
         selector = new JFileChooser();
         panelFx = new JFXPanel();
         panelYt = new JFXPanel();
         panelYt.setVisible(false);
         Platform.runLater(new Runnable() {
-
             @Override
             public void run() {
                 webview = new WebView();
             }
-
         });
-
         frame.add(panelYt);
     }
 
-    /**
-     * Método creado para la reproduccion de enlaces.
-     * 
-     * Para que no se reproduzcan dos vídeos a la vez, al principio del método
-     * comprobamos el contenido, si hay algdún vídeo, lo eliminamos y recargamos la
-     * página.
-     * 
-     */
-    public JPanel getBrowserPanel(String url) {
-        /**
-         * if (web != null) { panel.remove(web); web.disposeNativePeer();
-         * web.reloadPage(); } web = new
-         * JWebBrowser(JWebBrowser.destroyOnFinalization()); panel.setLayout(new
-         * BorderLayout()); web.setBarsVisible(false); web.navigate(url);
-         * panel.add(web); panel.revalidate(); panel.repaint();
-         * 
-         * return panel;
-         */
-
-        Group grupo = new Group();
-        Media enlace = new Media(url);
-        MediaPlayer mp = new MediaPlayer(enlace);
-        mp.play();
-        MediaView mv = new MediaView(mp);
-        // panel.add();
-        return panel;
-
-    }
-
-    public void prueba(String url) {
-        if (!panelYt.isVisible()) {
+    public void reproducirEnlace(String url) {
+        if (!panelYt.isVisible()) { // Si el panel de youtube no está visible, estamos reproduciendo desde archivo.
             panelYt.setVisible(true);
             frame.add(panelYt);
         }
         if (panelFx.isVisible()) {
             panelFx.setVisible(false);
+            // Comprobamos los estamos por si hay otro vídeo reproduciendose, eliminarlo.
             if (mp != null) {
                 if (mp.getStatus() == Status.PLAYING || mp.getStatus() == Status.STALLED
                         || mp.getStatus() == Status.PAUSED) {
@@ -108,24 +67,21 @@ public class WidgetVideoElena {
                 }
             }
         }
+        // Formmamos el enlace de youtube.
         String[] splitUrl = url.split("=");
         String enlace = "https://www.youtube.com/embed/" + splitUrl[1] + "?rel=0&amp;autoplay=1";
 
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                // Cargamos el vídeo
                 webview.getEngine().load(enlace);
-                webview.setPrefSize(640, 390);
 
                 panelYt.setScene(new Scene(new Group(webview)));
-
                 panelYt.updateUI();
                 panelYt.repaint();
-
             }
-
         });
-
     }
 
     public void fichero() {
@@ -134,39 +90,44 @@ public class WidgetVideoElena {
         if (selector.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
             ruta = selector.getSelectedFile();
             frame.add(panelFx);
-            createScene();
+            crearEscena();
         }
     }
 
     /**
      * Método usado para la reprodución de vídeos desde los archivos. Escrito con
-     * JavaFX.
+     * JavaFX. - Para controlar que no se mezclen dos vídeos trabajamos con la
+     * visibilidad de los paneles en los que se reproducen.
+     * 
      */
-    public void createScene() {
+    public void crearEscena() {
         if (panelYt.isVisible()) {
             panelYt.setVisible(false);
             Platform.runLater(new Runnable() {
-
+                // Entre la carga de un vídeo y otro, metenemos una página en blanco para
+                // controlar los errores de acople de sonido e imagen.
                 @Override
                 public void run() {
                     webview.getEngine().load("about:blank");
                 }
-
             });
 
         }
-        if (!panelFx.isVisible())
+        if (!panelFx.isVisible()) {
             panelFx.setVisible(true);
+        }
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 mp = new MediaPlayer(new Media(ruta.toURI().toString()));
+                // Comprobamos lo estados del MediaPlayer para controlar que no se esté
+                // reproduciendo otro vídeo.
                 if (mp.getStatus() == Status.PLAYING || mp.getStatus() == Status.STALLED
                         || mp.getStatus() == Status.PAUSED) {
                     mp.stop();
                     mp.dispose();
                 }
-                // Añadimos el video al JFxPanel
+                // Creamos la escena y la ponemos en el panel.
                 panelFx.setScene(new Scene(new Group(new MediaView(mp))));
                 mp.setVolume(0.7);
                 mp.play();
@@ -175,29 +136,4 @@ public class WidgetVideoElena {
             }
         });
     }
-
-    public JPanel getPanel() {
-        return panel;
-    }
-
-    public void setPanel(JPanel panel) {
-        this.panel = panel;
-    }
-
-    public JFXPanel getPanelFx() {
-        return panelFx;
-    }
-
-    public void setPanelFx(JFXPanel panelFx) {
-        this.panelFx = panelFx;
-    }
-
-    public JWebBrowser getWeb() {
-        return web;
-    }
-
-    public void setWeb(JWebBrowser web) {
-        this.web = web;
-    }
-
 }

@@ -2,9 +2,6 @@
     "json.schemas": [
     ],"java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "../lib/DJNativeSwing-SWT.jar",
-        "../lib/DJNativeSwing-SWTDemo.jar",
-        "../lib/DJNativeSwing.jar",
         "../lib/swt.jar",
         "../lib/javafx-swt.jar",
         "../lib/javafx.base.jar",

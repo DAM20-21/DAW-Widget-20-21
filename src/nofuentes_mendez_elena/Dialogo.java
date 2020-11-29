@@ -18,7 +18,7 @@ import javax.swing.SwingConstants;
  * 
  * @author Elena Nofuentes
  * @since 26-11-2020
- * @version 1.1
+ * @version 1.2
  * 
  */
 
@@ -30,8 +30,7 @@ public class Dialogo extends JDialog {
     private JButton buttonArchivo;
     private JButton buttonURL;
     private VentanaPrincipal ventana;
-    private WidgetVideoElena w;
-    private JFrame frame;
+    private WidgetVideoElena widgetVideoElena;
 
     /**
      * Constructor parametrizado
@@ -41,7 +40,6 @@ public class Dialogo extends JDialog {
      */
     public Dialogo(JFrame frame, VentanaPrincipal ventana) {
         super(frame);
-        this.frame = frame;
         setModal(true);
         setBounds(100, 100, 300, 200);
         text1 = new JLabel();
@@ -50,7 +48,7 @@ public class Dialogo extends JDialog {
         buttonArchivo = new JButton(" Archivo ");
         buttonURL = new JButton(" Reproducir enlace");
         this.ventana = ventana;
-        w = new WidgetVideoElena(ventana.getVentana());
+        widgetVideoElena = new WidgetVideoElena(ventana.getVentana());
         aElementos();
         aListenert();
     }
@@ -69,6 +67,7 @@ public class Dialogo extends JDialog {
         text2.setHorizontalAlignment(SwingConstants.CENTER);
         add(text2);
         add(jt1);
+        buttonURL.setFocusable(false);
         add(buttonURL);
     }
 
@@ -76,15 +75,14 @@ public class Dialogo extends JDialog {
      * Método para añadir los listener a los botones del diálogo para que hagan la
      * acción correspondiente.
      * 
-     * buttonArchivo -> Abre el selector de archivos y trabaja con el archivo
-     * seleccionado. buttonURL -> Oculta el dialogo y en el panel de la ventana
-     * principal reproduce el vídeo.
+     * buttonArchivo -> Llama al método fichero del Widget buttonURL -> Llama al
+     * método reproducirEnlace del Widget
      */
     public void aListenert() {
         buttonArchivo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                w.fichero();
+                widgetVideoElena.fichero();
                 ventana.getVentana().repaint();
                 ventana.getVentana().revalidate();
             }
@@ -94,17 +92,9 @@ public class Dialogo extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String url = jt1.getText().toString();
-                w.prueba(url);
+                widgetVideoElena.reproducirEnlace(url);
                 ventana.getVentana().repaint();
                 ventana.getVentana().revalidate();
-
-                /**
-                 * // dialogo.setVisible(false); String url = jt1.getText().toString(); String[]
-                 * splitUrl = url.split("=");
-                 * 
-                 * frame.add(w.getBrowserPanel("https://www.youtube.com/embed/" + splitUrl[1] +
-                 * "?rel=0&amp;autoplay=1")); }
-                 */
             }
         });
     }

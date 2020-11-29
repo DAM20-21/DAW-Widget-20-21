@@ -9,7 +9,7 @@ import java.awt.*;
  * 
  * @author Elena Nofuentes
  * @since 25-11-2020
- * @version 1.0
+ * @version 1.1
  * @link {@link Dialogo}
  * 
  */
