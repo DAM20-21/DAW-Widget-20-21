@@ -29,9 +29,9 @@ public class Area implements KeyListener, ActionListener {
 
     String[] medidas = { "Metros^2", "Kilometros^2", "Hectarea", "Yardas^2", "Millas^2" };
 
-    Double distanciaInicial = 0.;
-    Double distanciaenMetros = 0.;// Aqui guardaremos el paso intermedio
-    Double distanciaFinal = 0.;
+    Double areaInicial = 0.;
+    Double areaEnMetros = 0.;// Aqui guardaremos el paso intermedio
+    Double areaFinal = 0.;
 
     JTextField numeroInicial;
 
@@ -127,13 +127,18 @@ public class Area implements KeyListener, ActionListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
-        if (!(numeroInicial.getText().isEmpty()) && numeroInicial.getText().matches("[0-9]*")) {
-            distanciaInicial = Double.parseDouble(numeroInicial.getText());
+        if (!(numeroInicial.getText().isEmpty()) && numeroInicial.getText().matches("[0-9\\.]*")) {
+            try {
+                areaInicial = Double.parseDouble(numeroInicial.getText());
+            } catch (NumberFormatException n) {
+                ;
+            }
+
             DecimalFormat df = new DecimalFormat("#.00000000");// Formateamos el numero para que solo nos muestre unos
                                                                // cuantos decimales
             numeroResultado.setText(df.format(calcularResultado()));
             DecimalFormat dfTexto = new DecimalFormat("#.0000");
-            textoResultado.setText(distanciaInicial + " " + medidas[seleccionInicial] + " son "
+            textoResultado.setText(areaInicial + " " + medidas[seleccionInicial] + " son "
                     + dfTexto.format(calcularResultado()) + " " + medidas[seleccionFinal]);
 
         }
@@ -150,7 +155,7 @@ public class Area implements KeyListener, ActionListener {
         DecimalFormat df = new DecimalFormat("#.00000000");
         numeroResultado.setText(df.format(calcularResultado()));
         DecimalFormat dfTexto = new DecimalFormat("#.0000");
-        textoResultado.setText(distanciaInicial + " " + medidas[seleccionInicial] + " son "
+        textoResultado.setText(areaInicial + " " + medidas[seleccionInicial] + " son "
                 + dfTexto.format(calcularResultado()) + " " + medidas[seleccionFinal]);
     }
 
@@ -161,9 +166,9 @@ public class Area implements KeyListener, ActionListener {
      * @return double que mostraremos como resultado
      */
     public double calcularResultado() {
-        distanciaenMetros = distanciaInicial * conversionaMetros[seleccionInicial];
-        distanciaFinal = distanciaenMetros * conversionDeMetrosA[seleccionFinal];
-        return distanciaFinal;
+        areaEnMetros = areaInicial * conversionaMetros[seleccionInicial];
+        areaFinal = areaEnMetros * conversionDeMetrosA[seleccionFinal];
+        return areaFinal;
     }
 
 }

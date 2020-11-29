@@ -113,14 +113,22 @@ public class Descuento implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         // Comprueba que no esta vacion y que es un numero
-        if (!(numeroPrecioInicial.getText().isEmpty()) && numeroPrecioInicial.getText().matches("[0-9]*")) {
-            precioInicial = Double.parseDouble(numeroPrecioInicial.getText());// Recogemos el valor del campo
+        if (!(numeroPrecioInicial.getText().isEmpty()) && numeroPrecioInicial.getText().matches("[0-9\\.]*")) {
+            try {
+                precioInicial = Double.parseDouble(numeroPrecioInicial.getText());// Recogemos el valor del campo
+            } catch (NumberFormatException n) {
+                ;
+            }
             precioFinal = precioInicial - (precioInicial * porcentaje);
             numeroPrecioFinal.setText("" + precioFinal);// Actualizamos la cuenta
         }
         // Comprueba que no esta vacion y que es un numero
-        if (!(numeroDescuento.getText().isEmpty()) && numeroDescuento.getText().matches("[0-9]*")) {
-            porcentaje = Double.parseDouble(numeroDescuento.getText()) / 100;
+        if (!(numeroDescuento.getText().isEmpty()) && numeroDescuento.getText().matches("[0-9\\.]*")) {
+            try {
+                porcentaje = Double.parseDouble(numeroDescuento.getText()) / 100;
+            } catch (NumberFormatException n) {
+                ;
+            }
             precioFinal = precioInicial - (precioInicial * porcentaje);
             numeroPrecioFinal.setText("" + precioFinal);
         }

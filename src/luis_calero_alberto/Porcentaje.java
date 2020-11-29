@@ -106,14 +106,22 @@ public class Porcentaje implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (!(numeroPorciento.getText().isEmpty()) && numeroPorciento.getText().matches("[0-9]*")) {
-            porcentaje = Double.parseDouble(numeroPorciento.getText()) / 100;
+        if (!(numeroPorciento.getText().isEmpty()) && numeroPorciento.getText().matches("[0-9\\.]*")) {
+            try {
+                porcentaje = Double.parseDouble(numeroPorciento.getText()) / 100;
+            } catch (NumberFormatException n) {
+                ;
+            }
             resultado.setText("" + (porcentaje * total));
             mensajeResultado.setText("El " + (numeroPorciento.getText()) + " % de " + total + " es ");
         }
 
-        if (!(numeroTotal.getText().isEmpty()) && numeroTotal.getText().matches("[0-9]*")) {
-            total = Double.parseDouble(numeroTotal.getText());
+        if (!(numeroTotal.getText().isEmpty()) && numeroTotal.getText().matches("[0-9\\.]*")) {
+            try {
+                total = Double.parseDouble(numeroTotal.getText());
+            } catch (NumberFormatException n) {
+                ;
+            }
             resultado.setText("" + (porcentaje * total));
             mensajeResultado.setText("El " + (numeroPorciento.getText()) + " % de " + total + " es ");
         }

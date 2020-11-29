@@ -24,9 +24,9 @@ public class Masa implements KeyListener, ActionListener {
 
     String[] medidas = { "Kilogramos", "Gramos", "Toneladas", "miligramos", "onzas", "Libras" };
 
-    Double distanciaInicial = 0.;
-    Double distanciaenMetros = 0.;// Aqui guardaremos el paso intermedio
-    Double distanciaFinal = 0.;
+    Double masaInicial = 0.;
+    Double masaEnGramos = 0.;// Aqui guardaremos el paso intermedio
+    Double masaFinal = 0.;
 
     JTextField numeroInicial;
 
@@ -122,13 +122,17 @@ public class Masa implements KeyListener, ActionListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
-        if (!(numeroInicial.getText().isEmpty()) && numeroInicial.getText().matches("[0-9]*")) {
-            distanciaInicial = Double.parseDouble(numeroInicial.getText());
+        if (!(numeroInicial.getText().isEmpty()) && numeroInicial.getText().matches("[0-9\\.]*")) {
+            try {
+                masaInicial = Double.parseDouble(numeroInicial.getText());
+            } catch (NumberFormatException n) {
+                ;
+            }
             DecimalFormat df = new DecimalFormat("#.00000000");// Formateamos el numero para que solo nos muestre unos
                                                                // cuantos decimales
             numeroResultado.setText(df.format(calcularResultado()));
             DecimalFormat dfTexto = new DecimalFormat("#.000");
-            textoResultado.setText(distanciaInicial + " " + medidas[seleccionInicial] + " son "
+            textoResultado.setText(masaInicial + " " + medidas[seleccionInicial] + " son "
                     + dfTexto.format(calcularResultado()) + " " + medidas[seleccionFinal]);
 
         }
@@ -142,7 +146,7 @@ public class Masa implements KeyListener, ActionListener {
         DecimalFormat df = new DecimalFormat("#.0000000");
         numeroResultado.setText(df.format(calcularResultado()));
         DecimalFormat dfTexto = new DecimalFormat("#.000");
-        textoResultado.setText(distanciaInicial + " " + medidas[seleccionInicial] + " son "
+        textoResultado.setText(masaInicial + " " + medidas[seleccionInicial] + " son "
                 + dfTexto.format(calcularResultado()) + " " + medidas[seleccionFinal]);
     }
 
@@ -157,8 +161,8 @@ public class Masa implements KeyListener, ActionListener {
      * @return double que mostraremos como resultado
      */
     public double calcularResultado() {
-        distanciaenMetros = distanciaInicial * conversionAGramos[seleccionInicial];
-        distanciaFinal = distanciaenMetros * conversionDeGramosA[seleccionFinal];
-        return distanciaFinal;
+        masaEnGramos = masaInicial * conversionAGramos[seleccionInicial];
+        masaFinal = masaEnGramos * conversionDeGramosA[seleccionFinal];
+        return masaFinal;
     }
 }

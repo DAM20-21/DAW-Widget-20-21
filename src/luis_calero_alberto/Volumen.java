@@ -29,9 +29,9 @@ public class Volumen implements KeyListener, ActionListener {
 
     String[] medidas = { "Metros^3", "litro", "Mililitro" };
 
-    Double distanciaInicial = 0.;
-    Double distanciaenMetros = 0.;// Aqui guardaremos el paso intermedio
-    Double distanciaFinal = 0.;
+    Double volumenInicial = 0.;
+    Double volumenEnMetros = 0.;// Aqui guardaremos el paso intermedio
+    Double volumenFinal = 0.;
 
     JTextField numeroInicial;
 
@@ -126,13 +126,18 @@ public class Volumen implements KeyListener, ActionListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
-        if (!(numeroInicial.getText().isEmpty()) && numeroInicial.getText().matches("[0-9]*")) {
-            distanciaInicial = Double.parseDouble(numeroInicial.getText());
+        if (!(numeroInicial.getText().isEmpty()) && numeroInicial.getText().matches("[0-9\\.]*")) {
+            try {
+                volumenInicial = Double.parseDouble(numeroInicial.getText());
+            } catch (NumberFormatException n) {
+                ;
+            }
+
             DecimalFormat df = new DecimalFormat("#.00000000");// Formateamos el numero para que solo nos muestre unos
                                                                // cuantos decimales
             numeroResultado.setText(df.format(calcularResultado()));
             DecimalFormat dfTexto = new DecimalFormat("#.0000");
-            textoResultado.setText(distanciaInicial + " " + medidas[seleccionInicial] + " son "
+            textoResultado.setText(volumenInicial + " " + medidas[seleccionInicial] + " son "
                     + dfTexto.format(calcularResultado()) + " " + medidas[seleccionFinal]);
 
         }
@@ -149,7 +154,7 @@ public class Volumen implements KeyListener, ActionListener {
         DecimalFormat df = new DecimalFormat("#.00000000");
         numeroResultado.setText(df.format(calcularResultado()));
         DecimalFormat dfTexto = new DecimalFormat("#.0000");
-        textoResultado.setText(distanciaInicial + " " + medidas[seleccionInicial] + " son "
+        textoResultado.setText(volumenInicial + " " + medidas[seleccionInicial] + " son "
                 + dfTexto.format(calcularResultado()) + " " + medidas[seleccionFinal]);
     }
 
@@ -160,8 +165,8 @@ public class Volumen implements KeyListener, ActionListener {
      * @return double que mostraremos como resultado
      */
     public double calcularResultado() {
-        distanciaenMetros = distanciaInicial * conversionaMetros[seleccionInicial];
-        distanciaFinal = distanciaenMetros * conversionDeMetrosA[seleccionFinal];
-        return distanciaFinal;
+        volumenEnMetros = volumenInicial * conversionaMetros[seleccionInicial];
+        volumenFinal = volumenEnMetros * conversionDeMetrosA[seleccionFinal];
+        return volumenFinal;
     }
 }

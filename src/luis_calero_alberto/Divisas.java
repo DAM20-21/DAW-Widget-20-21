@@ -25,9 +25,9 @@ public class Divisas implements KeyListener, ActionListener {
     String[] medidas = { "Euros", "Pesetas", "Dolares estadounidenses", "Libras esterlinas", "Peso mexicano",
             "Franco suizo", "Bitcoin" };
 
-    Double distanciaInicial = 0.;
-    Double distanciaenMetros = 0.;// Aqui guardaremos el paso intermedio
-    Double distanciaFinal = 0.;
+    Double divisaInicial = 0.;
+    Double divisaEnEuros = 0.;// Aqui guardaremos el paso intermedio
+    Double divisaFinal = 0.;
 
     JTextField numeroInicial;
 
@@ -123,13 +123,17 @@ public class Divisas implements KeyListener, ActionListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
-        if (!(numeroInicial.getText().isEmpty()) && numeroInicial.getText().matches("[0-9]*")) {
-            distanciaInicial = Double.parseDouble(numeroInicial.getText());
+        if (!(numeroInicial.getText().isEmpty()) && numeroInicial.getText().matches("[0-9\\.]*")) {
+            try {
+                divisaInicial = Double.parseDouble(numeroInicial.getText());
+            } catch (NumberFormatException N) {
+                ;
+            }
             DecimalFormat df = new DecimalFormat("#.00000000");// Formateamos el numero para que solo nos muestre unos
                                                                // cuantos decimales
             numeroResultado.setText(df.format(calcularResultado()));
             DecimalFormat dfTexto = new DecimalFormat("#.000");
-            textoResultado.setText(distanciaInicial + " " + medidas[seleccionInicial] + " son "
+            textoResultado.setText(divisaInicial + " " + medidas[seleccionInicial] + " son "
                     + dfTexto.format(calcularResultado()) + " " + medidas[seleccionFinal]);
 
         }
@@ -143,7 +147,7 @@ public class Divisas implements KeyListener, ActionListener {
         DecimalFormat df = new DecimalFormat("#.0000000");
         numeroResultado.setText(df.format(calcularResultado()));
         DecimalFormat dfTexto = new DecimalFormat("#.000");
-        textoResultado.setText(distanciaInicial + " " + medidas[seleccionInicial] + " son "
+        textoResultado.setText(divisaInicial + " " + medidas[seleccionInicial] + " son "
                 + dfTexto.format(calcularResultado()) + " " + medidas[seleccionFinal]);
     }
 
@@ -158,8 +162,8 @@ public class Divisas implements KeyListener, ActionListener {
      * @return double que mostraremos como resultado
      */
     public double calcularResultado() {
-        distanciaenMetros = distanciaInicial * conversionAEuros[seleccionInicial];
-        distanciaFinal = distanciaenMetros * conversionDeEurosA[seleccionFinal];
-        return distanciaFinal;
+        divisaEnEuros = divisaInicial * conversionAEuros[seleccionInicial];
+        divisaFinal = divisaEnEuros * conversionDeEurosA[seleccionFinal];
+        return divisaFinal;
     }
 }

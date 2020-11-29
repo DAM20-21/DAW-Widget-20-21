@@ -131,8 +131,12 @@ public class Longitud implements KeyListener, ActionListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
-        if (!(numeroInicial.getText().isEmpty()) && numeroInicial.getText().matches("[0-9]*")) {
-            distanciaInicial = Double.parseDouble(numeroInicial.getText());
+        if (!(numeroInicial.getText().isEmpty()) && numeroInicial.getText().matches("[0-9\\.]*")) {
+            try {// try por si el usuario nos pone mas de un punto
+                distanciaInicial = Double.parseDouble(numeroInicial.getText());
+            } catch (NumberFormatException n) {
+                ;
+            }
             DecimalFormat df = new DecimalFormat("#.00000000");// Formateamos el numero para que solo nos muestre unos
                                                                // cuantos decimales
             numeroResultado.setText(df.format(calcularResultado()));

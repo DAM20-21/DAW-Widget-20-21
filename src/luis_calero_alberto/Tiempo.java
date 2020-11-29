@@ -27,9 +27,9 @@ public class Tiempo implements KeyListener, ActionListener {
     String[] medidas = { "Minutos", "Milisegundos", "Segundos", "Horas", "Dias", "Semanas", "Meses", "Años", "Decadas",
             "Siglos" };
 
-    Double distanciaInicial = 0.;
-    Double distanciaenMetros = 0.;// Aqui guardaremos el paso intermedio
-    Double distanciaFinal = 0.;
+    Double tiempoInicial = 0.;
+    Double tiempoEnMinutos = 0.;// Aqui guardaremos el paso intermedio
+    Double tiempoFinal = 0.;
 
     JTextField numeroInicial;
 
@@ -125,13 +125,17 @@ public class Tiempo implements KeyListener, ActionListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
-        if (!(numeroInicial.getText().isEmpty()) && numeroInicial.getText().matches("[0-9]*")) {
-            distanciaInicial = Double.parseDouble(numeroInicial.getText());
+        if (!(numeroInicial.getText().isEmpty()) && numeroInicial.getText().matches("[0-9\\.]*")) {
+            try {
+                tiempoInicial = Double.parseDouble(numeroInicial.getText());
+            } catch (NumberFormatException n) {
+                ;
+            }
             DecimalFormat df = new DecimalFormat("#.00000000");// Formateamos el numero para que solo nos muestre unos
                                                                // cuantos decimales
             numeroResultado.setText(df.format(calcularResultado()));
             DecimalFormat dfTexto = new DecimalFormat("#.000");
-            textoResultado.setText(distanciaInicial + " " + medidas[seleccionInicial] + " son "
+            textoResultado.setText(tiempoInicial + " " + medidas[seleccionInicial] + " son "
                     + dfTexto.format(calcularResultado()) + " " + medidas[seleccionFinal]);
 
         }
@@ -145,7 +149,7 @@ public class Tiempo implements KeyListener, ActionListener {
         DecimalFormat df = new DecimalFormat("#.0000000");
         numeroResultado.setText(df.format(calcularResultado()));
         DecimalFormat dfTexto = new DecimalFormat("#.000");
-        textoResultado.setText(distanciaInicial + " " + medidas[seleccionInicial] + " son "
+        textoResultado.setText(tiempoInicial + " " + medidas[seleccionInicial] + " son "
                 + dfTexto.format(calcularResultado()) + " " + medidas[seleccionFinal]);
     }
 
@@ -160,9 +164,9 @@ public class Tiempo implements KeyListener, ActionListener {
      * @return double que mostraremos como resultado
      */
     public double calcularResultado() {
-        distanciaenMetros = distanciaInicial * conversionAMinutos[seleccionInicial];
-        distanciaFinal = distanciaenMetros * conversionDeMinutosA[seleccionFinal];
-        return distanciaFinal;
+        tiempoEnMinutos = tiempoInicial * conversionAMinutos[seleccionInicial];
+        tiempoFinal = tiempoEnMinutos * conversionDeMinutosA[seleccionFinal];
+        return tiempoFinal;
     }
 
 }
