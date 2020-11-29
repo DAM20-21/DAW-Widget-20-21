@@ -14,12 +14,10 @@ import javax.swing.SwingConstants;
  * Clase Diálogo que extiende de JDialog, la cual nos mostrará las opciones para
  * poder reproducir un vídeo.
  * 
- * Cuando esté abierto las demás ventanas estarán bloqueadas.
- * 
  * @author Elena Nofuentes
  * @since 26-11-2020
  * @version 1.2
- * 
+ * @see WidgetVideoElena
  */
 
 public class Dialogo extends JDialog {
@@ -42,6 +40,7 @@ public class Dialogo extends JDialog {
         super(frame);
         setModal(true);
         setBounds(100, 100, 200, 150);
+        setTitle(" Opciones ");
         text1 = new JLabel();
         text2 = new JLabel();
         jt1 = new JTextField();
@@ -58,15 +57,19 @@ public class Dialogo extends JDialog {
      */
     public void aElementos() {
         setLayout(new GridLayout(0, 1));
+        Color color = new Color(255, 255, 168);
+
         text1.setText(" Elija el medio de reproducción: ");
         text1.setHorizontalAlignment(SwingConstants.CENTER);
         add(text1);
+        buttonArchivo.setBackground(color);
         buttonArchivo.setFocusable(false);
         add(buttonArchivo);
         text2.setText(" URL ");
         text2.setHorizontalAlignment(SwingConstants.CENTER);
         add(text2);
         add(jt1);
+        buttonURL.setBackground(color);
         buttonURL.setFocusable(false);
         add(buttonURL);
     }
@@ -77,6 +80,8 @@ public class Dialogo extends JDialog {
      * 
      * buttonArchivo -> Llama al método fichero del Widget buttonURL -> Llama al
      * método reproducirEnlace del Widget
+     * 
+     * {@link WidgetVideoElena}
      */
     public void aListenert() {
         buttonArchivo.addActionListener(new ActionListener() {

@@ -8,7 +8,7 @@ import java.awt.EventQueue;
  * @author Elena Nofuentes
  * @since 25-11-2020
  * @version 1.3
- * 
+ * @see VentanaPrincipal#inicializar()
  */
 
 public class Principal {

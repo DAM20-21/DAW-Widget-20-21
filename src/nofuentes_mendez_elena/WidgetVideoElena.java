@@ -21,7 +21,7 @@ import javafx.scene.web.WebView;
  * 
  * @author Elena Nofuentes
  * @since 25-11-2020
- * @version 1.0
+ * @version 1.0 {@link Dialogo#aListenert()}
  * 
  */
 public class WidgetVideoElena {

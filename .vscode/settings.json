@@ -10,6 +10,6 @@
         "../lib/javafx.graphics.jar",
         "../lib/javafx.media.jar",
         "../lib/javafx.swing.jar",
-        "../lib/javafx.web.jar",
+        "../lib/javafx.web.jar"
     ],
 }
