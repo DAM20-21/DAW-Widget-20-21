@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -51,7 +52,7 @@ public class VentanaPrincipal {
          */
         public VentanaPrincipal() {
                 ventana = new JFrame();
-                ventana.setBounds(300, 150, 700, 450);
+                ventana.setBounds(300, 150, 500, 300);
                 ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
 
@@ -82,6 +83,7 @@ public class VentanaPrincipal {
                 // text Field Ciudad (Panel info)
                 opc = new GridBagConstraints();
                 ciudad = new JTextField();
+                ciudad.setSize(105, 30);
                 ciudad.setText("Busca un pueblo del Valle del Jerte");
                 ciudad.setOpaque(true);
                 ciudad.setEditable(true);
@@ -121,6 +123,7 @@ public class VentanaPrincipal {
                         tornaWidget.comprobarPueblos(ciudad);
                         tornaWidget.comprobarImagen(ciudad);
                         refrescarPantalla();
+                        
                 });
         }
 
