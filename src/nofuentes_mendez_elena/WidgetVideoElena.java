@@ -71,13 +71,12 @@ public class WidgetVideoElena {
 
     public void fichero() {
         // Abrimos el dialogo
-        selector.showOpenDialog(frame);
         // Comprobamos que se ha seleccionado un archivo.
-        // if (opcion == JFileChooser.APPROVE_OPTION) {
-        ruta = selector.getSelectedFile();
-        frame.remove(panelFx);
-        createScene();
-        // }
+        if (selector.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
+            ruta = selector.getSelectedFile();
+            frame.add(panelFx);
+            createScene();
+        }
     }
 
     /**
@@ -97,7 +96,6 @@ public class WidgetVideoElena {
                 // Añadimos el video al JFxPanel
                 panelFx.setScene(new Scene(new Group(new MediaView(mp))));
                 mp.setVolume(0.7);
-                frame.add(panelFx);
                 mp.play();
                 panelFx.updateUI();
                 panelFx.repaint();
