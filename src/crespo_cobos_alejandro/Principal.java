@@ -3,8 +3,8 @@ package crespo_cobos_alejandro;
 import java.awt.EventQueue;
 
 /**
- * Main para probar el Widget Selector de Color
- * @author Jesús Redondo García
+ * Main para comprobar el tiempo en el valle del jerte.
+ * @author Alejandro Crespo Cobos
  */
 public class Principal {
 
