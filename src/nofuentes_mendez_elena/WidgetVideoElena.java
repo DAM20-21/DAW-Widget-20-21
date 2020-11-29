@@ -14,7 +14,10 @@ import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.web.WebView;
 
 /**
- * WidgetVideoElena
+ * Clase WidgetVideoElena, permite reproducir vídeos desde los archivos locales
+ * y desde los enlaces de youtube. Permite alternar la reprodución entre los
+ * mismos sin problema. Podemos reproducir un Archivo y a la mitad de este
+ * mandar reproducir un enlace y viceversa.
  * 
  * @author Elena Nofuentes
  * @since 25-11-2020
@@ -51,6 +54,15 @@ public class WidgetVideoElena {
         frame.add(panelYt);
     }
 
+    /**
+     * Método escrito en JavaFx para reproducir los videos mediante un enlace.
+     * Comprobamos la visibilidad de los paneles y los estados del MediaPlayer para
+     * controlar que no tengamos errores de acople de video, sonido y/o
+     * reproducción.
+     * 
+     * @param url , String con el enlace introducido en las opciones del diálogo.
+     */
+
     public void reproducirEnlace(String url) {
         if (!panelYt.isVisible()) { // Si el panel de youtube no está visible, estamos reproduciendo desde archivo.
             panelYt.setVisible(true);
@@ -76,7 +88,7 @@ public class WidgetVideoElena {
             public void run() {
                 // Cargamos el vídeo
                 webview.getEngine().load(enlace);
-
+                webview.setPrefSize(500, 300);
                 panelYt.setScene(new Scene(new Group(webview)));
                 panelYt.updateUI();
                 panelYt.repaint();
@@ -84,9 +96,13 @@ public class WidgetVideoElena {
         });
     }
 
+    /**
+     * Método fichero, abre el selector de archivos y se asegura de que hayamos
+     * seleccionado uno para agregar el panel al frame y llamar al método crear
+     * escena.
+     */
     public void fichero() {
-        // Abrimos el dialogo
-        // Comprobamos que se ha seleccionado un archivo.
+        // Abrimos el dialogo y comprobamos que se ha seleccionado un archivo.
         if (selector.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
             ruta = selector.getSelectedFile();
             frame.add(panelFx);
@@ -95,10 +111,9 @@ public class WidgetVideoElena {
     }
 
     /**
-     * Método usado para la reprodución de vídeos desde los archivos. Escrito con
-     * JavaFX. - Para controlar que no se mezclen dos vídeos trabajamos con la
+     * Método estrico en JavaFx, usado para la reprodución de vídeos desde los
+     * archivos. Para controlar que no se mezclen dos vídeos trabajamos con la
      * visibilidad de los paneles en los que se reproducen.
-     * 
      */
     public void crearEscena() {
         if (panelYt.isVisible()) {
@@ -130,6 +145,7 @@ public class WidgetVideoElena {
                 // Creamos la escena y la ponemos en el panel.
                 panelFx.setScene(new Scene(new Group(new MediaView(mp))));
                 mp.setVolume(0.7);
+                // Lanzamos la reproducción del vídeo.
                 mp.play();
                 panelFx.updateUI();
                 panelFx.repaint();

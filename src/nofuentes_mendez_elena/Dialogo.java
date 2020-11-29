@@ -41,12 +41,12 @@ public class Dialogo extends JDialog {
     public Dialogo(JFrame frame, VentanaPrincipal ventana) {
         super(frame);
         setModal(true);
-        setBounds(100, 100, 300, 200);
+        setBounds(100, 100, 200, 150);
         text1 = new JLabel();
         text2 = new JLabel();
         jt1 = new JTextField();
         buttonArchivo = new JButton(" Archivo ");
-        buttonURL = new JButton(" Reproducir enlace");
+        buttonURL = new JButton(" Reproducir enlace ");
         this.ventana = ventana;
         widgetVideoElena = new WidgetVideoElena(ventana.getVentana());
         aElementos();
