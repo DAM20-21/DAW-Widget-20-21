@@ -26,7 +26,7 @@ public class TornaWeather extends JPanel {
 
     private JTextArea municipio;
     private JLabel imagenes;
-    private Boolean aviso = false;
+    //private Boolean aviso = false;
     private JPanel panelImagenes;
     private JPanel panelCiudades;
 
@@ -125,7 +125,7 @@ public class TornaWeather extends JPanel {
      * @param ciudad
      */
     public void comprobarPueblos(JTextField ciudad) {
-
+        boolean aviso = false;
         String texto = ciudad.getText();
         for (int i = 0; i < pueblos.size(); i++) {
             if (pueblos.get(i).getNombre().equalsIgnoreCase(texto)) {
