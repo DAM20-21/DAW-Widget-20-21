@@ -33,10 +33,9 @@ public class VentanaNota extends JDialog{
         this.vp = vpr;
         vp.incializar();
     }
-    VentanaNota(VentanaPrincipalWidget vpr,String ti, String te) {
+    VentanaNota(String ti, String te) {
         super();
         this.setBounds(1000, 100, 200, 300);
-        this.vp = vpr; 
         this.editorDeTexto(ti,te);
     }
     
@@ -142,7 +141,7 @@ public class VentanaNota extends JDialog{
                     salir = false;
                     
                 }else{
-                    Fichero fich = new Fichero(tituloRecogido, textoRecogido,this);
+                    Fichero fich = new Fichero(tituloRecogido, textoRecogido);
                     
 
                     salir = true;

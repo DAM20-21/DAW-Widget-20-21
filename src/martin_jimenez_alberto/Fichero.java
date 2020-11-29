@@ -7,22 +7,15 @@ import java.io.IOException;
 public class Fichero {
     private String titulo;
     private String texto;
-    private VentanaNota ventNot;
 
-    Fichero(String titulo,String texto,VentanaNota vn){
+    Fichero(String titulo,String texto/* ,VentanaNota vn */){
         this.titulo = titulo;
         this.texto = texto;
-        this.ventNot = vn;
+        /* this.ventNot = vn; */
         anadirCarpeta();
     }
 
-    public VentanaNota getVentNot() {
-        return this.ventNot;
-    }
-
-    public void setVentNot(VentanaNota ventNot) {
-        this.ventNot = ventNot;
-    }
+    
     
     /**
      * Crea un fichero con los parámetros dados
@@ -71,12 +64,16 @@ public class Fichero {
     }
 
     public void mostrarFichero(){
+        String[] aux = null;
+       
         String titulor = getTitulo();
         titulor += ".txt";
         String textor = getTexto(titulor);
+        aux = titulo.split(".txt");
+        titulor = aux[0];
         try{
-            VentanaNota vn = new VentanaNota(ventNot.vp,titulor,textor);
-            vn.incializar();
+            VentanaNota vno = new VentanaNota(titulor,textor);
+            vno.editorDeTexto(titulor,textor);
         }catch(Exception ex){
             ex.printStackTrace(); 
         }

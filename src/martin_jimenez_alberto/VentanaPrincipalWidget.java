@@ -19,7 +19,6 @@ public class VentanaPrincipalWidget {
 
     JButton nuevaNota;
 
-/* JPanel[] listaPaneles; */
 
     VentanaPrincipalWidget() {
         f = new JFrame();
@@ -33,8 +32,7 @@ public class VentanaPrincipalWidget {
         GridBagConstraints setting;
         String tituloString;
         nuevaNota = new JButton("+");
-        nFICHEROS = listaFICHEROS.size();//Para tranajar con la misma variable en todos los métodos
-/* listaPaneles = new JPanel[nFICHEROS]; */
+        nFICHEROS = listaFICHEROS.size();//Para trabajar con la misma variable en todos los métodos
 
         for(int i=0 ; i<nFICHEROS ; i++){//Añadir la vista de los ficheros al JFrame
             botonEditar = new JButton("Editar");
@@ -62,7 +60,6 @@ public class VentanaPrincipalWidget {
             LineBorder borde = new LineBorder(Color.black);
             previewTexto.setBorder(borde);
             f.add(previewTexto,setting);
-/* listaPaneles[i] = previewTexto; */
 
             inicializarListtenersRepetidos(botonEditar, i);
         }
@@ -116,7 +113,7 @@ public class VentanaPrincipalWidget {
             aux = titulo.split(".txt");
             titulo = aux[0];
  
-            Fichero fich = new Fichero(titulo,texto,null);
+            Fichero fich = new Fichero(titulo,texto);
             listaFICHEROS.add(fich);
         }
     }
