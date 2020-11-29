@@ -29,8 +29,6 @@ public class TornaWeather extends JPanel {
     private JPanel panelCiudades;
     ArrayList<Tiempo> pueblos = new ArrayList<>();
     ArrayList<ImageIcon> imgs = new ArrayList<>();
-    // String [] climas = {"Soleado", "Lluvia", "Niebla", "Nieve", "Nubes y
-    // claros"};
 
     // Referencia al Widget:
 
@@ -83,23 +81,6 @@ public class TornaWeather extends JPanel {
         opc.gridx = 0;
         opc.gridy = 0;
         panelCiudades.add(municipio, opc);
-
-        /*
-         * //TEMP MAXIMA opc = new GridBagConstraints(); tempM = new JTextField("");
-         * tempM.setBorder(BorderFactory.createTitledBorder("Temperatura Maxima"));
-         * tempM.setEditable(false); opc.gridx= 0; opc.gridy = 1;
-         * panelCiudades.add(tempM, opc);
-         * 
-         * //TEMP MINIMA opc = new GridBagConstraints(); tempm = new JTextField("");
-         * tempm.setBorder(BorderFactory.createTitledBorder("Temperatura Minima"));
-         * tempm.setEditable(false); opc.gridx= 0; opc.gridy = 2;
-         * panelCiudades.add(tempm, opc);
-         * 
-         * //CIELO opc = new GridBagConstraints(); cielo = new JTextField("");
-         * cielo.setBorder(BorderFactory.createTitledBorder("Clima"));
-         * cielo.setEditable(false); opc.gridx= 0; opc.gridy = 3;
-         * panelCiudades.add(cielo, opc);
-         */
 
         // Añado las imagenes
         opc = new GridBagConstraints();
@@ -168,6 +149,13 @@ public class TornaWeather extends JPanel {
         imgs.add(new ImageIcon("img/nubesyclaros.png"));
         imgs.add(new ImageIcon("img/nubes.png"));
     }
+
+
+    /**
+     * Aqui comprobamos para ver que imagen del clima saldrá.
+     * 
+     * @param ciudad
+     */
 
     public void comprobarImagen(JTextField ciudad) {
 
