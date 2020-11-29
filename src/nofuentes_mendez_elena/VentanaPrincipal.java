@@ -43,4 +43,8 @@ public class VentanaPrincipal {
         return ventana;
     }
 
+    public void setVentana(JFrame ventana) {
+        this.ventana = ventana;
+    }
+
 }

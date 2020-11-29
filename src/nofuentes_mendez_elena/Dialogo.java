@@ -33,8 +33,8 @@ public class Dialogo extends JDialog {
     private JFileChooser selector;
     private JButton buttonURL;
     private Dialogo dialogo;
-    private WidgetVideoElena widgetVideoElena;
     private VentanaPrincipal ventana;
+    private WidgetVideoElena w;
 
     /** Constructor parametrizado */
     public Dialogo(JFrame frame, VentanaPrincipal ventana) {
@@ -49,6 +49,7 @@ public class Dialogo extends JDialog {
         selector = new JFileChooser();
         dialogo = this;
         this.ventana = ventana;
+        w = new WidgetVideoElena(ventana.getVentana());
         aElementos();
         aListenert();
     }
@@ -82,17 +83,9 @@ public class Dialogo extends JDialog {
         buttonArchivo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Abrimos el dialogo
-                int opcion = selector.showOpenDialog(dialogo);
-                // Comprobamos que se ha seleccionado un archivo.
-                if (opcion == JFileChooser.APPROVE_OPTION) {
-                    dialogo.setVisible(false);
-                    File fich = selector.getSelectedFile();
-                    widgetVideoElena = new WidgetVideoElena(fich);
-                    ventana.getVentana().add(widgetVideoElena.getPanelFx());
-                    ventana.getVentana().revalidate();
-                    ventana.getVentana().repaint();
-                }
+                w.fichero();
+                ventana.getVentana().repaint();
+                ventana.getVentana().revalidate();
             }
         });
 
@@ -100,15 +93,18 @@ public class Dialogo extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // dialogo.setVisible(false);
-                widgetVideoElena = new WidgetVideoElena();
-                String url = jt1.getText().toString();
-                String[] splitUrl = url.split("=");
-                ventana.getVentana().add(widgetVideoElena
-                        .getBrowserPanel("https://www.youtube.com/embed/" + splitUrl[1] + "?rel=0&amp;autoplay=1"));
+                // widgetVideoElena = new WidgetVideoElena();
+                // String url = jt1.getText().toString();
+                // String[] splitUrl = url.split("=");
+                // ventana.getVentana().add(widgetVideoElena
+                // .getBrowserPanel("https://www.youtube.com/embed/" + splitUrl[1] +
+                // "?rel=0&amp;autoplay=1"));
                 // ventana.getVentana().add(widgetVideoElena.getBrowserPanel(url));
-                ventana.getVentana().revalidate();
-                ventana.getVentana().repaint();
+                // ventana.getVentana().revalidate();
+                // ventana.getVentana().repaint();
+                // widgetVideoElena = null;
             }
+
         });
     }
 }
