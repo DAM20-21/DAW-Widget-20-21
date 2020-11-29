@@ -7,13 +7,23 @@ import java.io.IOException;
 public class Fichero {
     private String titulo;
     private String texto;
+    private VentanaNota ventNot;
 
-    Fichero(String titulo,String texto){
+    Fichero(String titulo,String texto,VentanaNota vn){
         this.titulo = titulo;
         this.texto = texto;
+        this.ventNot = vn;
         anadirCarpeta();
     }
 
+    public VentanaNota getVentNot() {
+        return this.ventNot;
+    }
+
+    public void setVentNot(VentanaNota ventNot) {
+        this.ventNot = ventNot;
+    }
+    
     /**
      * Crea un fichero con los parámetros dados
      */
@@ -45,6 +55,7 @@ public class Fichero {
     public static String  getTexto(String lec) {
     String texto = null;
     lec = "DAW-Widget-20-21/ficheros/Ficheros/".concat(lec);
+    lec += "";
         try {
             BufferedReader br = new BufferedReader(new FileReader(lec));
             String linea;
@@ -59,4 +70,15 @@ public class Fichero {
         return texto;
     }
 
+    public void mostrarFichero(){
+        String titulor = getTitulo();
+        titulor += ".txt";
+        String textor = getTexto(titulor);
+        try{
+            VentanaNota vn = new VentanaNota(ventNot.vp,titulor,textor);
+            vn.incializar();
+        }catch(Exception ex){
+            ex.printStackTrace(); 
+        }
+    }
 }
