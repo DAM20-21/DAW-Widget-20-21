@@ -11,9 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 
 /**
- * Ventana Principal para probar el widget Selector de Color
- * 
- * @author Jesús Redondo García
+ * Ventana Principal 
+ * @author Alejnadro Crespo Cobos
  */
 public class VentanaPrincipal {
 
