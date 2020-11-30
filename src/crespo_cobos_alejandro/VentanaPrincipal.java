@@ -37,7 +37,7 @@ public class VentanaPrincipal {
         }
 
         /**
-         * Método que inicializa todos los componentes de la ventana
+         * Método que inicializa todos los componentes de la ventana...
          */
         public void inicializarComponentes() {
 
@@ -55,7 +55,6 @@ public class VentanaPrincipal {
                 opc.anchor = GridBagConstraints.NORTH;
                 opc.weightx= 1;
                 opc.weighty= 1;
-
                 opc.fill = GridBagConstraints.BOTH;
                 panelInfo.setBorder(BorderFactory.createTitledBorder("Buscador"));//Le pongo imagen a mi boton para buscar
                 ventana.getContentPane().add(panelInfo, opc);
@@ -72,7 +71,6 @@ public class VentanaPrincipal {
                 opc.gridy = 0;
                 opc.weightx= 10;
                 opc.weighty= 1;
-
                 opc.fill = GridBagConstraints.BOTH;
                 panelInfo.add(ciudad, opc);
 
@@ -85,8 +83,9 @@ public class VentanaPrincipal {
                 opc.weighty= 1;
                 opc.fill = GridBagConstraints.BOTH;
                 panelInfo.add(botonBuscar, opc);
-                // añado todos mis cambios a la ventana
 
+
+                // añado todos mis cambios a la ventana
                 opc = new GridBagConstraints();
                 opc.gridx = 0;
                 opc.gridy = 1;
