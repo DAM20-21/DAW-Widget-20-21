@@ -48,7 +48,6 @@ public class TornaWeather extends JPanel {
     public void anadirElementosAlex() {
 
         // Definimos el layout:
-        GridBagLayout gbl = new GridBagLayout();
         GridBagConstraints opc = new GridBagConstraints();
         this.setLayout(new GridBagLayout());
         
