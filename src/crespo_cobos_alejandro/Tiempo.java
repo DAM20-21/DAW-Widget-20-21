@@ -24,10 +24,6 @@ public class Tiempo {
     public Tiempo() {
     }
 
-   
-    
-    
-
     public String getNombre() {
         return this.nombre;
     }
