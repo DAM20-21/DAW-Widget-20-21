@@ -30,7 +30,6 @@ public class VentanaPrincipal {
 	// La ventana principal, en este caso, guarda todos los componentes:
 	private JFrame ventana;
 	private JFrame ventanaDialog;
-	private JPanel panel;
 	private JButton iniciarSesion;
 	private JLabel usuario;
 	private JLabel contraseña;
@@ -72,8 +71,6 @@ public class VentanaPrincipal {
 
 		settingsOptions.gridx = 0;
 		settingsOptions.gridy = 0;
-		settingsOptions.weightx = 10;
-		settingsOptions.weighty = 10;
 		iniciarSesion.setSize(50, 50);
 		ventana.add(iniciarSesion, settingsOptions);
 
@@ -96,10 +93,10 @@ public class VentanaPrincipal {
 
 				settingsOptions = new GridBagConstraints();
 				settingsOptions.gridy = 0;
+
 				// CREAMOS EL TEXTO USUARIO
 				usuario = new JLabel();
 				usuario.setText("Introduce usuario: ");
-
 				ventanaDialog.add(usuario, settingsOptions);
 
 				// CREAMOS PARA INTRODUCIR EL USUARIO
