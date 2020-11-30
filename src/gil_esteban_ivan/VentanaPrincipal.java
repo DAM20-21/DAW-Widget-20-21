@@ -27,6 +27,7 @@ public class VentanaPrincipal {
 	private JButton botonCensura;
 	private JPanel panelTexto;
 	private JTextArea texto;
+	private WidgetIvan dialog;
 
 	/**
 	 * Constructor, marca el tamaño y el cierre del frame
@@ -77,7 +78,7 @@ public class VentanaPrincipal {
 	public void inicializarListeners() {
 		botonCensura.addActionListener(e -> {
 			if (!texto.getText().isEmpty()) {
-				WidgetIvan dialog = new WidgetIvan(botonCensura, texto);
+				dialog = new WidgetIvan(botonCensura, texto);
 				dialog.setVisible(true);
 			} else {
 				JOptionPane.showMessageDialog(ventana, "Debes introducir al menos 1 caracter", "Texto vacio", JOptionPane.WARNING_MESSAGE);
