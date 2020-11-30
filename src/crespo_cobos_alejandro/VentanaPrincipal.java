@@ -49,7 +49,7 @@ public class VentanaPrincipal {
                 ventana.getContentPane().setLayout(gbl);
 
                 // Panel info
-                panelInfo = new JPanel();
+                panelInfo = new JPanel(new GridBagLayout());
                 opc.gridx = 0;
                 opc.gridy = 0;
                 opc.anchor = GridBagConstraints.NORTH;
@@ -70,7 +70,10 @@ public class VentanaPrincipal {
                 ciudad.setEditable(true);
                 opc.gridx = 0;
                 opc.gridy = 0;
-                opc.fill = GridBagConstraints.HORIZONTAL;
+                opc.weightx= 10;
+                opc.weighty= 1;
+
+                opc.fill = GridBagConstraints.BOTH;
                 panelInfo.add(ciudad, opc);
 
                 // BOTON BUscar ( Panel info)
@@ -78,6 +81,9 @@ public class VentanaPrincipal {
                 botonBuscar = new JButton(new ImageIcon("img/lupa.png"));//Le pongo imagen a mi boton para buscar
                 opc.gridx = 1;
                 opc.gridy = 0;
+                opc.weightx= 1;
+                opc.weighty= 1;
+                opc.fill = GridBagConstraints.BOTH;
                 panelInfo.add(botonBuscar, opc);
                 // añado todos mis cambios a la ventana
 
