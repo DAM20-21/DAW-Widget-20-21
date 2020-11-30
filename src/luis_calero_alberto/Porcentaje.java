@@ -8,6 +8,10 @@ import javax.swing.JTextField;
 
 import java.awt.*;
 
+/**
+ * @author Alberto Luis Calero Clase para calcular el porcentaje que nos da un
+ *         el usuario de un numero que nos da el usuario
+ */
 public class Porcentaje implements KeyListener {
 
     JPanel panel;
@@ -23,16 +27,26 @@ public class Porcentaje implements KeyListener {
     JTextField mensajeResultado;
 
     JTextField resultado;
-
+    /**
+     * Parametros que utilizaremos
+     */
     Double porcentaje = 0.;
     Double total = 0.;
     Double numeroResultado = 0.;
 
+    /**
+     * Contructor , recibe el panel en el que insertara la interfaz
+     * 
+     * @param panel
+     */
     Porcentaje(JPanel panel) {
         this.panel = panel;
 
     }
 
+    /**
+     * Inicializaremos y anadiremos todos los elementos de la interfaz
+     */
     public void anadirElementoPorcentaje() {
 
         porciento = new JTextField("Porcentaje:");
@@ -92,6 +106,9 @@ public class Porcentaje implements KeyListener {
         numeroTotal.addKeyListener(this);
     }
 
+    /**
+     * Metodos del keylistener
+     */
     @Override
     public void keyTyped(KeyEvent e) {
         // TODO Auto-generated method stub
@@ -104,10 +121,20 @@ public class Porcentaje implements KeyListener {
 
     }
 
+    /**
+     * Al escribir un numero actualizaremos instantaneamente el resultado y el
+     * mensaje del resultado
+     */
     @Override
     public void keyReleased(KeyEvent e) {
-        if (!(numeroPorciento.getText().isEmpty()) && numeroPorciento.getText().matches("[0-9\\.]*")) {
-            try {
+        if (!(numeroPorciento.getText().isEmpty()) && numeroPorciento.getText().matches("[0-9\\.]*")) {// Comprobamos
+                                                                                                       // que son
+                                                                                                       // numeros(Acepta
+                                                                                                       // decimales con
+                                                                                                       // el punto) y
+                                                                                                       // que no esta
+                                                                                                       // vacio
+            try {// Trycatch por si se introducen dos puntos
                 porcentaje = Double.parseDouble(numeroPorciento.getText()) / 100;
             } catch (NumberFormatException n) {
                 ;

@@ -11,17 +11,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+/**
+ * @author Alberto Luis Calero
+ * 
+ *         Haremos conversiones entre diferentes monedas del mundo
+ */
 public class Divisas implements KeyListener, ActionListener {
     JPanel panel;
 
     JComboBox<String> medidaInicial;
     JComboBox<String> medidaFinal;
-
+    /**
+     * Guardaremos la opcion de los JComboBox
+     */
     int seleccionInicial;
     int seleccionFinal;
     Double[] conversionAEuros = { 1., 0.006024, 0.84, 1.11, 0.042, 0.92, 14369.41 };
     Double[] conversionDeEurosA = { 1., 166.0, 1.2, 0.90, 23.97, 1.08, 0.00007 };
-
+    /**
+     * Divisas disponibles para convertir
+     */
     String[] medidas = { "Euros", "Pesetas", "Dolares estadounidenses", "Libras esterlinas", "Peso mexicano",
             "Franco suizo", "Bitcoin" };
 
@@ -40,6 +49,9 @@ public class Divisas implements KeyListener, ActionListener {
 
     }
 
+    /**
+     * Inicializamos y anadimos elementos
+     */
     public void anadirElementoDivisas() {
         // Inicializamos los elementos
         medidaInicial = new JComboBox<>(new DefaultComboBoxModel<>(medidas));
@@ -140,6 +152,9 @@ public class Divisas implements KeyListener, ActionListener {
 
     }
 
+    /**
+     * Accion para los JCombobox
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         seleccionInicial = medidaInicial.getSelectedIndex();// Recogemos la posicion que se ha registrado
@@ -156,7 +171,7 @@ public class Divisas implements KeyListener, ActionListener {
      */
 
     /**
-     * Calcula la conversion primero convierte a metros y despues a la medida
+     * Calcula la conversion primero convierte a euros y despues a la medida
      * seleccionada
      * 
      * @return double que mostraremos como resultado

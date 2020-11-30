@@ -6,6 +6,13 @@ import javax.swing.JPanel;
 
 import java.awt.*;
 
+/**
+ * @author Alberto Luis Calero
+ * 
+ *         En esta clase se introduciran dos paneles , uno con las diferentes
+ *         opciones para convertir y otro en el que cambiaremos de interfaz
+ *         segun el tipo de conversion que queramos hacer
+ */
 public class JPanelConversor extends JPanel {
     JPanel opciones;
     JPanel calculadora;
@@ -24,6 +31,9 @@ public class JPanelConversor extends JPanel {
 
     }
 
+    /**
+     * Anadimos los elementos para la interfaz
+     */
     private void anadirElementoPrincipal() {
         this.setLayout(new GridLayout(1, 2));
         opciones = new JPanel();
@@ -43,6 +53,9 @@ public class JPanelConversor extends JPanel {
 
     }
 
+    /**
+     * Anadimos los listeners a los botones
+     */
     private void anadirListener() {
         opcionesIniciales[0].addActionListener(e -> {
             Porcentaje porcentaje = new Porcentaje(calculadora);

@@ -11,6 +11,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+/**
+ * @author Alberto Luis Calero
+ * 
+ *         Convierte una medida de tiempo en otra que quiera el usuario
+ */
 public class Tiempo implements KeyListener, ActionListener {
     JPanel panel;
 
@@ -19,11 +24,16 @@ public class Tiempo implements KeyListener, ActionListener {
 
     int seleccionInicial;
     int seleccionFinal;
+    /**
+     * Conversiones de unas medidas a otras
+     */
     Double[] conversionAMinutos = { 1.0, 0.000016, 0.0166, 60., (24 * 60.), (7 * 60 * 24.), (30 * 60 * 24.),
             (365 * 7 * 60 * 24.), (3650 * 7 * 60 * 24.), (36500 * 7 * 60 * 24.) };
     Double[] conversionDeMinutosA = { 1.0, 60000., 60., 0.0166667, 0.0006944, 9.9206E-5, 2.2831E-5, 1.9026E-6,
             1.9026E-7, 1.9026E-8 };
-
+    /**
+     * Medidas entre las que haremos las conversiones
+     */
     String[] medidas = { "Minutos", "Milisegundos", "Segundos", "Horas", "Dias", "Semanas", "Meses", "Años", "Decadas",
             "Siglos" };
 
@@ -42,6 +52,9 @@ public class Tiempo implements KeyListener, ActionListener {
 
     }
 
+    /**
+     * Inicializamos y anadimos los elementos
+     */
     public void anadirElementoTiempo() {
         // Inicializamos los elementos
         medidaInicial = new JComboBox<>(new DefaultComboBoxModel<>(medidas));
@@ -142,6 +155,9 @@ public class Tiempo implements KeyListener, ActionListener {
 
     }
 
+    /**
+     * Accion que realizaran el JComboBox
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         seleccionInicial = medidaInicial.getSelectedIndex();// Recogemos la posicion que se ha registrado

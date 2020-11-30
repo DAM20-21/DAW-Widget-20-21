@@ -8,25 +8,34 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
+
 import javax.swing.JComboBox;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * @author Alberto Luis Calero
+ * 
+ *         En esta clase haremos conversiones entre medidas de area
+ */
 public class Area implements KeyListener, ActionListener {
 
     JPanel panel;
-    JButton volver;
+
     JComboBox<String> medidaInicial;
     JComboBox<String> medidaFinal;
 
     int seleccionInicial;
     int seleccionFinal;
-
+    /**
+     * Las conversiones de unas medidas a otras
+     */
     Double[] conversionDeMetrosA = { 1.0, 0.000001, 0.0001, 1.19599, 0.00000038 };
     Double[] conversionaMetros = { 1.0, 100000., 10000., 0.8361, 2589988. };
-
+    /**
+     * Medidas entre las que podemos convertir
+     */
     String[] medidas = { "Metros^2", "Kilometros^2", "Hectarea", "Yardas^2", "Millas^2" };
 
     Double areaInicial = 0.;
@@ -43,6 +52,9 @@ public class Area implements KeyListener, ActionListener {
         this.panel = panel;
     }
 
+    /**
+     * Inicializamos y anadimos los elementos
+     */
     public void anadirElementoArea() {
         // Inicializamos los elementos
         medidaInicial = new JComboBox<>(new DefaultComboBoxModel<>(medidas));

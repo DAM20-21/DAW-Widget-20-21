@@ -7,6 +7,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.*;
 
+/**
+ * @author Alberto Luis Calero
+ * 
+ *         En esta clase calcularemos el descuento que nos dan sobre un precio
+ *         dado
+ */
 public class Descuento implements KeyListener {
 
     JTextField textoPrecioOriginal;
@@ -33,6 +39,9 @@ public class Descuento implements KeyListener {
 
     }
 
+    /**
+     * Inicializamos y anadimos los elementos
+     */
     public void anadirElementoDescuento() {
 
         textoPrecioOriginal = new JTextField("Precio inicial :");
@@ -122,7 +131,7 @@ public class Descuento implements KeyListener {
             precioFinal = precioInicial - (precioInicial * porcentaje);
             numeroPrecioFinal.setText("" + precioFinal);// Actualizamos la cuenta
         }
-        // Comprueba que no esta vacion y que es un numero
+        // Comprueba que no esta vacio y que es un numero
         if (!(numeroDescuento.getText().isEmpty()) && numeroDescuento.getText().matches("[0-9\\.]*")) {
             try {
                 porcentaje = Double.parseDouble(numeroDescuento.getText()) / 100;

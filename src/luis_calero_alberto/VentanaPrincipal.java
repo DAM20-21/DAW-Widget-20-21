@@ -3,6 +3,12 @@ package luis_calero_alberto;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author Alberto Luis Calero
+ * 
+ *         Ventana principal donde se añadiran los elementos que necesitemos ,
+ *         en este caso solo se añade un JPanelConversor
+ */
 public class VentanaPrincipal {
     private JFrame ventana;
     private JPanelConversor panel;
@@ -14,6 +20,9 @@ public class VentanaPrincipal {
 
     }
 
+    /**
+     * Inicializamos y anadimos el PanelConversor
+     */
     public void inicializarComponentes() {
         panel = new JPanelConversor();
         ventana.setLayout(new GridLayout(1, 1));
