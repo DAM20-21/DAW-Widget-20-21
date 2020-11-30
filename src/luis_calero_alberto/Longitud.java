@@ -122,6 +122,9 @@ public class Longitud implements KeyListener, ActionListener {
         settings.ipadx = 200;
         settings.fill = GridBagConstraints.HORIZONTAL;
         panel.add(numeroResultado, settings);
+        // Quitamos el textfield que no usamos
+        vacio.setEditable(false);
+        vacio.setBackground(panel.getBackground());
         // anadimos listeners
         medidaInicial.addActionListener(this);
         medidaFinal.addActionListener(this);

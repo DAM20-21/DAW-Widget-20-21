@@ -93,6 +93,8 @@ public class Divisas implements KeyListener, ActionListener {
         settings.fill = GridBagConstraints.HORIZONTAL;
         settings.weightx = 1;
         panel.add(vacio, settings);//
+        vacio.setEditable(false);
+        vacio.setBackground(panel.getBackground());
         settings = new GridBagConstraints();
         settings.gridx = 0;
         settings.gridy = 4;

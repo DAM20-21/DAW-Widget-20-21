@@ -113,6 +113,9 @@ public class Area implements KeyListener, ActionListener {
         settings.ipadx = 200;
         settings.fill = GridBagConstraints.HORIZONTAL;
         panel.add(numeroResultado, settings);
+        // Quitamos el textfield que no usamos
+        vacio.setEditable(false);
+        vacio.setBackground(panel.getBackground());
 
         // Como solo son 3 lineas los listeners los ponemos aqui directamente
         medidaInicial.addActionListener(this);

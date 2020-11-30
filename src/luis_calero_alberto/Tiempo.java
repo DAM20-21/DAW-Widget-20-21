@@ -114,6 +114,10 @@ public class Tiempo implements KeyListener, ActionListener {
         settings.fill = GridBagConstraints.HORIZONTAL;
         panel.add(numeroResultado, settings);
 
+        // Quitamos el textfield que no usamos
+        vacio.setEditable(false);
+        vacio.setBackground(panel.getBackground());
+
         medidaInicial.addActionListener(this);
         medidaFinal.addActionListener(this);
 
