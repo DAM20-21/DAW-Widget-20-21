@@ -143,9 +143,10 @@ public class Divisas implements KeyListener, ActionListener {
             } catch (NumberFormatException N) {
                 ;
             }
-            DecimalFormat df = new DecimalFormat("#.00000000");// Formateamos el numero para que solo nos muestre unos
-                                                               // cuantos decimales
-            numeroResultado.setText(df.format(calcularResultado()));
+            DecimalFormat df = new DecimalFormat("#.000000000000");// Formateamos el numero para que solo nos muestre
+                                                                   // unos
+            // cuantos decimales
+            numeroResultado.setText("" + df.format(calcularResultado()));
             DecimalFormat dfTexto = new DecimalFormat("#.000");
             textoResultado.setText(divisaInicial + " " + medidas[seleccionInicial] + " son "
                     + dfTexto.format(calcularResultado()) + " " + medidas[seleccionFinal]);
@@ -161,8 +162,8 @@ public class Divisas implements KeyListener, ActionListener {
     public void actionPerformed(ActionEvent e) {
         seleccionInicial = medidaInicial.getSelectedIndex();// Recogemos la posicion que se ha registrado
         seleccionFinal = medidaFinal.getSelectedIndex();
-        DecimalFormat df = new DecimalFormat("#.0000000");
-        numeroResultado.setText(df.format(calcularResultado()));
+        DecimalFormat df = new DecimalFormat("#.0000000000000");
+        numeroResultado.setText("" + df.format(calcularResultado()));
         DecimalFormat dfTexto = new DecimalFormat("#.000");
         textoResultado.setText(divisaInicial + " " + medidas[seleccionInicial] + " son "
                 + dfTexto.format(calcularResultado()) + " " + medidas[seleccionFinal]);
