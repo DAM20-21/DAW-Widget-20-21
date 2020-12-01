@@ -19,6 +19,10 @@ import javafx.scene.web.WebView;
  * mismos sin problema. Podemos reproducir un Archivo y a la mitad de este
  * mandar reproducir un enlace y viceversa.
  * 
+ * - En el momento de reproducir vídeos por enlaces de Youtube, debemos tener en
+ * cuenta que no tengan derechos de autor asociados, ya que entonces no se
+ * reproduciran fuera de la plataforma.
+ * 
  * @author Elena Nofuentes
  * @since 25-11-2020
  * @version 1.0 {@link Dialogo#aListenert()}
@@ -79,16 +83,21 @@ public class WidgetVideoElena {
                 }
             }
         }
-        // Formmamos el enlace de youtube.
-        String[] splitUrl = url.split("=");
-        String enlace = "https://www.youtube.com/embed/" + splitUrl[1] + "?rel=0&amp;autoplay=1";
-
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                // Formmamos el enlace de youtube, comprobamos si es una lista de reproducción o
+                // un vídeo.
+                String[] splitUrl = url.split("=");
+                String enlace = "";
+                if (url.contains("list")) {
+                    enlace = "https://www.youtube.com/embed/videoseries?list=" + splitUrl[2];
+                } else {
+                    enlace = "https://www.youtube.com/embed/" + splitUrl[1] + "?rel=0&amp;autoplay=1";
+                }
                 // Cargamos el vídeo
                 webview.getEngine().load(enlace);
-                webview.setPrefSize(500, 300);
+                webview.setPrefSize(500, 315);
                 panelYt.setScene(new Scene(new Group(webview)));
                 panelYt.updateUI();
                 panelYt.repaint();
@@ -105,6 +114,7 @@ public class WidgetVideoElena {
         // Abrimos el dialogo y comprobamos que se ha seleccionado un archivo.
         if (selector.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
             ruta = selector.getSelectedFile();
+            // Añadimos los botones para controlar la reproducción del vídeo.
             frame.add(panelFx);
             crearEscena();
         }
@@ -126,7 +136,6 @@ public class WidgetVideoElena {
                     webview.getEngine().load("about:blank");
                 }
             });
-
         }
         if (!panelFx.isVisible()) {
             panelFx.setVisible(true);
@@ -142,7 +151,8 @@ public class WidgetVideoElena {
                     mp.stop();
                     mp.dispose();
                 }
-                // Creamos la escena y la ponemos en el panel.
+                // Creamos la escena y la ponemos en el panel y añadimos los listener a los
+                // botones.
                 panelFx.setScene(new Scene(new Group(new MediaView(mp))));
                 mp.setVolume(0.7);
                 // Lanzamos la reproducción del vídeo.

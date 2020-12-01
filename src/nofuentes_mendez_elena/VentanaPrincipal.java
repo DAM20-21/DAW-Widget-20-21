@@ -20,7 +20,7 @@ public class VentanaPrincipal {
     /** Constructor por defecto */
     public VentanaPrincipal() {
         ventana = new JFrame("Reproductor de vídeo");
-        ventana.setBounds(100, 100, 500, 300);
+        ventana.setBounds(100, 100, 500, 350);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setLayout(new BorderLayout());
         dialogo = new Dialogo(ventana, this);

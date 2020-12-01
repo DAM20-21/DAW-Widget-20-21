@@ -38,7 +38,6 @@ public class Dialogo extends JDialog {
      */
     public Dialogo(JFrame frame, VentanaPrincipal ventana) {
         super(frame);
-        setModal(true);
         setBounds(100, 100, 200, 150);
         setTitle(" Opciones ");
         text1 = new JLabel();
@@ -57,19 +56,16 @@ public class Dialogo extends JDialog {
      */
     public void aElementos() {
         setLayout(new GridLayout(0, 1));
-        Color color = new Color(255, 255, 168);
 
         text1.setText(" Elija el medio de reproducción: ");
         text1.setHorizontalAlignment(SwingConstants.CENTER);
         add(text1);
-        buttonArchivo.setBackground(color);
         buttonArchivo.setFocusable(false);
         add(buttonArchivo);
         text2.setText(" URL ");
         text2.setHorizontalAlignment(SwingConstants.CENTER);
         add(text2);
         add(jt1);
-        buttonURL.setBackground(color);
         buttonURL.setFocusable(false);
         add(buttonURL);
     }
