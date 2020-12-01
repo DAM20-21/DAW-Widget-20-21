@@ -61,14 +61,57 @@ public class VentanaPrincipalWidget {
             previewTexto.setBorder(borde);
             f.add(previewTexto,setting);
 
-            inicializarListtenersRepetidos(botonEditar, i);
+            botonEditar.addActionListener(new ActionBoton(this, i));
         }
         GridBagConstraints snuevaNota = new GridBagConstraints();
         snuevaNota.gridx = 0;
         snuevaNota.gridy = nFICHEROS;
         f.add(nuevaNota,snuevaNota);
     }
+    public void repintar(){
+        f.removeAll();
+        GridBagConstraints setting;
+        String tituloString;
+        nuevaNota = new JButton("+");
+        nFICHEROS = listaFICHEROS.size();//Para trabajar con la misma variable en todos los métodos
 
+        for(int i=0 ; i<nFICHEROS ; i++){//Añadir la vista de los ficheros al JFrame
+            botonEditar = new JButton("Editar");
+            previewTexto = new JPanel(new GridBagLayout());
+            titulo = new JTextField();
+            titulo.setEditable(false);
+            //Añadir los componentes al JPanel
+            tituloString = listaFICHEROS.get(i).getTitulo();
+            titulo.setText(tituloString.toUpperCase());
+            GridBagConstraints sTitulo = new GridBagConstraints();
+            sTitulo.gridx = 0;
+            sTitulo.gridy = 0;
+            sTitulo.weightx = 10;
+            sTitulo.weighty = 1;
+            sTitulo.fill = GridBagConstraints.BOTH;
+            previewTexto.add(titulo ,sTitulo);
+            previewTexto.add(botonEditar);
+            //Settings del PREVIEW
+            setting = new GridBagConstraints();
+            setting.gridx = 0;
+            setting.gridy = i;
+            setting.weightx = 1;
+            setting.fill = GridBagConstraints.BOTH;
+            //Borde de la preview
+            LineBorder borde = new LineBorder(Color.black);
+            previewTexto.setBorder(borde);
+            f.add(previewTexto,setting);
+
+            botonEditar.addActionListener(new ActionBoton(this, i));
+        }
+        GridBagConstraints snuevaNota = new GridBagConstraints();
+        snuevaNota.gridx = 0;
+        snuevaNota.gridy = nFICHEROS;
+        f.add(nuevaNota,snuevaNota);
+
+        f.revalidate(); 
+        f.repaint();
+    }
     private void inicializarListteners() {
         nuevaNota.addActionListener((e)->{
             try{
@@ -80,10 +123,6 @@ public class VentanaPrincipalWidget {
         });
     }
 
-    private void inicializarListtenersRepetidos(JButton boton,int i) {
-        boton.addActionListener(new ActionBoton(this, i));
-    }
-
     /**
 	 * Método para inicializar la pantalla
 	 */
@@ -92,11 +131,7 @@ public class VentanaPrincipalWidget {
         guardarFicheros();
         anadirComponentes();
         inicializarListteners();
-    }
-    public void actualizarVentanaWid(){
-        f.revalidate(); 
-        f.repaint();
-    }   
+    }  
 
     /**
      * Devuelve el número de ficheros que hay en la carpeta de los ficheros

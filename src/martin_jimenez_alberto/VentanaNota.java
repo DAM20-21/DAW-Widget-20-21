@@ -3,6 +3,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 
@@ -21,8 +22,8 @@ public class VentanaNota extends JDialog{
     JButton botonGuardar;
     //Panel del título
     JPanel pTitulo;
-    //Texto del título, es JTextArea para poder poner LineWrap(true) y que haga saltos de linea
-    JTextArea tTitulo;
+    //Texto del título
+    JTextField tTitulo;
     //Panel del texto
     JPanel pTexto;
     //Texto del atributo texto, es JTextArea para poder poner LineWrap(true) y que haga saltos de linea
@@ -33,7 +34,7 @@ public class VentanaNota extends JDialog{
      */
     VentanaNota(VentanaPrincipalWidget vpr) {
         super();
-        this.setBounds(10, 0, 600, 900);
+        this.setBounds(10, 0, 500, 800);
         this.vp = vpr;
         vp.incializar();
     }
@@ -44,7 +45,7 @@ public class VentanaNota extends JDialog{
      */
     VentanaNota(String ti, String te) {
         super();
-        this.setBounds(10, 0, 600, 900);
+        this.setBounds(10, 0, 500, 800);
     }
     
     /**
@@ -55,8 +56,7 @@ public class VentanaNota extends JDialog{
         this.setLayout(gb); 
         
         botonGuardar = new JButton("Guardar");
-        tTitulo = new JTextArea();
-        tTitulo.setLineWrap(true);
+        tTitulo = new JTextField();
         pTitulo = new JPanel(new GridBagLayout());
         tTexto = new JTextArea();
         tTexto.setLineWrap(true);
@@ -105,8 +105,7 @@ public class VentanaNota extends JDialog{
         this.setLayout(gb); 
         
         botonGuardar = new JButton("Guardar");
-        tTitulo  = new JTextArea();
-        tTitulo.setLineWrap(true);
+        tTitulo  = new JTextField();
         pTitulo = new JPanel(new GridBagLayout());
         tTexto  = new JTextArea();
         tTexto.setLineWrap(true);
@@ -155,6 +154,7 @@ public class VentanaNota extends JDialog{
         botonGuardar.addActionListener((e)->{
             Boolean salir = false;
             String tituloRecogido , textoRecogido;
+
             tituloRecogido = tTitulo.getText();
             textoRecogido = tTexto.getText();
             do{
@@ -164,13 +164,13 @@ public class VentanaNota extends JDialog{
                 }else{
                     Fichero fich = new Fichero(tituloRecogido, textoRecogido);
                     salir = true;
-                    this.setVisible(false);
-                    this.dispose();
-
-                    vp.f.repaint(); 
+                    /* this.setVisible(false);*/
+                    
                 }
             }while(salir = false);
 
+            vp.repintar();
+            this.dispose(); 
         });
     }
     
