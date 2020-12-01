@@ -22,7 +22,7 @@ public class VentanaPrincipalWidget {
 
     VentanaPrincipalWidget() {
         f = new JFrame();
-        f.setBounds(1000, 100, 200, 300);
+        f.setBounds(10, 0, 600, 900);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     public void anadirComponentes() {
@@ -85,7 +85,7 @@ public class VentanaPrincipalWidget {
     }
 
     /**
-	 * Método para refrescar la pantalla
+	 * Método para inicializar la pantalla
 	 */
     public void incializar() {
         f.setVisible(true);
@@ -93,6 +93,10 @@ public class VentanaPrincipalWidget {
         anadirComponentes();
         inicializarListteners();
     }
+    public void actualizarVentanaWid(){
+        f.revalidate(); 
+        f.repaint();
+    }   
 
     /**
      * Devuelve el número de ficheros que hay en la carpeta de los ficheros

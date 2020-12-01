@@ -2,7 +2,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
 
@@ -15,39 +15,51 @@ public class VentanaNota extends JDialog{
      */
     private static final long serialVersionUID = 1L;
     ArrayList<Fichero> listaFICHEROS;// Lista que guarda Objetos Fichero
-    int nFICHEROS;
-    VentanaPrincipalWidget vp;
-
+    int nFICHEROS;//Atributo para guardar el tamaño de la lista de los ficheros
+    VentanaPrincipalWidget vp;// Atributo que almacena un objeto VentanaPrincipalWidget
+    //Definición del boton que guarda lo escrito
     JButton botonGuardar;
+    //Panel del título
     JPanel pTitulo;
-    JTextField tTitulo;
+    //Texto del título, es JTextArea para poder poner LineWrap(true) y que haga saltos de linea
+    JTextArea tTitulo;
+    //Panel del texto
     JPanel pTexto;
-    JTextField tTexto;
+    //Texto del atributo texto, es JTextArea para poder poner LineWrap(true) y que haga saltos de linea
+    JTextArea tTexto;
 
-    JButton bGuardar;
-    JButton bEliminar;
-
+    /**
+     * Constructor parametrizado de una nota vacia
+     */
     VentanaNota(VentanaPrincipalWidget vpr) {
         super();
-        this.setBounds(1000, 100, 200, 300);
+        this.setBounds(10, 0, 600, 900);
         this.vp = vpr;
         vp.incializar();
     }
+    /**
+     *  Constructor parametrizado de una nota con información
+     * @param ti String con el título del feichero
+     * @param te String con el texto del fichero
+     */
     VentanaNota(String ti, String te) {
         super();
-        this.setBounds(1000, 100, 200, 300);
-        this.editorDeTexto(ti,te);
+        this.setBounds(10, 0, 600, 900);
     }
     
-
+    /**
+     * Método que añade los componentes
+     */
     public void anadirComponentes() {
         GridBagLayout gb = new GridBagLayout();
         this.setLayout(gb); 
         
         botonGuardar = new JButton("Guardar");
-        tTitulo = new JTextField();
+        tTitulo = new JTextArea();
+        tTitulo.setLineWrap(true);
         pTitulo = new JPanel(new GridBagLayout());
-        tTexto = new JTextField();
+        tTexto = new JTextArea();
+        tTexto.setLineWrap(true);
         pTexto = new JPanel(new GridBagLayout());
 
         GridBagConstraints sTitulo = new GridBagConstraints();
@@ -83,15 +95,21 @@ public class VentanaNota extends JDialog{
 
         this.add(botonGuardar,sBoton);
     }
-
+    /**
+     * Métodos que añade los componentes de un Fichero con datos
+     * @param ti String con el título
+     * @param te String con el texto
+     */
     public void anadirComponentes(String ti, String te) {
         GridBagLayout gb = new GridBagLayout();
         this.setLayout(gb); 
         
         botonGuardar = new JButton("Guardar");
-        tTitulo  = new JTextField();
+        tTitulo  = new JTextArea();
+        tTitulo.setLineWrap(true);
         pTitulo = new JPanel(new GridBagLayout());
-        tTexto  = new JTextField();
+        tTexto  = new JTextArea();
+        tTexto.setLineWrap(true);
         pTexto = new JPanel(new GridBagLayout());
 
         GridBagConstraints sTitulo = new GridBagConstraints();
@@ -129,6 +147,10 @@ public class VentanaNota extends JDialog{
 
         this.add(botonGuardar,sBoton);
     }
+
+    /**
+     * Añade el listener del botón guardar
+     */
     private void inicializarListteners() {
         botonGuardar.addActionListener((e)->{
             Boolean salir = false;
@@ -139,24 +161,32 @@ public class VentanaNota extends JDialog{
                 if(tituloRecogido.equals("") || textoRecogido.equals("")){
                     JOptionPane.showMessageDialog(this, "Rellena todos los campos");
                     salir = false;
-                    
                 }else{
                     Fichero fich = new Fichero(tituloRecogido, textoRecogido);
-                    
-
                     salir = true;
+                    this.setVisible(false);
+                    this.dispose();
+
+                    vp.f.repaint(); 
                 }
             }while(salir = false);
-                
-            this.setVisible(false);
-            this.dispose();
+
         });
     }
+    
+    /**
+     * Metodo parainicializar sinparámetros
+     */
     public void incializar() {
         anadirComponentes();
         inicializarListteners(); 
         this.setVisible(true);
     }
+    /**
+     * Método para inicializar con parámetros
+     * @param ti String que contiene el título
+     * @param te String que contiene el texto
+     */
     public void editorDeTexto(String ti, String te) {
         anadirComponentes(ti, te);
         inicializarListteners(); 

@@ -46,7 +46,7 @@ public class Fichero {
     }
 
     public static String  getTexto(String lec) {
-    String texto = null;
+    String texto = "";
     lec = "DAW-Widget-20-21/ficheros/Ficheros/".concat(lec);
     lec += "";
         try {
