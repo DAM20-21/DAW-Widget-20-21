@@ -1,1 +1,1 @@
-Esto esun fichero con un texto de prueba
+Esto es un fichero de prueba

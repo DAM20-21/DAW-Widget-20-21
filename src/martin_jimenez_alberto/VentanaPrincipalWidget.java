@@ -16,6 +16,7 @@ public class VentanaPrincipalWidget {
     JPanel previewTexto;
     JTextField titulo;
     JButton botonEditar;
+    JButton botonEliminar;
 
     JButton nuevaNota;
 
@@ -36,6 +37,7 @@ public class VentanaPrincipalWidget {
 
         for(int i=0 ; i<nFICHEROS ; i++){//Añadir la vista de los ficheros al JFrame
             botonEditar = new JButton("Editar");
+            botonEliminar = new JButton("Eliminar");
             previewTexto = new JPanel(new GridBagLayout());
             titulo = new JTextField();
             titulo.setEditable(false);
@@ -49,9 +51,10 @@ public class VentanaPrincipalWidget {
             sTitulo.weighty = 1;
             sTitulo.fill = GridBagConstraints.BOTH;
             previewTexto.add(titulo ,sTitulo);
+            previewTexto.add(botonEliminar);
             previewTexto.add(botonEditar);
             //Settings del PREVIEW
-            setting = new GridBagConstraints();
+            setting = new GridBagConstraints(); 
             setting.gridx = 0;
             setting.gridy = i;
             setting.weightx = 1;
@@ -61,57 +64,16 @@ public class VentanaPrincipalWidget {
             previewTexto.setBorder(borde);
             f.add(previewTexto,setting);
 
-            botonEditar.addActionListener(new ActionBoton(this, i));
+            botonEditar.addActionListener(new ActionBoton(this , i,1));//El 1 dice que tipo de botón es
+            botonEliminar.addActionListener(new ActionBoton(this , i,2));//El 2 dice que tipo de botón es
+
         }
         GridBagConstraints snuevaNota = new GridBagConstraints();
         snuevaNota.gridx = 0;
         snuevaNota.gridy = nFICHEROS;
         f.add(nuevaNota,snuevaNota);
     }
-    public void repintar(){
-        f.removeAll();
-        GridBagConstraints setting;
-        String tituloString;
-        nuevaNota = new JButton("+");
-        nFICHEROS = listaFICHEROS.size();//Para trabajar con la misma variable en todos los métodos
 
-        for(int i=0 ; i<nFICHEROS ; i++){//Añadir la vista de los ficheros al JFrame
-            botonEditar = new JButton("Editar");
-            previewTexto = new JPanel(new GridBagLayout());
-            titulo = new JTextField();
-            titulo.setEditable(false);
-            //Añadir los componentes al JPanel
-            tituloString = listaFICHEROS.get(i).getTitulo();
-            titulo.setText(tituloString.toUpperCase());
-            GridBagConstraints sTitulo = new GridBagConstraints();
-            sTitulo.gridx = 0;
-            sTitulo.gridy = 0;
-            sTitulo.weightx = 10;
-            sTitulo.weighty = 1;
-            sTitulo.fill = GridBagConstraints.BOTH;
-            previewTexto.add(titulo ,sTitulo);
-            previewTexto.add(botonEditar);
-            //Settings del PREVIEW
-            setting = new GridBagConstraints();
-            setting.gridx = 0;
-            setting.gridy = i;
-            setting.weightx = 1;
-            setting.fill = GridBagConstraints.BOTH;
-            //Borde de la preview
-            LineBorder borde = new LineBorder(Color.black);
-            previewTexto.setBorder(borde);
-            f.add(previewTexto,setting);
-
-            botonEditar.addActionListener(new ActionBoton(this, i));
-        }
-        GridBagConstraints snuevaNota = new GridBagConstraints();
-        snuevaNota.gridx = 0;
-        snuevaNota.gridy = nFICHEROS;
-        f.add(nuevaNota,snuevaNota);
-
-        f.revalidate(); 
-        f.repaint();
-    }
     private void inicializarListteners() {
         nuevaNota.addActionListener((e)->{
             try{
@@ -133,6 +95,13 @@ public class VentanaPrincipalWidget {
         inicializarListteners();
     }  
 
+    public void repintar() {
+        f.dispose();
+        f.setVisible(false);
+        VentanaPrincipalWidget vp = new VentanaPrincipalWidget();
+        vp.incializar();
+    }
+
     /**
      * Devuelve el número de ficheros que hay en la carpeta de los ficheros
      * 
@@ -140,19 +109,20 @@ public class VentanaPrincipalWidget {
      */
     public void guardarFicheros(){
         listaFICHEROS = new ArrayList<>();
+
         File carpeta = new File("DAW-Widget-20-21/ficheros/Ficheros"); 
         File[] lista = carpeta.listFiles();
         String titulo;
         String texto;
         String[] aux = null;
-
         for(int i=0 ; i<lista.length; i++){
+
             titulo = lista[i].getName();
             texto = Fichero.getTexto(titulo);
             aux = titulo.split(".txt");
             titulo = aux[0];
  
-            Fichero fich = new Fichero(titulo,texto);
+            Fichero fich = new Fichero(titulo,texto,this);
             listaFICHEROS.add(fich);
         }
     }

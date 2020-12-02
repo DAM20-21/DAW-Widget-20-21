@@ -28,6 +28,10 @@ public class VentanaNota extends JDialog{
     JPanel pTexto;
     //Texto del atributo texto, es JTextArea para poder poner LineWrap(true) y que haga saltos de linea
     JTextArea tTexto;
+    //
+    String tituloString;
+
+    String textoString;
 
     /**
      * Constructor parametrizado de una nota vacia
@@ -36,16 +40,18 @@ public class VentanaNota extends JDialog{
         super();
         this.setBounds(10, 0, 500, 800);
         this.vp = vpr;
-        vp.incializar();
     }
     /**
      *  Constructor parametrizado de una nota con información
      * @param ti String con el título del feichero
      * @param te String con el texto del fichero
      */
-    VentanaNota(String ti, String te) {
+    VentanaNota(String ti, String te,VentanaPrincipalWidget vpr) {
         super();
         this.setBounds(10, 0, 500, 800);
+        this.vp = vpr;
+        tituloString = ti;
+        textoString = te;
     }
     
     /**
@@ -79,6 +85,7 @@ public class VentanaNota extends JDialog{
         sTexto.fill = GridBagConstraints.BOTH;
         TitledBorder bTexto = new TitledBorder("Texto");
         pTexto.setBorder(bTexto);
+        
 
         GridBagConstraints sBoton = new GridBagConstraints();
         sBoton.gridx = 0;
@@ -87,6 +94,7 @@ public class VentanaNota extends JDialog{
         sBoton.weightx = 1;
         sBoton.fill = GridBagConstraints.BOTH;
         
+
         pTitulo.add(tTitulo,sTitulo);
         this.add(pTitulo,sTitulo);
 
@@ -100,10 +108,9 @@ public class VentanaNota extends JDialog{
      * @param ti String con el título
      * @param te String con el texto
      */
-    public void anadirComponentes(String ti, String te) {
+    public void anadirComponentesEdit() {
         GridBagLayout gb = new GridBagLayout();
         this.setLayout(gb); 
-        
         botonGuardar = new JButton("Guardar");
         tTitulo  = new JTextField();
         pTitulo = new JPanel(new GridBagLayout());
@@ -136,11 +143,11 @@ public class VentanaNota extends JDialog{
         sBoton.weightx = 1;
         sBoton.fill = GridBagConstraints.BOTH;
 
-        tTitulo.setText(ti);
+        tTitulo.setText(tituloString);
         pTitulo.add(tTitulo,sTitulo);
         this.add(pTitulo,sTitulo);
 
-        tTexto.setText(te);
+        tTexto.setText(textoString);
         pTexto.add(tTexto,sTitulo);
         this.add(pTexto,sTexto);
 
@@ -162,18 +169,18 @@ public class VentanaNota extends JDialog{
                     JOptionPane.showMessageDialog(this, "Rellena todos los campos");
                     salir = false;
                 }else{
-                    Fichero fich = new Fichero(tituloRecogido, textoRecogido);
+                    Fichero fich = new Fichero(tituloRecogido, textoRecogido,vp);
                     salir = true;
-                    /* this.setVisible(false);*/
                     
                 }
             }while(salir = false);
-
             vp.repintar();
             this.dispose(); 
         });
     }
     
+    
+
     /**
      * Metodo parainicializar sinparámetros
      */
@@ -188,8 +195,8 @@ public class VentanaNota extends JDialog{
      * @param te String que contiene el texto
      */
     public void editorDeTexto(String ti, String te) {
-        anadirComponentes(ti, te);
-        inicializarListteners(); 
-        this.setVisible(true);
+        anadirComponentesEdit(); 
+        inicializarListteners();
+        this.setVisible(true); 
     }
 }
