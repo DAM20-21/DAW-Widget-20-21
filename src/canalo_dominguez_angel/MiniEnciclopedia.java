@@ -153,7 +153,8 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
         private void crearListeners() {
                 comboBoxDinosaurios.addActionListener((e) -> {
                         int pos = comboBoxDinosaurios.getSelectedIndex();
-                        labelImagen.removeAll();
+                        labelImagen.setIcon(null);
+                        labelImagen.setText(null);
                         Image nuevaImagen = null;
                         if (pos != 0) {
                                 try {
@@ -163,7 +164,6 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                                         iconoImagen = new ImageIcon(imagen);
                                         labelImagen.setIcon(iconoImagen);
                                 } catch (IOException ex) {
-                                        ex.printStackTrace();
                                         labelImagen.setText("Aquí iría la imagen del " + lista.get(pos).getNombre()
                                                         + ", pero hay que incluirla en el repositorio.");
                                 }
@@ -183,7 +183,6 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                                         iconoImagen = new ImageIcon(imagen);
                                         labelImagen.setIcon(iconoImagen);
                                 } catch (IOException ex) {
-                                        ex.printStackTrace();
                                         labelImagen.setText(
                                                         "Aquí iría el mapa de la isla Sorna, pero hay que incluirlo en el repositorio.");
                                 }
@@ -233,14 +232,16 @@ public class MiniEnciclopedia extends JPanel implements ActionListener {
                 settingsObjeto.fill = GridBagConstraints.BOTH;
                 panelImagen = new JPanel();
                 img = null;
+                labelImagen = new JLabel();
                 try {
                         img = ImageIO.read(new File("./img/Sorna.jpg"));
+                        imagen = img.getScaledInstance(300, 200, Image.SCALE_SMOOTH);
+                        iconoImagen = new ImageIcon(imagen);
+                        labelImagen = new JLabel(iconoImagen);
                 } catch (IOException e) {
-                        e.printStackTrace();
+                        labelImagen.setText(
+                                        "Aquí iría el mapa de la isla Sorna, pero hay que incluirlo en el repositorio.");
                 }
-                imagen = img.getScaledInstance(300, 200, Image.SCALE_SMOOTH);
-                iconoImagen = new ImageIcon(imagen);
-                labelImagen = new JLabel(iconoImagen);
                 panelImagen.add(labelImagen);
                 add(panelImagen, settingsObjeto);
 
