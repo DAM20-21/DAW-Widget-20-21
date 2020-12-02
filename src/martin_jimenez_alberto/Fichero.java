@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Fichero {
     private String titulo;
     private String texto;
-    private File dir;
+    private File dirFile;
     String auxi; 
     private VentanaPrincipalWidget vp;
 
@@ -19,12 +19,12 @@ public class Fichero {
         auxi = "DAW-Widget-20-21/ficheros/Ficheros/";
         auxi += titulo;
         auxi += ".txt";
-        dir = new File (auxi); 
+        dirFile = new File (auxi); 
         this.vp = vp;
 
     }
     public File getDir() {
-        return this.dir;
+        return this.dirFile;
     }
     
     
@@ -35,8 +35,6 @@ public class Fichero {
         String direccion = "DAW-Widget-20-21/ficheros/Ficheros/";
         direccion += titulo;
         direccion += ".txt";
-
-
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(direccion));
             bw.write(texto);
@@ -60,7 +58,6 @@ public class Fichero {
     public static String  getTexto(String lec) {
     String texto = "";
     lec = "DAW-Widget-20-21/ficheros/Ficheros/".concat(lec);
-    lec += "";
         try {
             BufferedReader br = new BufferedReader(new FileReader(lec));
             String linea;
@@ -74,7 +71,7 @@ public class Fichero {
         }
         return texto;
     }
-
+    
     public void mostrarFichero(){
         String[] aux = null;
        

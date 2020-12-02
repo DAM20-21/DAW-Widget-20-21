@@ -27,9 +27,9 @@ public class ActionBoton implements ActionListener{
 		File fich = ventana.listaFICHEROS.get(i).getDir();  
 		switch(tipoBoton){
 			case 1:{ 
-				fich.delete();
 				f.mostrarFichero();
 				f.anadirCarpeta(); 
+				fich.delete();
 				break;
 			}
 			case 2:{
