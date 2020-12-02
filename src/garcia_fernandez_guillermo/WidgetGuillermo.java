@@ -1,23 +1,31 @@
 package garcia_fernandez_guillermo;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
 /**
  * Clase que realiza todas las operaciones de traducción de las palabras
- * Tiene una referencia a la ventana principal que se le pasa por constructor
- *  @author Guillermo García Fernández
+ * Se le pasan el JTextField de la palabra a traducir, el JTextField donde se quiere pintar la traducción
+ * y el JTextArea donde se quieran introducir todas las palabras disponibles
+ * @author Guillermo García Fernández
+ * @version 1.1
+ * @since 1.0
  */
-public class WidgetGuillermo {
+public class WidgetGuillermo{
     
-    VentanaPrincipal ventana;
+    JTextField textFieldPalabra;
+    JTextField textFieldResultado;
+    JTextArea textAreaPalDisponibles;
 
-    WidgetGuillermo(VentanaPrincipal ventana){
-        this.ventana = ventana;
+    WidgetGuillermo(JTextField textFieldPalabra, JTextField textFieldResultado, JTextArea textAreaPalDisponibles){
+        this.textFieldPalabra = textFieldPalabra;
+        this.textFieldResultado = textFieldResultado;
+        this.textAreaPalDisponibles = textAreaPalDisponibles;
     }
 
     /**
@@ -33,13 +41,13 @@ public class WidgetGuillermo {
             String[] palabras = new String[2];
             BufferedReader brTraduccion = new BufferedReader(new FileReader("src/garcia_fernandez_guillermo/diccionario.txt"));
             while((lineaAux = brTraduccion.readLine()) != null || salir == false){
-                if (lineaAux.contains(ventana.getTexto().getText()))
+                if (lineaAux.contains(textFieldPalabra.getText()))
                     palabras = lineaAux.split(":");
                     lineaEscritura = palabras[1];
                     salir = true;
             }
             brTraduccion.close();
-            ventana.getResultado().setText(lineaEscritura);
+            textFieldResultado.setText(lineaEscritura);
         }catch(IOException e){
             System.out.println("Error en la E/S");
         }
@@ -61,7 +69,7 @@ public class WidgetGuillermo {
             }
             brPalabrasDisponibles.close();
             for (int i = 0; i < palabras.size(); i++){
-                ventana.getTextoPalDisponibles().append(palabras.get(i) + "\n");
+                textAreaPalDisponibles.append(palabras.get(i) + "\n");
             }
         }catch(IOException e){
             System.out.println("Error en la E/S");

@@ -39,9 +39,6 @@ public class VentanaPrincipal {
         ventana = new JFrame();
         ventana.setBounds(100, 50, 400, 200);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Inicializamos un objeto de la clase WidgetGuillermmo para traducir
-        traductor = new WidgetGuillermo(this);
     }
 
     public void inicializarComponentes() {
@@ -83,9 +80,12 @@ public class VentanaPrincipal {
         textoPalDisponibles = new JTextArea();
         scrollPalabras = new JScrollPane(textoPalDisponibles);
         textoPalDisponibles.setEditable(false);
-        textoPalDisponibles.setLineWrap(true);
+        //textoPalDisponibles.setLineWrap(true);
         textoPalDisponibles.setWrapStyleWord(true);
         scrollPalabras.setPreferredSize(new Dimension(500,500));
+
+        // Inicializamos un objeto de la clase WidgetGuillermmo para traducir
+        traductor = new WidgetGuillermo(texto, resultado, textoPalDisponibles);
     }
 
     /**
