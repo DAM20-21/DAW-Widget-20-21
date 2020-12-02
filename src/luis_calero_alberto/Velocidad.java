@@ -79,15 +79,6 @@ public class Velocidad implements KeyListener, ActionListener {
         settings.insets = new Insets(5, 20, 20, 5);
 
         panel.add(medidaFinal, settings);
-        JTextField vacio = new JTextField();
-        vacio.setBorder(null);
-        settings = new GridBagConstraints();
-        settings.gridx = 2;
-        settings.gridy = 2;
-        settings.insets = new Insets(5, 20, 20, 5);
-        settings.fill = GridBagConstraints.HORIZONTAL;
-        settings.weightx = 1;
-        panel.add(vacio, settings);//
         settings = new GridBagConstraints();
         settings.gridx = 0;
         settings.gridy = 4;
@@ -105,10 +96,6 @@ public class Velocidad implements KeyListener, ActionListener {
         settings.ipadx = 200;
         settings.fill = GridBagConstraints.HORIZONTAL;
         panel.add(numeroResultado, settings);
-
-        // Quitamos el textfield que no usamos
-        vacio.setEditable(false);
-        vacio.setBackground(panel.getBackground());
 
         medidaInicial.addActionListener(this);
         medidaFinal.addActionListener(this);

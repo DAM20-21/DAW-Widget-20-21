@@ -84,17 +84,13 @@ public class Divisas implements KeyListener, ActionListener {
         settings.insets = new Insets(5, 20, 20, 5);
 
         panel.add(medidaFinal, settings);
-        JTextField vacio = new JTextField();
-        vacio.setBorder(null);
-        settings = new GridBagConstraints();
-        settings.gridx = 2;
-        settings.gridy = 2;
-        settings.insets = new Insets(5, 20, 20, 5);
-        settings.fill = GridBagConstraints.HORIZONTAL;
-        settings.weightx = 1;
-        panel.add(vacio, settings);//
-        vacio.setEditable(false);
-        vacio.setBackground(panel.getBackground());
+        /*
+         * JTextField vacio = new JTextField(); vacio.setBorder(null); settings = new
+         * GridBagConstraints(); settings.gridx = 2; settings.gridy = 2; settings.insets
+         * = new Insets(5, 20, 20, 5); settings.fill = GridBagConstraints.HORIZONTAL;
+         * settings.weightx = 1; panel.add(vacio, settings); vacio.setEditable(false);
+         * vacio.setBackground(panel.getBackground());
+         */
         settings = new GridBagConstraints();
         settings.gridx = 0;
         settings.gridy = 4;
