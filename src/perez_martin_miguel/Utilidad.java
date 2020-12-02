@@ -11,7 +11,11 @@ public class Utilidad {
      * @return ale
      */
     public static int[] aleatorio(ArrayList<String> palabras) {
-        int[] ale = new int[12];
+        Cronometro crono = new Cronometro();
+
+        int tamaño = crono.getSegundos()/5;
+
+        int[] ale = new int[tamaño];
         int i = 0;
 
         ale[i] = (int) (Math.random() * palabras.size());

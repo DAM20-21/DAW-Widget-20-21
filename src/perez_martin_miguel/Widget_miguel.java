@@ -132,7 +132,6 @@ public class Widget_miguel extends JDialog {
         ////////////////////////////////////////////////////////////////////////////////
 
         // panel del centro.
-        panelCentro.setBackground(Color.RED);
         this.add(panelCentro);
 
         panelCentro.setLayout(new GridBagLayout());
