@@ -21,6 +21,9 @@ public class Tiempo extends JPanel implements KeyListener, ActionListener {
      *
      */
     private static final long serialVersionUID = 1L;
+    /**
+     * Componentes con los que elegiremos el tipo de conversion que queremos hacer
+     */
     JComboBox<String> medidaInicial;
     JComboBox<String> medidaFinal;
 
@@ -90,7 +93,7 @@ public class Tiempo extends JPanel implements KeyListener, ActionListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
-        if (!(numeroInicial.getText().isEmpty()) && numeroInicial.getText().matches("[0-9\\.]*")) {
+        if (!(numeroInicial.getText().isEmpty()) && numeroInicial.getText().matches("[0-9\\.]*")) {// Es un numero
             try {
                 tiempoInicial = Double.parseDouble(numeroInicial.getText());
             } catch (NumberFormatException n) {

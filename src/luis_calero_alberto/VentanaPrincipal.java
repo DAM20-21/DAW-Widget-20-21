@@ -7,7 +7,7 @@ import java.awt.*;
  * @author Alberto Luis Calero
  * 
  *         Ventana principal donde se añadiran los elementos que necesitemos ,
- *         en este caso solo se añade un JPanelConversor
+ *         en este caso solo se añade el Widget ,un JPanelConversor
  */
 public class VentanaPrincipal {
     private JFrame ventana;

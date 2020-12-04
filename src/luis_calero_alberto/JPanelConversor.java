@@ -18,7 +18,7 @@ public class JPanelConversor extends JPanel {
      */
     private static final long serialVersionUID = 1L;
     /**
-     * Paneles donde iran los conversores
+     * Paneles donde iran los distintos conversores
      */
     JPanel[] panelesCalculadora = { new Porcentaje(), new Descuento(), new Longitud(), new Area(), new Volumen(),
             new Divisas(), new Velocidad(), new Tiempo(), new Masa() };

@@ -21,7 +21,9 @@ public class Masa extends JPanel implements KeyListener, ActionListener {
      *
      */
     private static final long serialVersionUID = 1L;
-
+    /**
+     * Componentes con los que elegiremos el tipo de conversion que queremos hacer
+     */
     JComboBox<String> medidaInicial;
     JComboBox<String> medidaFinal;
 

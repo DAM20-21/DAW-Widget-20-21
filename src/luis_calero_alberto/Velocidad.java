@@ -16,6 +16,10 @@ public class Velocidad extends JPanel implements KeyListener, ActionListener {
      *
      */
     private static final long serialVersionUID = 1L;
+
+    /**
+     * Componentes con los que elegiremos el tipo de conversion que queremos hacer
+     */
     JComboBox<String> medidaInicial;
     JComboBox<String> medidaFinal;
 
@@ -83,7 +87,8 @@ public class Velocidad extends JPanel implements KeyListener, ActionListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
-        if (!(numeroInicial.getText().isEmpty()) && numeroInicial.getText().matches("[0-9\\.]*")) {
+        if (!(numeroInicial.getText().isEmpty()) && numeroInicial.getText().matches("[0-9\\.]*")) {// Comprobamos que es
+                                                                                                   // un numero
             distanciaInicial = Double.parseDouble(numeroInicial.getText());
             DecimalFormat df = new DecimalFormat("#.00000000");// Formateamos el numero para que solo nos muestre unos
                                                                // cuantos decimales
