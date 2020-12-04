@@ -22,7 +22,7 @@ public class Velocidad implements KeyListener, ActionListener {
     /**
      * Conversiones de unas medidas a otras
      */
-    Double[] conversionaMetros = { 1.0, 0.277, 0.514, 0.447, 0.304 };
+    Double[] conversionaMetros = { 1.0, 0.277778, 0.514, 0.447, 0.304 };
     Double[] conversiondeMetrosA = { 1.0, 3.6, 1.94, 2.23, 3.28 };
     /**
      * Medidas entre las que elegir
@@ -51,51 +51,11 @@ public class Velocidad implements KeyListener, ActionListener {
         // Inicializamos los elementos
         medidaInicial = new JComboBox<>(new DefaultComboBoxModel<>(medidas));
         medidaFinal = new JComboBox<>(new DefaultComboBoxModel<>(medidas));
-
         numeroInicial = new JTextField("0");
         textoResultado = new JTextField();
-        textoResultado.setEditable(false);
-        textoResultado.setBorder(null);
         numeroResultado = new JTextField();
         // Colocamos los elementos
-        panel.setLayout(new GridBagLayout());
-        GridBagConstraints settings = new GridBagConstraints();
-
-        settings.gridx = 0;
-        settings.gridy = 1;
-
-        settings.insets = new Insets(5, 20, 20, 5);
-        panel.add(medidaInicial, settings);
-        settings = new GridBagConstraints();
-        settings.gridx = 2;
-        settings.gridy = 1;
-        settings.insets = new Insets(5, 20, 20, 5);
-        settings.fill = GridBagConstraints.HORIZONTAL;
-        settings.weightx = 1;
-        panel.add(numeroInicial, settings);
-        settings = new GridBagConstraints();
-        settings.gridx = 0;
-        settings.gridy = 2;
-        settings.insets = new Insets(5, 20, 20, 5);
-
-        panel.add(medidaFinal, settings);
-        settings = new GridBagConstraints();
-        settings.gridx = 0;
-        settings.gridy = 4;
-        settings.insets = new Insets(5, 20, 20, 5);
-        settings.gridwidth = 3;
-        settings.fill = GridBagConstraints.HORIZONTAL;
-
-        panel.add(textoResultado, settings);
-        settings = new GridBagConstraints();
-        settings.gridx = 2;
-        settings.gridy = 3;
-        settings.insets = new Insets(05, 20, 20, 05);
-        settings.weightx = 1;
-        settings.gridwidth = 2;
-        settings.ipadx = 200;
-        settings.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(numeroResultado, settings);
+        Utilidades.colocarElementos(panel, medidaInicial, medidaFinal, numeroInicial, textoResultado, numeroResultado);
 
         medidaInicial.addActionListener(this);
         medidaFinal.addActionListener(this);
@@ -121,7 +81,7 @@ public class Velocidad implements KeyListener, ActionListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
-        if (!(numeroInicial.getText().isEmpty()) && numeroInicial.getText().matches("[0-9]*")) {
+        if (!(numeroInicial.getText().isEmpty()) && numeroInicial.getText().matches("[0-9\\.]*")) {
             distanciaInicial = Double.parseDouble(numeroInicial.getText());
             DecimalFormat df = new DecimalFormat("#.00000000");// Formateamos el numero para que solo nos muestre unos
                                                                // cuantos decimales

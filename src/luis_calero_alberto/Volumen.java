@@ -35,7 +35,7 @@ public class Volumen implements KeyListener, ActionListener {
     /**
      * Medidas entre las que podemos convertir
      */
-    String[] medidas = { "Metros^3", "litro", "Mililitro" };
+    String[] medidas = { "Metros^3", "litros", "Mililitros" };
 
     Double volumenInicial = 0.;
     Double volumenEnMetros = 0.;// Aqui guardaremos el paso intermedio
@@ -58,51 +58,11 @@ public class Volumen implements KeyListener, ActionListener {
         // Inicializamos los elementos
         medidaInicial = new JComboBox<>(new DefaultComboBoxModel<>(medidas));
         medidaFinal = new JComboBox<>(new DefaultComboBoxModel<>(medidas));
-
         numeroInicial = new JTextField("0");
         textoResultado = new JTextField();
-        textoResultado.setEditable(false);
-        textoResultado.setBorder(null);
         numeroResultado = new JTextField();
         // Colocamos los elementos
-        panel.setLayout(new GridBagLayout());
-        GridBagConstraints settings;
-
-        settings = new GridBagConstraints();
-        settings.gridx = 0;
-        settings.gridy = 1;
-
-        settings.insets = new Insets(20, 20, 20, 00);
-        panel.add(medidaInicial, settings);
-        settings = new GridBagConstraints();
-        settings.gridx = 2;
-        settings.gridy = 1;
-        settings.insets = new Insets(20, 20, 20, 00);
-        settings.fill = GridBagConstraints.HORIZONTAL;
-        settings.weightx = 1;
-        panel.add(numeroInicial, settings);
-        settings = new GridBagConstraints();
-        settings.gridx = 0;
-        settings.gridy = 2;
-        settings.insets = new Insets(20, 20, 20, 00);
-
-        panel.add(medidaFinal, settings);
-        settings = new GridBagConstraints();
-        settings.gridx = 0;
-        settings.gridy = 4;
-        settings.insets = new Insets(5, 20, 20, 5);
-        settings.gridwidth = 3;
-        settings.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(textoResultado, settings);
-        settings = new GridBagConstraints();
-        settings.gridx = 2;
-        settings.gridy = 3;
-        settings.insets = new Insets(20, 20, 20, 0);
-        settings.weightx = 1;
-        settings.gridwidth = 2;
-        settings.ipadx = 200;
-        settings.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(numeroResultado, settings);
+        Utilidades.colocarElementos(panel, medidaInicial, medidaFinal, numeroInicial, textoResultado, numeroResultado);
 
         medidaInicial.addActionListener(this);
         medidaFinal.addActionListener(this);

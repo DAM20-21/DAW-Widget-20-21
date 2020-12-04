@@ -25,7 +25,6 @@ public class JPanelConversor extends JPanel {
 
     public JPanelConversor() {
         super();
-        setBounds(100, 100, 700, 500);
         anadirElementoPrincipal();
         anadirListener();
 
