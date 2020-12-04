@@ -7,7 +7,7 @@ public class Principal {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    VentanaPrincipal ventana = new VentanaPrincipal();
+                    Widget_audio ventana = new Widget_audio();
                     ventana.inicializar();
                 } catch (Exception e) {
                     e.printStackTrace();
