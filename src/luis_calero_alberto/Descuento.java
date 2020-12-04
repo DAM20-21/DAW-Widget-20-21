@@ -36,7 +36,7 @@ public class Descuento implements KeyListener {
 
     public Descuento(JPanel panel) {
         this.panel = panel;
-
+        anadirElementoDescuento();
     }
 
     /**

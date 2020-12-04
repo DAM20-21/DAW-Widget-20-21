@@ -50,6 +50,7 @@ public class Area implements KeyListener, ActionListener {
 
     public Area(JPanel panel) {
         this.panel = panel;
+        anadirElementoArea();
     }
 
     /**

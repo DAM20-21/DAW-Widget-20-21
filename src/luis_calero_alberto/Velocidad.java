@@ -41,7 +41,7 @@ public class Velocidad implements KeyListener, ActionListener {
 
     public Velocidad(JPanel panel) {
         this.panel = panel;
-
+        anadirElementoVelocidad();
     }
 
     /**

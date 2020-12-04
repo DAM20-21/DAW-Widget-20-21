@@ -46,7 +46,7 @@ public class Masa implements KeyListener, ActionListener {
 
     public Masa(JPanel panel) {
         this.panel = panel;
-
+        anadirElementoMasa();
     }
 
     /**

@@ -59,7 +59,7 @@ public class Longitud implements KeyListener, ActionListener {
      */
     public Longitud(JPanel panel) {
         this.panel = panel;
-
+        anadirElementoLongitud();
     }
 
     /**

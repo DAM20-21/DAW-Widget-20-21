@@ -1,8 +1,7 @@
 package luis_calero_alberto;
 
-import javax.swing.JButton;
-
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 import java.awt.*;
 
@@ -14,14 +13,16 @@ import java.awt.*;
  *         segun el tipo de conversion que queramos hacer
  */
 public class JPanelConversor extends JPanel {
-    JPanel opciones;
-    JPanel calculadora;
     /**
      * Numero Serial
      */
     private static final long serialVersionUID = 1L;
+    /**
+     * Paneles donde iran los conversores
+     */
+    JPanel[] panelesCalculadora;
 
-    JButton[] opcionesIniciales;
+    JTabbedPane tabbedPane;
 
     public JPanelConversor() {
         super();
@@ -34,20 +35,28 @@ public class JPanelConversor extends JPanel {
      * Anadimos los elementos para la interfaz
      */
     private void anadirElementoPrincipal() {
-        this.setLayout(new GridLayout(1, 2));
-        opciones = new JPanel();
+        this.setLayout(new GridLayout(1, 1));
         String[] nombres = { "Porcentaje", "Descuento", "Longitud", "Area", "Volumen", "Divisas", "Velocidad", "Tiempo",
                 "Masa" };
-        opciones.setLayout(new GridLayout(3, 3));
-        opcionesIniciales = new JButton[9];
-        for (int i = 0; i < opcionesIniciales.length; i++) {
-            opcionesIniciales[i] = new JButton(nombres[i]);
-            opciones.add(opcionesIniciales[i]);
+        panelesCalculadora = new JPanel[9];
+        // TabbedPane en el que iran todas las opciones
+        tabbedPane = new JTabbedPane();
+        for (int i = 0; i < nombres.length; i++) {
+            panelesCalculadora[i] = new JPanel();
+            tabbedPane.addTab(nombres[i], panelesCalculadora[i]);
         }
+        // Creamos nuestros conversores
+        Porcentaje porcentaje = new Porcentaje(panelesCalculadora[0]);
+        Descuento descuento = new Descuento(panelesCalculadora[1]);
+        Longitud longitud = new Longitud(panelesCalculadora[2]);
+        Area area = new Area(panelesCalculadora[3]);
+        Volumen volumen = new Volumen(panelesCalculadora[4]);
+        Divisas divisas = new Divisas(panelesCalculadora[5]);
+        Velocidad velocidad = new Velocidad(panelesCalculadora[6]);
+        Tiempo tiempo = new Tiempo(panelesCalculadora[7]);
+        Masa masa = new Masa(panelesCalculadora[8]);
+        this.add(tabbedPane);
 
-        calculadora = new JPanel();
-        this.add(opciones);
-        this.add(calculadora);
         refrescarPantalla();
 
     }
@@ -56,69 +65,6 @@ public class JPanelConversor extends JPanel {
      * Anadimos los listeners a los botones
      */
     private void anadirListener() {
-        opcionesIniciales[0].addActionListener(e -> {
-            Porcentaje porcentaje = new Porcentaje(calculadora);
-            calculadora.removeAll();
-            porcentaje.anadirElementoPorcentaje();
-            refrescarPantalla();
-        });
-
-        opcionesIniciales[1].addActionListener(e -> {
-            Descuento descuento = new Descuento(calculadora);
-            calculadora.removeAll();
-            descuento.anadirElementoDescuento();
-            refrescarPantalla();
-        });
-
-        opcionesIniciales[2].addActionListener(e -> {
-            Longitud longitud = new Longitud(calculadora);
-            calculadora.removeAll();
-            longitud.anadirElementoLongitud();
-            refrescarPantalla();
-        });
-
-        opcionesIniciales[3].addActionListener(e -> {
-            Area area = new Area(calculadora);
-            calculadora.removeAll();
-            area.anadirElementoArea();
-            refrescarPantalla();
-
-        });
-
-        opcionesIniciales[4].addActionListener(e -> {
-            Volumen volumen = new Volumen(calculadora);
-            calculadora.removeAll();
-            volumen.anadirElementoVolumen();
-            refrescarPantalla();
-        });
-
-        opcionesIniciales[5].addActionListener(e -> {
-            Divisas divisas = new Divisas(calculadora);
-            calculadora.removeAll();
-            divisas.anadirElementoDivisas();
-            refrescarPantalla();
-        });
-
-        opcionesIniciales[6].addActionListener(e -> {
-            Velocidad velocidad = new Velocidad(calculadora);
-            calculadora.removeAll();
-            velocidad.anadirElementoVelocidad();
-            refrescarPantalla();
-        });
-
-        opcionesIniciales[7].addActionListener(e -> {
-            Tiempo tiempo = new Tiempo(calculadora);
-            calculadora.removeAll();
-            tiempo.anadirElementoTiempo();
-            refrescarPantalla();
-        });
-
-        opcionesIniciales[8].addActionListener(e -> {
-            Masa masa = new Masa(calculadora);
-            calculadora.removeAll();
-            masa.anadirElementoMasa();
-            refrescarPantalla();
-        });
 
     }
 

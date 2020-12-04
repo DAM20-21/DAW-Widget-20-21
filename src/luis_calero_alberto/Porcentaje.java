@@ -41,7 +41,7 @@ public class Porcentaje implements KeyListener {
      */
     Porcentaje(JPanel panel) {
         this.panel = panel;
-
+        anadirElementoPorcentaje();
     }
 
     /**

@@ -49,7 +49,7 @@ public class Tiempo implements KeyListener, ActionListener {
 
     public Tiempo(JPanel panel) {
         this.panel = panel;
-
+        anadirElementoTiempo();
     }
 
     /**

@@ -49,6 +49,7 @@ public class Volumen implements KeyListener, ActionListener {
 
     public Volumen(JPanel panel) {
         this.panel = panel;
+        anadirElementoVolumen();
     }
 
     /**

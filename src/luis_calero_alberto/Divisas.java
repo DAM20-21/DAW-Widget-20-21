@@ -46,7 +46,7 @@ public class Divisas implements KeyListener, ActionListener {
 
     public Divisas(JPanel panel) {
         this.panel = panel;
-
+        anadirElementoDivisas();
     }
 
     /**
