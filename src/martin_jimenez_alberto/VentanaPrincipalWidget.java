@@ -8,8 +8,12 @@ import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 
-public class VentanaPrincipalWidget {
-    ArrayList<Fichero> listaFICHEROS ;//Lista que guarda Objetos Fichero
+public class VentanaPrincipalWidget extends JPanel{
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    ArrayList<Fichero> listaFICHEROS;// Lista que guarda Objetos Fichero
     int nFICHEROS;
 
     JFrame f;
