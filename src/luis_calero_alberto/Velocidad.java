@@ -4,16 +4,18 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.*;
 import java.awt.event.KeyListener;
 import java.text.DecimalFormat;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-public class Velocidad implements KeyListener, ActionListener {
-    JPanel panel;
+public class Velocidad extends JPanel implements KeyListener, ActionListener {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     JComboBox<String> medidaInicial;
     JComboBox<String> medidaFinal;
 
@@ -39,8 +41,8 @@ public class Velocidad implements KeyListener, ActionListener {
 
     JTextField numeroResultado;
 
-    public Velocidad(JPanel panel) {
-        this.panel = panel;
+    public Velocidad() {
+
         anadirElementoVelocidad();
     }
 
@@ -55,7 +57,7 @@ public class Velocidad implements KeyListener, ActionListener {
         textoResultado = new JTextField();
         numeroResultado = new JTextField();
         // Colocamos los elementos
-        Utilidades.colocarElementos(panel, medidaInicial, medidaFinal, numeroInicial, textoResultado, numeroResultado);
+        Utilidades.colocarElementos(this, medidaInicial, medidaFinal, numeroInicial, textoResultado, numeroResultado);
 
         medidaInicial.addActionListener(this);
         medidaFinal.addActionListener(this);

@@ -4,7 +4,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.*;
 import java.awt.event.KeyListener;
 import java.text.DecimalFormat;
 import java.awt.event.ActionEvent;
@@ -16,9 +15,12 @@ import java.awt.event.KeyEvent;
  * 
  *         Convierte una medida de tiempo en otra que quiera el usuario
  */
-public class Tiempo implements KeyListener, ActionListener {
-    JPanel panel;
+public class Tiempo extends JPanel implements KeyListener, ActionListener {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     JComboBox<String> medidaInicial;
     JComboBox<String> medidaFinal;
 
@@ -47,8 +49,7 @@ public class Tiempo implements KeyListener, ActionListener {
 
     JTextField numeroResultado;
 
-    public Tiempo(JPanel panel) {
-        this.panel = panel;
+    public Tiempo() {
         anadirElementoTiempo();
     }
 
@@ -63,7 +64,7 @@ public class Tiempo implements KeyListener, ActionListener {
         textoResultado = new JTextField();
         numeroResultado = new JTextField();
         // Colocamos los elementos
-        Utilidades.colocarElementos(panel, medidaInicial, medidaFinal, numeroInicial, textoResultado, numeroResultado);
+        Utilidades.colocarElementos(this, medidaInicial, medidaFinal, numeroInicial, textoResultado, numeroResultado);
 
         medidaInicial.addActionListener(this);
         medidaFinal.addActionListener(this);

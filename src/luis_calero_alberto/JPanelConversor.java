@@ -20,7 +20,8 @@ public class JPanelConversor extends JPanel {
     /**
      * Paneles donde iran los conversores
      */
-    JPanel[] panelesCalculadora;
+    JPanel[] panelesCalculadora = { new Porcentaje(), new Descuento(), new Longitud(), new Area(), new Volumen(),
+            new Divisas(), new Velocidad(), new Tiempo(), new Masa() };
 
     JTabbedPane tabbedPane;
 
@@ -38,23 +39,12 @@ public class JPanelConversor extends JPanel {
         this.setLayout(new GridLayout(1, 1));
         String[] nombres = { "Porcentaje", "Descuento", "Longitud", "Area", "Volumen", "Divisas", "Velocidad", "Tiempo",
                 "Masa" };
-        panelesCalculadora = new JPanel[9];
+
         // TabbedPane en el que iran todas las opciones
         tabbedPane = new JTabbedPane();
         for (int i = 0; i < nombres.length; i++) {
-            panelesCalculadora[i] = new JPanel();
             tabbedPane.addTab(nombres[i], panelesCalculadora[i]);
         }
-        // Creamos nuestros conversores
-        Porcentaje porcentaje = new Porcentaje(panelesCalculadora[0]);
-        Descuento descuento = new Descuento(panelesCalculadora[1]);
-        Longitud longitud = new Longitud(panelesCalculadora[2]);
-        Area area = new Area(panelesCalculadora[3]);
-        Volumen volumen = new Volumen(panelesCalculadora[4]);
-        Divisas divisas = new Divisas(panelesCalculadora[5]);
-        Velocidad velocidad = new Velocidad(panelesCalculadora[6]);
-        Tiempo tiempo = new Tiempo(panelesCalculadora[7]);
-        Masa masa = new Masa(panelesCalculadora[8]);
         this.add(tabbedPane);
 
         refrescarPantalla();

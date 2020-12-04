@@ -4,7 +4,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.DecimalFormat;
@@ -20,7 +19,12 @@ import java.awt.event.ActionListener;
  *         0.0001 km
  * 
  */
-public class Longitud implements KeyListener, ActionListener {
+public class Longitud extends JPanel implements KeyListener, ActionListener {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
     JPanel panel;
 
@@ -55,10 +59,8 @@ public class Longitud implements KeyListener, ActionListener {
     /**
      * Contructor de la clase
      * 
-     * @param panel en este panel anadiremos la interfaz
      */
-    public Longitud(JPanel panel) {
-        this.panel = panel;
+    public Longitud() {
         anadirElementoLongitud();
     }
 
@@ -73,7 +75,7 @@ public class Longitud implements KeyListener, ActionListener {
         textoResultado = new JTextField();
         numeroResultado = new JTextField();
         // Colocamos los elementos
-        Utilidades.colocarElementos(panel, medidaInicial, medidaFinal, numeroInicial, textoResultado, numeroResultado);
+        Utilidades.colocarElementos(this, medidaInicial, medidaFinal, numeroInicial, textoResultado, numeroResultado);
 
         medidaInicial.addActionListener(this);
         medidaFinal.addActionListener(this);

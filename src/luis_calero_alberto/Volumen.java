@@ -3,7 +3,7 @@ package luis_calero_alberto;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.DecimalFormat;
-import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,10 +18,12 @@ import javax.swing.JTextField;
  * @author Alberto Luis Calero Haremos conversiones entre volumenes con los
  *         datos del usuario
  */
-public class Volumen implements KeyListener, ActionListener {
+public class Volumen extends JPanel implements KeyListener, ActionListener {
 
-    JPanel panel;
-
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     JComboBox<String> medidaInicial;
     JComboBox<String> medidaFinal;
 
@@ -47,8 +49,8 @@ public class Volumen implements KeyListener, ActionListener {
 
     JTextField numeroResultado;
 
-    public Volumen(JPanel panel) {
-        this.panel = panel;
+    public Volumen() {
+
         anadirElementoVolumen();
     }
 
@@ -63,7 +65,7 @@ public class Volumen implements KeyListener, ActionListener {
         textoResultado = new JTextField();
         numeroResultado = new JTextField();
         // Colocamos los elementos
-        Utilidades.colocarElementos(panel, medidaInicial, medidaFinal, numeroInicial, textoResultado, numeroResultado);
+        Utilidades.colocarElementos(this, medidaInicial, medidaFinal, numeroInicial, textoResultado, numeroResultado);
 
         medidaInicial.addActionListener(this);
         medidaFinal.addActionListener(this);

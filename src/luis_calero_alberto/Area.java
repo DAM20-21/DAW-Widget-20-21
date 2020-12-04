@@ -3,7 +3,7 @@ package luis_calero_alberto;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.DecimalFormat;
-import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,10 +19,12 @@ import javax.swing.JTextField;
  * 
  *         En esta clase haremos conversiones entre medidas de area
  */
-public class Area implements KeyListener, ActionListener {
+public class Area extends JPanel implements KeyListener, ActionListener {
 
-    JPanel panel;
-
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     JComboBox<String> medidaInicial;
     JComboBox<String> medidaFinal;
 
@@ -48,8 +50,8 @@ public class Area implements KeyListener, ActionListener {
 
     JTextField numeroResultado;
 
-    public Area(JPanel panel) {
-        this.panel = panel;
+    public Area() {
+
         anadirElementoArea();
     }
 
@@ -64,7 +66,7 @@ public class Area implements KeyListener, ActionListener {
         textoResultado = new JTextField();
         numeroResultado = new JTextField();
         // Colocamos los elementos
-        Utilidades.colocarElementos(panel, medidaInicial, medidaFinal, numeroInicial, textoResultado, numeroResultado);
+        Utilidades.colocarElementos(this, medidaInicial, medidaFinal, numeroInicial, textoResultado, numeroResultado);
 
         medidaInicial.addActionListener(this);
         medidaFinal.addActionListener(this);

@@ -9,12 +9,15 @@ import javax.swing.JTextField;
 import java.awt.*;
 
 /**
- * @author Alberto Luis Calero Clase para calcular el porcentaje que nos da un
+ * @author Alberto Luis Calero Panel para calcular el porcentaje que nos da un
  *         el usuario de un numero que nos da el usuario
  */
-public class Porcentaje implements KeyListener {
+public class Porcentaje extends JPanel implements KeyListener {
 
-    JPanel panel;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
     JTextField porciento;
 
@@ -35,12 +38,10 @@ public class Porcentaje implements KeyListener {
     Double numeroResultado = 0.;
 
     /**
-     * Contructor , recibe el panel en el que insertara la interfaz
-     * 
-     * @param panel
+     * Contructor solo llama al metodo para anadir los elementos
      */
-    Porcentaje(JPanel panel) {
-        this.panel = panel;
+    Porcentaje() {
+
         anadirElementoPorcentaje();
     }
 
@@ -61,38 +62,38 @@ public class Porcentaje implements KeyListener {
         mensajeResultado.setEditable(false);
         resultado = new JTextField();
         resultado.setEditable(false);
-        panel.setLayout(new GridBagLayout());
+        this.setLayout(new GridBagLayout());
         GridBagConstraints settings = new GridBagConstraints();
 
         settings.gridx = 0;
         settings.gridy = 1;
         settings.insets = new Insets(5, 20, 20, 20);
-        panel.add(porciento, settings);
+        this.add(porciento, settings);
         settings = new GridBagConstraints();
         settings.gridx = 2;
         settings.gridy = 1;
         settings.insets = new Insets(5, 20, 20, 20);
         settings.fill = GridBagConstraints.HORIZONTAL;
         settings.weightx = 1;
-        panel.add(numeroPorciento, settings);
+        this.add(numeroPorciento, settings);
         settings = new GridBagConstraints();
         settings.gridx = 0;
         settings.gridy = 2;
         settings.insets = new Insets(5, 20, 20, 20);
-        panel.add(mensajeTotal, settings);
+        this.add(mensajeTotal, settings);
         settings = new GridBagConstraints();
         settings.gridx = 2;
         settings.gridy = 2;
         settings.insets = new Insets(5, 20, 20, 20);
         settings.fill = GridBagConstraints.HORIZONTAL;
         settings.weightx = 1;
-        panel.add(numeroTotal, settings);
+        this.add(numeroTotal, settings);
         settings = new GridBagConstraints();
         settings.gridx = 0;
         settings.gridy = 3;
         settings.insets = new Insets(5, 20, 20, 20);
         settings.ipadx = 150;
-        panel.add(mensajeResultado, settings);
+        this.add(mensajeResultado, settings);
         settings = new GridBagConstraints();
         settings.gridx = 2;
         settings.gridy = 3;
@@ -100,7 +101,7 @@ public class Porcentaje implements KeyListener {
         settings.weightx = 1;
         settings.ipadx = 100;
         settings.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(resultado, settings);
+        this.add(resultado, settings);
 
         numeroPorciento.addKeyListener(this);
         numeroTotal.addKeyListener(this);

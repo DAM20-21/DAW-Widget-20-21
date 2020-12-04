@@ -13,7 +13,12 @@ import java.awt.*;
  *         En esta clase calcularemos el descuento que nos dan sobre un precio
  *         dado
  */
-public class Descuento implements KeyListener {
+public class Descuento extends JPanel implements KeyListener {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
     JTextField textoPrecioOriginal;
 
@@ -27,15 +32,13 @@ public class Descuento implements KeyListener {
 
     JTextField numeroPrecioFinal;
 
-    JPanel panel;
-
     Double precioFinal = 0.;
     Double resta = 0.;
     Double porcentaje = 0.;
     Double precioInicial = 0.;
 
-    public Descuento(JPanel panel) {
-        this.panel = panel;
+    public Descuento() {
+
         anadirElementoDescuento();
     }
 
@@ -56,40 +59,40 @@ public class Descuento implements KeyListener {
         numeroPrecioFinal.setEditable(false);
 
         textoPrecioFinal.setBorder(null);
-        panel.setLayout(new GridBagLayout());
+        this.setLayout(new GridBagLayout());
         GridBagConstraints settings = new GridBagConstraints();
 
         settings.gridx = 0;
         settings.gridy = 1;
         settings.ipadx = 150;
         settings.insets = new Insets(20, 20, 20, 20);
-        panel.add(textoPrecioOriginal, settings);
+        this.add(textoPrecioOriginal, settings);
         settings = new GridBagConstraints();
         settings.gridx = 2;
         settings.gridy = 1;
         settings.insets = new Insets(20, 20, 20, 20);
         settings.fill = GridBagConstraints.HORIZONTAL;
         settings.weightx = 1;
-        panel.add(numeroPrecioInicial, settings);
+        this.add(numeroPrecioInicial, settings);
         settings = new GridBagConstraints();
         settings.gridx = 0;
         settings.gridy = 2;
         settings.insets = new Insets(20, 20, 20, 20);
         settings.ipadx = 150;
-        panel.add(textoDescuento, settings);
+        this.add(textoDescuento, settings);
         settings = new GridBagConstraints();
         settings.gridx = 2;
         settings.gridy = 2;
         settings.insets = new Insets(20, 20, 20, 20);
         settings.fill = GridBagConstraints.HORIZONTAL;
         settings.weightx = 1;
-        panel.add(numeroDescuento, settings);
+        this.add(numeroDescuento, settings);
         settings = new GridBagConstraints();
         settings.gridx = 0;
         settings.gridy = 3;
         settings.insets = new Insets(20, 20, 20, 20);
         settings.ipadx = 150;
-        panel.add(textoPrecioFinal, settings);
+        this.add(textoPrecioFinal, settings);
         settings = new GridBagConstraints();
         settings.gridx = 2;
         settings.gridy = 3;
@@ -97,7 +100,7 @@ public class Descuento implements KeyListener {
         settings.weightx = 1;
         settings.ipadx = 100;
         settings.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(numeroPrecioFinal, settings);
+        this.add(numeroPrecioFinal, settings);
 
         numeroPrecioInicial.addKeyListener(this);
         numeroDescuento.addKeyListener(this);

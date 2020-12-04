@@ -4,7 +4,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.*;
+
 import java.awt.event.KeyListener;
 import java.text.DecimalFormat;
 import java.awt.event.ActionEvent;
@@ -16,9 +16,12 @@ import java.awt.event.KeyEvent;
  * 
  *         Haremos conversiones entre diferentes monedas del mundo
  */
-public class Divisas implements KeyListener, ActionListener {
-    JPanel panel;
+public class Divisas extends JPanel implements KeyListener, ActionListener {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     JComboBox<String> medidaInicial;
     JComboBox<String> medidaFinal;
     /**
@@ -44,8 +47,7 @@ public class Divisas implements KeyListener, ActionListener {
 
     JTextField numeroResultado;
 
-    public Divisas(JPanel panel) {
-        this.panel = panel;
+    public Divisas() {
         anadirElementoDivisas();
     }
 
@@ -60,7 +62,7 @@ public class Divisas implements KeyListener, ActionListener {
         textoResultado = new JTextField();
         numeroResultado = new JTextField();
         // Colocamos los elementos
-        Utilidades.colocarElementos(panel, medidaInicial, medidaFinal, numeroInicial, textoResultado, numeroResultado);
+        Utilidades.colocarElementos(this, medidaInicial, medidaFinal, numeroInicial, textoResultado, numeroResultado);
 
         medidaInicial.addActionListener(this);
         medidaFinal.addActionListener(this);
